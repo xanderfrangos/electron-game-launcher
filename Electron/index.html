@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <!-- Insert this line above script imports  -->
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+        <script src="./jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+    </head>
+    <body>
+        <div id="sidebar">
+            <div class="view">
+            </div>
+        </div>
+        <div id="main">
+            <div class="view">
+            </div>
+        </div>
+        <script>
+            // You can also require other files to run in this process
+            require('./renderer.js')
+        </script>
+        <script src="./app.js"></script>
+    </body>
+</html>
