@@ -41,7 +41,7 @@ buildGameRowHTML = (games) => {
 
         for (var game of games) {
 
-            var tileHTML = '<div class="game-tile"><div data-action="steam://rungameid/' + game.id + '"><img class="cover" src="./cache/' + game.id + '/header.jpg?t=1508951965" /></div></div>';
+            var tileHTML = '<div class="game-tile"><a data-action="steam://rungameid/' + game.id + '" href="steam://rungameid/' + game.id + '"><img class="cover" src="./cache/' + game.id + '/header.jpg?t=1508951965" /></a></div>';
 
             rowHTML += tileHTML;
         }
