@@ -5,22 +5,39 @@
         <meta name="viewport" content="width=device-width">
         <!-- Insert this line above script imports  -->
         <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
         <script src="./jquery.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
     </head>
     <body>
-        <div id="sidebar">
-            <div class="view">
-            </div>
-        </div>
-        <div id="main">
-            <div class="view">
-            </div>
-        </div>
+        <main>
+
+                <div id="sidebar">
+                        <div class="view">
+                        </div>
+                    </div>
+                    <div id="main">
+
+                        <div class="view">
+                        
+                            <div class="logo-top"><img src="./images/temp-logo-white.png" /></div>    
+                            <div class="game-list">
+            
+                            </div>
+                        </div>
+                    </div>
+
+        </main>
+
         <script>
             // You can also require other files to run in this process
-            require('./renderer.js')
+            require('./renderer.js');
         </script>
+        <script src="./js/gamepads.js"></script>
         <script src="./app.js"></script>
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+            ':35729/livereload.js?snipver=1">')
+            </script>
     </body>
 </html>

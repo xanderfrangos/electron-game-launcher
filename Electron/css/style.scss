@@ -74,13 +74,15 @@ b {
     font-weight: bold;
 }
 body, html {
-    font-family: 'Myriad Pro', sans-serif;
+    font-family: sans-serif;
     font-weight: 500;
     line-height: 1;
     font-size: 17px;
     color: white;
-    background: #151719;
-    
+    background: #151719 url('../images/page_bg_generated_v6b.jpg') center center;
+    background-attachment: fixed;
+    background-size: cover;
+
     @include mobile {
         font-size: 15px;
     }
@@ -91,12 +93,50 @@ body, html {
 #main {
     width: 100%;
     box-sizing: border-box;
+    max-width: 1280px;
+    margin: 0 auto 100px;
 }
 
-
+.logo-top {
+    img {
+        width: 130px;
+        height: auto;
+        display: block;
+        margin: 100px auto;
+    }
+}
 
 .game-list {
-    .game {
+
+    .game-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding: 4px;
+        margin-top:-8px;
+        position: relative;
         
+        &:before {
+            content:attr(data-startLetter);
+            position: absolute;
+            top:0;
+            right: 100%;
+            padding: 0 25px;
+            font-size: 65px;
+            opacity: 0.25;
+        }
+    }
+    .game-tile {
+        display: block;
+        flex: 1 360px;
+        flex-grow: 2;
+        padding: 4px;
+
+        .cover {
+            width:100%;
+            height: auto;
+            display: block;
+        }
+
     }
 }
