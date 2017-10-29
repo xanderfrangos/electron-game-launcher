@@ -1,20 +1,34 @@
 {
-  "name": "electron-game-launcher",
-  "version": "1.0.0",
-  "description": "A minimal Electron game launcher",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "repository": "https://github.com/electron/electron-game-launcher",
-  "keywords": [
-    "Electron",
-    "game",
-    "launcher",
-    "steam"
-  ],
-  "author": "Xander Frangos",
-  "devDependencies": {
-    "electron": "~1.7.8"
-  }
+    "name": "electron-game-launcher",
+    "version": "1.0.0",
+    "description": "A minimal Electron game launcher",
+    "main": "main.js",
+    "scripts": {
+        "dev": "webpack",
+        "start": "electron ."
+    },
+    "repository": "xanderfrangos/electron-game-launcher",
+    "keywords": [
+        "Electron",
+        "game",
+        "launcher",
+        "steam"
+    ],
+    "author": "Xander Frangos",
+    "devDependencies": {
+        "babel-core": "^6.23.1",
+        "babel-loader": "^6.3.2",
+        "babel-preset-react": "^6.23.0",
+        "css-loader": "^0.26.1",
+        "electron": "^1.4.3",
+        "electron-reload": "^1.1.0",
+        "extract-text-webpack-plugin": "^2.0.0-rc.3",
+        "file-loader": "^0.9.0",
+        "webpack": "^2.2.1"
+    },
+    "dependencies": {
+        "react": "^15.4.2",
+        "react-dom": "^15.4.2"
+    }
+
 }
