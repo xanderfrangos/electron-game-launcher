@@ -1,11 +1,16 @@
 let apps = [];
 let fs = require('fs');
 
+//require('./jquery.js')
+//require('./gamepads.js')
+
+import {} from './jquery.js'
+import {} from './gamepads.js'
 
 apps = JSON.parse(fs.readFileSync('./apps.json', 'utf8'));
 
 
-generateAppsPage = () => {
+let generateAppsPage = () => {
     
     var sortedApps = apps.sort(function(a, b) {
         var textA = a.name.toLowerCase();
@@ -32,7 +37,7 @@ generateAppsPage = () => {
     }
 }
 
-buildGameRowHTML = (games) => {
+let buildGameRowHTML = (games) => {
 
     var rowHTML = '';
     
@@ -51,8 +56,6 @@ buildGameRowHTML = (games) => {
     return rowHTML;
 
 }
-
-
 
 
 generateAppsPage();
