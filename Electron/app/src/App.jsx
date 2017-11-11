@@ -33,6 +33,7 @@ export default class App extends Component {
         
         return (
             <main>
+                <div id="background"></div>
                 <div id="sidebar">
                     <div className="view">
                     </div>

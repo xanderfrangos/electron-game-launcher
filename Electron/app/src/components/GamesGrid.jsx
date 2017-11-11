@@ -1,5 +1,6 @@
 import React, {Component}  from 'react'
 import styles from '../styles/local.css'
+import GameTile from './GameTile.jsx'
 
 export default class GamesGrid extends Component {
     render() {
@@ -30,18 +31,17 @@ export default class GamesGrid extends Component {
             
             
             let mappedData = rowsData.map( (row, index) => {
-                return (<div className="game-row" data-count="3" data-startLetter="A" key={index}>{ row.games.map( gameTileRender ) }</div>)
+                return (<div className="row" data-count="3" data-startLetter="A" key={index}>{ row.games.map( gameTileRender ) }</div>)
             });
             return mappedData; 
             
         }
         
         const gameTileRender = (game, index) => {
-            return <div className="game-tile" key={index}><a data-action={"steam://rungameid/" + game.id} href={"steam://rungameid/" + game.id}><img className="cover" src={'./cache/' + game.id + '/header.jpg?t=1508951965'} /></a></div>  
+            return <GameTile key={index} game={game}></GameTile>  
         }
         
-        return ( <div className="game-list">{ renderRows() }</div> )
+        return ( <div className="GameGrid">{ renderRows() }</div> )
         
-        //return (<img src={this.props.src} className={styles.logo}/>)
     }
 }
