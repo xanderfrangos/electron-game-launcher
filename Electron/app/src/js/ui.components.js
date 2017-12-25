@@ -1,31 +1,35 @@
-class UIList {
+// UILayer -> UIList Array -> UIItem Array
+
+export class UILayer {
+    constructor(lists, title = "") {
+        this.Active = false;
+        this.Title = title;
+        this.Lists = lists;
+        this.ActiveList = 0;
+        this.IsHorizontal = false; // false = Vertical, true = Horizontal
+    }
+}
+
+export class UIList {
     constructor(items, title = "", width = 1) {
         this.Active = false;
         this.Title = title;
         this.Items = items;
         this.ActiveItem = 0;
-        this.Horizontal = 0; // Vertical
-        this.Width = width;
+        this.IsHorizontal = false; // false = Vertical, true = Horizontal
+        this.Width = width; // Number of rows/columns perpendicular to the list.
     }
 }
 
-class UIItem {
+export class UIItem {
     constructor(primaryAction) {
         this.Active = false;
-        this.PrimaryAction() = primaryAction;
+        this.PrimaryAction = primaryAction;
     }
     SecondaryAction() { return false; }
 }
 
-class UILayer {
-    constructor(lists, title = "") {
-        this.Active = false;
-        this.Title = title;
-        this.Lists = lists;
-    }
-}
-
-class UIPopup {
+export class UIPopup {
     // UI Layer with 2 lists
     constructor(options, actions = false, title = "") {
         this.Active = false;
@@ -34,7 +38,7 @@ class UIPopup {
     }
 }
 
-class UICheckbox {
+export class UICheckbox {
     constructor(title, value) {
         this.Active = false;
         this.Title = title;
@@ -42,7 +46,7 @@ class UICheckbox {
     }
 }
 
-class UIDropdown {
+export class UIDropdown {
     constructor(title, options, value) {
         this.Active = false;
         this.Title = title;
@@ -51,7 +55,7 @@ class UIDropdown {
     }
 }
 
-class UITextbox {
+export class UITextbox {
     constructor(title, value) {
         this.Active = false;
         this.Title = title;

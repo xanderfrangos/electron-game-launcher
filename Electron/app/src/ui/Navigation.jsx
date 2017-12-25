@@ -1,21 +1,25 @@
-global.UINavigation = class {
+import UILayer from './Layer.jsx'
+import UIList from './List.jsx'
+import UIItem from './Item.jsx'
+
+export default class UINavigation {
     constructor() {
         this.Layers = [];
         this.ActiveLayer = 0;
         this.AllowInput = true;
         this.CurrentItem = new UIItem({});
         this.FollowInput = true;
-        this.LayerCache = [{NextID:0,Layers:[]}];
+        this.LayerCache = {NextID:0,Layers:[]};
     }
 
     NewCacheLayer(lists, title = "") {
         var NewLayer = new UILayer(lists, title);
-        var LayerID = CacheLayer(NewLayer);
+        var LayerID = this.CacheLayer(NewLayer);
         return LayerID;
     }
 
     CacheLayer(layer) {
-        this.LayerCache.Layers["layer"+this.LayerCache.NextID].push(layer);
+        this.LayerCache.Layers["layer" + this.LayerCache.NextID] = layer;
         var LayerID = this.LayerCache.NextID;
         this.LayerCache.NextID++;
         return LayerID;
@@ -28,22 +32,24 @@ global.UINavigation = class {
 
     PreviousLayer() {
         var CurrentLayerID = this.Layers[this.Layers.length - 1];
-        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
+        this.LayerCache.Layers["layer" + this.Layers[this.Layers.length - 1]].Active = false;
         this.Layers.splice(this.Layers.length - 1, 1);
-        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
+        this.LayerCache.Layers["layer" + this.Layers[this.Layers.length - 1]].Active = true;
         this.DestroyLayer(CurrentLayerID);
     }
 
     NewLayer(layerID) {
-        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
+        if(this.Layers.length > 0) {
+            this.LayerCache.Layers["layer" + this.Layers[this.Layers.length - 1]].Active = false;
+        }
         this.Layers.push(layerID);
-        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
+        this.LayerCache.Layers["layer" + this.Layers[this.Layers.length - 1]].Active = true;
     }
 
     ChangeLayer(layerID) {
-        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
+        this.LayerCache.Layers["layer" + this.Layers[this.Layers.length - 1]].Active = false;
         this.Layers[this.Layers.length - 1] = layerID;
-        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
+        this.LayerCache.Layers["layer" + this.Layers[this.Layers.length - 1]].Active = true;
     }
 
     SetCurrentListItemIndex(ItemIndex) {

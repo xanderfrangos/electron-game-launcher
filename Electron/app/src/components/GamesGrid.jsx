@@ -13,10 +13,10 @@ export default class GamesGrid extends Component {
             var currentBatch = [];
             
             
-            this.props.games.forEach((game, index) => {
+            this.props.list.Items.forEach((game, index) => {
                 
                 if (currentBatch.length < rowLength) {
-                    currentBatch.push(game);
+                    currentBatch.push(game.meta);
                 } else {
                     rowsData.push( { "games": currentBatch } )
                     currentBatch = []

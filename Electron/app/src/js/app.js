@@ -6,6 +6,9 @@ let fs = require('fs');
 
 import {} from './jquery.js'
 import {} from './gamepads.js'
+import {} from './ui.components.js'
+import {} from './ui.navigation.js'
+import {} from './ui.input.js'
 
 apps = JSON.parse(fs.readFileSync('./apps.json', 'utf8'));
 

@@ -12,7 +12,8 @@ let mainWindow
 
 app.on('ready', () => {
 
-    let mainWindow = new BrowserWindow({width: 800, height: 600, frame: false})
+
+    let mainWindow = new BrowserWindow({width: 800, height: 600, frame: false, frame:true})
     //mainWindow.maximize();
     mainWindow.loadURL(`file://${__dirname}/app/index.html`)
     //mainWindow.setMenu(null);

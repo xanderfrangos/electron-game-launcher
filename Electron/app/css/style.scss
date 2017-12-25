@@ -257,6 +257,10 @@ body {
             transition: transform 0.3s;
             transform: translate3D(0,0,0px);
         }
+
+        &[data-active="true"] {
+           border:10px solid red; 
+        }
         
         &:hover {
             //z-index: 3;
