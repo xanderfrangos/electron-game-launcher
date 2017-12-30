@@ -133,7 +133,7 @@ body {
 }
 
 #app {
-    position: fixed;
+    //position: fixed;
     top:0;
     left: 0;
     width: 100vw;
@@ -226,11 +226,11 @@ body {
         flex-wrap: nowrap;
         padding: 4px;
         margin-top:-8px;
-        position: relative;
+        //position: relative;
 
         
         &:before {
-            content:attr(data-startLetter);
+            //content:attr(data-startLetter);
             position: absolute;
             top:0;
             right: 100%;
@@ -259,14 +259,15 @@ body {
         }
 
         &[data-active="true"] {
-           border:10px solid red; 
+            box-shadow: 0 0 0 10px red;
+            z-index: 1;
         }
         
         &:hover {
             //z-index: 3;
             
             a {
-                transform: translate3D(0,0,200px);
+                //transform: translate3D(0,0,200px);
             }
         }
         

@@ -42,4 +42,5 @@ jspm_packages
 
 cache
 .vs
+.DS_Store
 

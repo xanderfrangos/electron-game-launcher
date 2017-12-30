@@ -9,17 +9,18 @@ export default class GamesGrid extends Component {
         
         const renderRows = () => {
          
-            var rowLength = 3;
+            var rowLength = this.props.list.Width;
             var currentBatch = [];
             
             
             this.props.list.Items.forEach((game, index) => {
                 
                 if (currentBatch.length < rowLength) {
-                    currentBatch.push(game.meta);
+                    currentBatch.push(game);
                 } else {
                     rowsData.push( { "games": currentBatch } )
                     currentBatch = []
+                    currentBatch.push(game);
                 }
                 
             });
@@ -31,17 +32,17 @@ export default class GamesGrid extends Component {
             
             
             let mappedData = rowsData.map( (row, index) => {
-                return (<div className="row" data-count="3" data-startLetter="A" key={index}>{ row.games.map( gameTileRender ) }</div>)
+                return (<div className="row" data-count={this.props.list.Width} data-startLetter="A" key={index}>{ row.games.map( gameTileRender ) }</div>)
             });
             return mappedData; 
             
         }
         
         const gameTileRender = (game, index) => {
-            return <GameTile key={index} game={game}></GameTile>  
+            return <GameTile active={game.Active} key={index} game={game.meta}></GameTile>  
         }
         
-        return ( <div className="GameGrid">{ renderRows() }</div> )
+        return ( <div className="GameGrid"><div className="GameGridTitle">{this.props.list.Title}</div>{ renderRows() }</div> )
         
     }
 }

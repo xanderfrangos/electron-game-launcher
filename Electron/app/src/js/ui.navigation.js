@@ -1,11 +1,19 @@
 global.UINavigation = class {
     constructor() {
         this.Layers = [];
-        this.ActiveLayer = 0;
+        this.CurrentLayerID = 0;
         this.AllowInput = true;
-        this.CurrentItem = new UIItem({});
         this.FollowInput = true;
-        this.LayerCache = [{NextID:0,Layers:[]}];
+        
+        this.Active = {
+            Layer: {},
+            List: {},
+            Item: {}
+        }
+        this.Active.List = new UIList([this.Active.Item]);
+        this.Active.Layer = new UILayer([this.Active.List]);
+        this.LayerCache = [{NextID:0,Layers:[ this.Active.Layer ]}];
+        this.Layers = [this.Active.Layer]
     }
 
     NewCacheLayer(lists, title = "") {
@@ -47,28 +55,40 @@ global.UINavigation = class {
     }
 
     SetCurrentListItemIndex(ItemIndex) {
-        this.LayerCache[this.Layers[this.ActiveLayer]].Lists[this.LayerCache[this.Layers[this.ActiveLayer]].ActiveList].ActiveItem = ItemIndex;
+        this.Active.Item.Active = false;
+        this.LayerCache[this.Layers[this.CurrentLayerID]].Lists[this.LayerCache[this.Layers[this.CurrentLayerID]].ActiveList].ActiveItem = ItemIndex;
         
         this.RefreshCurrentItem();
+        this.Active.Item.Active = true;
     }
 
     SetCurrentListIndex(ListIndex, ItemIndex = 0) {
-        this.LayerCache[this.Layers[this.ActiveLayer]].ActiveList = ListIndex;
+        this.Active.List.Active = false;
+        this.LayerCache[this.Layers[this.CurrentLayerID]].ActiveList = ListIndex;
 
-        this.LayerCache[this.Layers[this.ActiveLayer]].Lists[this.LayerCache[this.Layers[this.ActiveLayer]].ActiveList].ActiveItem = ItemIndex;
+        this.LayerCache[this.Layers[this.CurrentLayerID]].Lists[this.LayerCache[this.Layers[this.CurrentLayerID]].ActiveList].ActiveItem = ItemIndex;
         
         this.RefreshCurrentItem();
+        this.Active.List.Active = true;
     }
 
     RefreshCurrentItem() {
         // Yes, I hate myself.
-        this.CurrentItem = this.LayerCache[this.Layers[this.ActiveLayer]].Lists[this.LayerCache[this.Layers[this.ActiveLayer]].ActiveList].Items[this.LayerCache[this.Layers[this.ActiveLayer]].Lists[this.LayerCache[this.Layers[this.ActiveLayer]].ActiveList].ActiveItem];
+        this.CurrentItem = this.LayerCache[this.Layers[this.CurrentLayerID]].Lists[this.LayerCache[this.Layers[this.CurrentLayerID]].ActiveList].Items[this.LayerCache[this.Layers[this.CurrentLayerID]].Lists[this.LayerCache[this.Layers[this.CurrentLayerID]].ActiveList].ActiveItem];
+    }
+
+    UpdateActiveObject() {
+        this.Active.Layer = this.LayerCache[this.Layers[this.CurrentLayerID]];
+        this.Active.List = CurrentLayer.Lists[CurrentLayer.ActiveList];
+        this.Active.Item = CurrentList.Items[CurrentList.ActiveItem];
     }
 
     MoveFocus(direction) {
-        var CurrentLayer = this.LayerCache[this.Layers[this.ActiveLayer]];
-        var CurrentList = CurrentLayer.Lists[CurrentLayer.ActiveList];
-        var CurrentItem = CurrentList.Items[CurrentList.ActiveItem];
+        UpdateActiveObject();
+
+        var CurrentLayer = this.Active.Layer;
+        var CurrentList = this.Active.List;
+        var CurrentItem = this.Active.Item;
 
         if(direction == "up") {
             if(CurrentList.IsHorizontal) {
