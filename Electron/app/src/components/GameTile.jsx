@@ -4,8 +4,16 @@ import styles from '../styles/local.css'
 
 export default class GameTile extends Component {
 
+    shouldComponentUpdate(nextProps, nextState) {
+        // NEEDS MORE IF STATEMENTS, DON'T LEAVE AS IS
+        if(this.props.active != nextProps.active) {
+            return true;
+        } else {
+            return false;
+        }
+      }
+
     render() {
-        
         if(this.props.active) {
             global.UI.Active.ItemRef = this.refs.Item;
         }

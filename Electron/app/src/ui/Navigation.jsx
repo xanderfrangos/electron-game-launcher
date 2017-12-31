@@ -296,8 +296,7 @@ export default class UINavigation {
             const tesNode = ReactDOM.findDOMNode(global.UI.Active.ItemRef)
             global.UI.Active.ItemRefDOM = tesNode;
             //mv.scrollTop = tesNode.offsetTop;
-            TweenLite.to(mv, 1, {scrollTo:tesNode.offsetTop});
-            console.log(tesNode);
+            TweenLite.to(mv, 0.25, {scrollTo:tesNode.offsetTop});
         }
 
     }

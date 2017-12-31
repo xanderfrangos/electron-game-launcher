@@ -3,6 +3,16 @@ import styles from '../styles/local.css'
 import GameTile from './GameTile.jsx'
 
 export default class GamesGrid extends Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // NEEDS MORE IF STATEMENTS, DON'T LEAVE AS IS
+        if(nextProps.list.Active) {
+            return true;
+        } else {
+            return false;
+        }
+      }
+
     render() {
         
         let rowsData = [];  
