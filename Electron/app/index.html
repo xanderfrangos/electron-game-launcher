@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Den Game Launcher</title>
-        <link rel="stylesheet" href="css/style.css">
-        <script src="src/js/gsap/TweenMax.js"></script>
-        <script src="src/js/gsap/easing/EasePack.js"></script>
-        <script src="src/js/gsap/plugins/ScrollToPlugin.js"></script>
-    </head>
-    <body>
-        <div id="title-bar">
-            <div id="title-bar-title">Den</div>
-            <div id="title-bar-btns">
-                <button id="title-min-btn">-</button>
-                <button id="title-max-btn">+</button>
-                <button id="title-close-btn">x</button>
-            </div>
-        </div>
-        <div id="app" onKeyDown="global.Input.HandleKeyDown(event)" tabIndex="0"></div>
+
+<head>
+    <meta charset="utf-8">
+    <title>Den Game Launcher</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="src/js/gsap/TweenMax.js"></script>
+    <script src="src/js/gsap/easing/EasePack.js"></script>
+    <script src="src/js/gsap/plugins/ScrollToPlugin.js"></script>
+</head>
+
+<body>
 
 
-        <script>
-            require('./build/bundle.js')
-            require('./src/js/titlebar.js')
-            
-            
-            </script>
-    </body>
+
+
+    <div id="background"></div>
+    <div id="app" onKeyDown="global.Input.HandleKeyDown(event)" tabIndex="0"></div>
+
+
+    <script>
+        require('./build/bundle.js')            
+    </script>
+
+</body>
+
 </html>

@@ -11,28 +11,35 @@ export default class UIInput {
             LastEventTime: 0,
             LastLoopTime: 0,
             ActiveGamepad: 0,
+            InputInterval: 32
         }
     }
 
 
     GamepadLoop() {
-        if(document.hasFocus()) {
-            let gamepads = navigator.getGamepads();
-            let Input = global.Input; // I'm lazy
-            for(var i = 0; i < 4; i++) {
-                if(gamepads[i] != null) {
-                    let isActive = Input.GamepadEvent(gamepads[i]);
-                    if(isActive) {
-                        Input.Gamepads.ActiveGamepad = i;
+        let Input = global.Input; // I'm lazy
+
+        if(Input.Gamepads.LastLoopTime - Input.Gamepads.LastEventTime > Input.Gamepads.InputInterval) {
+            Input.Gamepads.LastEventTime = Input.Gamepads.LastLoopTime;
+            if(document.hasFocus()) {
+                let gamepads = navigator.getGamepads();
+                
+                for(var i = 0; i < 4; i++) {
+                    if(gamepads[i] != null) {
+                        let isActive = Input.GamepadEvent(gamepads[i], i);
+                        if(isActive) {
+                            Input.Gamepads.ActiveGamepad = i;
+                        }
                     }
                 }
             }
         }
 
+
         global.Input.Gamepads.LastLoopTime = requestAnimationFrame(global.Input.GamepadLoop);
     }
 
-    GamepadEvent(gp) {
+    GamepadEvent(gp, index) {
         let isActive = false;
         gp.buttons.forEach((value, index) => {
             if(value.pressed == true) {
@@ -60,21 +67,21 @@ export default class UIInput {
             }
         });
         
-        if(Math.abs(gp.axes[0]) > 0.5 || Math.abs(gp.axes[1]) > 0.5)
+        if(Math.abs(gp.axes[0]) > 0.75 || Math.abs(gp.axes[1]) > 0.75)
             isActive = true;
         
-        if(gp.axes[0] < -0.5) {
+        if(gp.axes[0] < -0.75) {
             // RS X Left
             global.UI.MoveFocus("left");
-        } else if(gp.axes[0] > 0.5) {
+        } else if(gp.axes[0] > 0.75) {
             // RS X Right
             global.UI.MoveFocus("right");
         } 
         
-        if(gp.axes[1] < -0.5) {
+        if(gp.axes[1] < -0.75) {
             // RS Y Up
             global.UI.MoveFocus("up");
-        } else if(gp.axes[1] > 0.5) {
+        } else if(gp.axes[1] > 0.75) {
             // RS Y Down
             global.UI.MoveFocus("down");
         }

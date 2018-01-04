@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {render} from 'react-dom'
 import GamesGrid from './components/GamesGrid.jsx'
 import UILayer from './ui/Layer.jsx'
 import UIList from './ui/List.jsx'
@@ -29,24 +28,35 @@ export default class App extends Component {
     // Build Items
     let items = [];
     let items2 = [];
-
+    let items3 = [];
 
     
 
     sortedApps.forEach(function(element) {
-        let newItem = new UIItem( global.Input.runGame );
+        let newItem = new UIItem( global.Input.RunGame );
         newItem.meta = element;
         items.push(newItem);
     }, this);
 
     sortedApps.forEach(function(element) {
-        let newItem = new UIItem(null);
+        let newItem = new UIItem(global.Input.RunGame);
         newItem.meta = element;
         items2.push(newItem);
     }, this);
 
+    sortedApps.forEach(function(element) {
+        let newItem = new UIItem(global.Input.RunGame);
+        newItem.meta = element;
+        items3.push(newItem);
+    }, this);
+
     // Build List w/ Items
-    let lists = [new UIList(items, "All Games 1", 3), new UIList(items2, "All Games 2", 3)];
+
+    let allList = new UIList(items, "All Games", 3);
+    let recentList = new UIList([items2[8], items2[12], items2[21]], "Recently Played", 3);
+    let favoritesList = new UIList([items3[7], items3[16], items3[22], items3[27], items3[23]], "Favorites", 3);
+
+    let lists = [favoritesList, recentList, allList];
 
     // Build Layer w/ List
     let layer = global.UI.NewCacheLayer(lists, "Layer Title");
@@ -70,7 +80,7 @@ export default class App extends Component {
         
         return (
             <main>
-                <div id="background"></div>
+                
                 <div id="sidebar">
                     <div className="view">
                     </div>
@@ -80,6 +90,7 @@ export default class App extends Component {
                         <div className="logo-top"><img src="./images/logo-white.png" /></div>    
                         <GamesGrid list={this.state.lists[0]} />
                         <GamesGrid list={this.state.lists[1]} />
+                        <GamesGrid list={this.state.lists[2]} />
                     </div>
                 </div>
             </main>

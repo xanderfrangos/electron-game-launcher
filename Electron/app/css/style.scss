@@ -89,7 +89,7 @@ body, html {
 }
 
 body {
-
+    font-family: "Cabin";
 }
 
 
@@ -98,29 +98,29 @@ body {
 
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 0.5vw;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    border-radius: 0.5vw;
+    
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(11,19,26,0.8); 
+    -webkit-border-radius: 0.5vw;
+    border-radius: 0.5vw;
+    background: rgba(173, 184, 194, 0.8); 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(11,19,26,0.4); 
+    background: rgba(127, 137, 146, 0.4); 
 }
 
 
 
 #background {
-    background: #151719 url('../images/bg.jpg') center center;
+    background: #151719 url('../images/bg2.jpg') center center;
     background-size: cover;
     position: fixed;
     top: 0;
@@ -129,7 +129,9 @@ body {
     height: 100vh;
     overflow: hidden;
     z-index: 1;
-        
+    will-change: transform;
+
+    display: none;
 }
 
 #app {
@@ -147,8 +149,8 @@ body {
 
 #title-bar {
     -webkit-app-region: drag;
-    background: linear-gradient(to bottom, rgba(11,19,26,0.85) 0%,rgba(11,19,26,0) 100%);
-    background: #111926;
+    //background: linear-gradient(to bottom, rgba(11,19,26,0.85) 0%,rgba(11,19,26,0) 100%);
+    //background: #111926;
     padding: none;
     margin: 0px; 
     position: fixed;
@@ -156,6 +158,7 @@ body {
     left:0;
     z-index: 1000;
     width: 100%;
+
 }
 
 #title-bar-title {
@@ -192,38 +195,77 @@ body {
     }
 }
 
+main {
+    display: flex;
+    flex-direction: row;
+    background: #151719;
+}
 
 
 #sidebar {
     position: relative;
     z-index: 6;   
+    width: 28%;
+    background: #292e35;
+    min-height: 100vh;
 }
 
 #main {
-    width: 100%;
+    width: 72%;
     box-sizing: border-box;
-    max-width: 1280px;
+    //max-width: 1280px;
     margin: 0 auto 100px;
-    
+    padding: 1vw;
     position: relative;
     z-index: 5;
 }
 
 .logo-top {
     img {
-        width: 130px;
+        width: 8vw;
         height: auto;
         display: block;
-        margin: 100px auto;
+        margin: 6vw auto;
     }
 }
 
 .GameGrid {
 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 4px;
+    margin-top:-8px;
+
+    &[data-width="2"] .GameTile {
+        width: 50%;
+    }
+    &[data-width="3"] .GameTile {
+        width: 33.333%;
+    }
+    &[data-width="4"] .GameTile {
+        width: 25%;
+    }
+    &[data-width="5"] .GameTile {
+        width: 20%;
+    }
+    &[data-width="6"] .GameTile {
+        width: 16.666666%;
+    }
+
+    .GameGridTitle {
+        width: 100%;
+        padding: 0 0.5vw;
+        box-sizing: border-box;
+        font-size: 1.5vw;
+        font-weight: 200;
+        margin: 2vw 0 1vw;
+    }
+
     .row {
         display: flex;
         flex-direction: row;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         padding: 4px;
         margin-top:-8px;
         //position: relative;
@@ -241,26 +283,31 @@ body {
     }
     .GameTile {
         display: block;
-        flex: 1 360px;
-        flex-grow: 2;
-        padding: 4px;
+        //flex: 1 360px;
+        //flex-grow: 2;
+        padding: 0.5vw;
+        width: 100%;
+        box-sizing: border-box;
 
         perspective: 100vw;
         transform-style: preserve-3d;
         position: relative;
-
+        //box-shadow: 0 10px 43px -13px rgba(0,0,0,0);
+        transition: box-shadow 0.2s, transform 0.2s, background 0.2s, opacity 0.2s;
+        transform: scale(01);
+        will-change: box-shadow, transform, background, opacity;
+        border-radius: 5px;
         //z-index: 1;
-
-        a {
-            display: block;
-            will-change: transform;
-            transition: transform 0.3s;
-            transform: translate3D(0,0,0px);
-        }
+        opacity: 0.65;
+        user-select: none;
+        cursor: pointer;
 
         &[data-active="true"] {
-            box-shadow: 0 0 0 10px red;
-            z-index: 1;
+            z-index: 3;
+            //transform: scale(1.15);
+            background: white;
+            //box-shadow: 0 10px 43px -13px black;
+            opacity: 1;
         }
         
         &:hover {
@@ -271,12 +318,26 @@ body {
             }
         }
         
+        .GameTileInner {
+            position: relative;
+        }
+
+        .TileBase {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
         
 
         .cover {
             width:100%;
             height: auto;
             display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
         }
 
     }

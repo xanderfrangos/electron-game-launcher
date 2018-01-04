@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Den Game Launcher</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+    </script>
+</head>
+
+<body>
+        <div id="title-bar">
+                <div id="title-bar-title">Den</div>
+                <div id="title-bar-btns">
+                    <button id="title-min-btn">-</button>
+                    <button id="title-max-btn">+</button>
+                    <button id="title-close-btn">x</button>
+                </div>
+            </div>
+            <script>
+                    require('./src/js/titlebar.js')
+                </script>
+        <webview src="file:///C:/Projects/electron-game-launcher/Electron/app/index.html" class="h" plugins nodeintegration disablewebsecurity allowfileaccessfromfiles></webview>
+    <script>
+        var wv = document.getElementById("webview");
+        var doOnce = true;
+        var thePath = 'file:///C:/Projects/electron-game-launcher/Electron/app/index.html';
+        // file:///C:/Projects/electron-game-launcher/Electron/app/index.html
+        
+        var webview = document.querySelector('webview')
+webview.addEventListener('dom-ready', () => {
+    console.log("b")
+  //
+  if(doOnce) {
+      doOnce = false;
+      
+  //webview.loadURL(thePath);
+  console.log(thePath);
+  //webview.openDevTools()
+  }
+
+})
+
+window.addEventListener('load', () => {
+    console.log("ba")
+    
+});
+    </script>
+    <style>
+        webview {
+            width:100%;height:100%;transform:scale(1);position:absolute;top:0;left:0;transform-origin:0% 0%;
+        }
+    </style>
+    <script>
+        var TargetHeight = 320;
+        SetTargetResolution = (Height) => {
+            TargetHeight = Height;
+            const Scale = Height / window.innerHeight;
+            webview.style.width = (Scale * 100) + "%";
+            webview.style.height = (Scale * 100) + "%";
+            webview.style.transform = "scale(" + (1 / Scale) + ")";
+        }
+        window.addEventListener('resize', () => {
+            SetTargetResolution(TargetHeight);
+        });
+        setTimeout(() => {SetTargetResolution(TargetHeight)}, 200);
+
+    </script>
+</body>
+
+</html>

@@ -9,6 +9,12 @@ export default class UINavigation {
         this.CurrentLayerID = 0;
         this.AllowInput = true;
         this.FollowInput = true;
+        this.Items = []
+        this.Refs = [];
+        this.Counters = {
+            LayerCache: 0,
+            Refs: 0,
+        };
 
         this.Active = {
             Layer: {},
@@ -17,11 +23,15 @@ export default class UINavigation {
         }
         this.Active.List = new UIList([this.Active.Item]);
         this.Active.Layer = new UILayer([this.Active.List]);
-        this.LayerCache = {
-            NextID: 0,
-            Layers: []
-        };
-        this.LayerCache.Layers[0] = this.Active.Layer;
+        this.LayerCache = [];
+        this.LayerCache[0] = this.Active.Layer;
+    }
+
+
+    NewRef(ref) {
+        this.Refs[this.Counters.Refs] = ref;
+        this.Counters.Refs++;
+        return this.Counters.Refs - 1;
     }
 
     NewCacheLayer(lists, title = "") {
@@ -31,10 +41,10 @@ export default class UINavigation {
     }
 
     CacheLayer(layer) {
-        this.LayerCache.Layers[this.LayerCache.NextID] = layer;
-        var LayerID = this.LayerCache.NextID;
+        this.LayerCache[this.Counters.LayerCache] = layer;
+        var LayerID = this.Counters.LayerCache;
         layer.ID = LayerID;
-        this.LayerCache.NextID++;
+        this.Counters.LayerCache++;
         return LayerID;
     }
 
@@ -44,29 +54,29 @@ export default class UINavigation {
 
     PreviousLayer() {
         var CurrentLayerID = this.Layers[this.Layers.length - 1];
-        this.LayerCache.Layers[this.Layers[this.Layers.length - 1]].Active = false;
+        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
         this
             .Layers
             .splice(this.Layers.length - 1, 1);
-        this.LayerCache.Layers[this.Layers[this.Layers.length - 1]].Active = true;
+        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
         this.DestroyLayer(CurrentLayerID);
     }
 
     NewLayer(layerID) {
         if (this.Layers.length > 0) {
-            this.LayerCache.Layers[this.Layers[this.Layers.length - 1]].Active = false;
+            this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
         }
         this
             .Layers
             .push(layerID);
-        this.LayerCache.Layers[this.Layers[this.Layers.length - 1]].Active = true;
+        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
         this.SetCurrentListIndex(0);
     }
 
     ChangeLayer(layerID) {
-        this.LayerCache.Layers[this.Layers[this.Layers.length - 1]].Active = false;
+        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
         this.Layers[this.Layers.length - 1] = layerID;
-        this.LayerCache.Layers[this.Layers[this.Layers.length - 1]].Active = true;
+        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
     }
 
     SetCurrentListItemIndex(ItemIndex) {
@@ -87,19 +97,17 @@ export default class UINavigation {
         this.Active.List.Active = false;
         this.Active.Item.Active = false;
 
-        this.Active.Layer = this.LayerCache.Layers[this.Layers[this.Layers.length - 1]];
+        this.Active.Layer = this.LayerCache[this.Layers[this.Layers.length - 1]];
         this.Active.List = this.Active.Layer.Lists[this.Active.Layer.ActiveList];
         this.Active.Item = this.Active.List.Items[this.Active.List.ActiveItem];
 
         this.Active.Layer.Active = true;
         this.Active.List.Active = true;
         this.Active.Item.Active = true;
-        if (global.AppJS) {
-            global
-                .AppJS
-                .setState({"lists": this.Active.Layer.Lists});
-        }
+    }
 
+    UpdateState() {
+        global.AppJS.setState({"lists": this.Active.Layer.Lists});
     }
 
     MoveFocus(direction) {
@@ -233,11 +241,11 @@ export default class UINavigation {
                     var NewItemIndex = CurrentLayer.Lists[ListIndex].Items.length - 1;
 
                     // Set new List/Item Index
-                    //this.SetCurrentListIndex(ListIndex, NewItemIndex);
+                    this.SetCurrentListIndex(ListIndex, NewItemIndex);
 
                 }
 
-            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 1) {
+            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 11) {
                 // Right side is blocked Abort!
                 return false;
             } else {
@@ -274,11 +282,11 @@ export default class UINavigation {
                     var NewItemIndex = 0;
 
                     // Set new List/Item Index
-                    //this.SetCurrentListIndex(ListIndex, NewItemIndex);
+                    this.SetCurrentListIndex(ListIndex, NewItemIndex);
 
                 }
 
-            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 0) {
+            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 10) {
                 // Right side is blocked Abort!
                 return false;
             } else {
@@ -289,16 +297,66 @@ export default class UINavigation {
             // End Direction Right
         }
 
+        const oldItem = ReactDOM.findDOMNode(global.UI.Refs[CurrentItem.ID])
+        const newItem = ReactDOM.findDOMNode(global.UI.Refs[global.UI.Active.Item.ID])
+        oldItem.dataset.active = "false"
+        newItem.dataset.active = "true"
 
-        if(global.UI.Active.ItemRef !== undefined) {
-            const mv = document.getElementById("app")
-            
-            const tesNode = ReactDOM.findDOMNode(global.UI.Active.ItemRef)
-            global.UI.Active.ItemRefDOM = tesNode;
-            //mv.scrollTop = tesNode.offsetTop;
-            TweenLite.to(mv, 0.25, {scrollTo:tesNode.offsetTop});
+        // Scroll to new item
+        this.ScrollToRefInView(document.getElementById("app"), global.UI.Refs[global.UI.Active.Item.ID], (window.innerWidth * 0.1));
+    }
+
+    ScrollToRef() {
+        const MainView = document.getElementById("app")
+
+        const ViewPadding = (window.innerWidth * 0.1);
+
+        const ViewTop = MainView.scrollTop + ViewPadding;
+        const ViewBottom = MainView.scrollTop + window.innerHeight - ViewPadding;
+
+        const ActiveRef = global.UI.Refs[global.UI.Active.Item.ID];
+        const RefTop = ActiveRef.offsetTop;
+        const RefBottom = ActiveRef.offsetTop + ActiveRef.clientHeight;
+
+        let ScrollPos = -1;
+
+        // Check if active ref is above top of view
+        if(RefTop < ViewTop) {
+            ScrollPos = RefTop - ViewPadding;
+        } 
+
+        // Check if active ref is below bottom of view
+        if(RefBottom > ViewBottom) {
+            ScrollPos = RefBottom + ViewPadding - window.innerHeight;
         }
 
+        if(ScrollPos >= 0) {
+            TweenLite.to(MainView, 0.25, {scrollTo: ScrollPos});
+        }
+    }
+
+    ScrollToRefInView(View, Ref, ViewPadding = 0) {
+        const ViewTop = View.scrollTop + ViewPadding;
+        const ViewBottom = View.scrollTop + window.innerHeight - ViewPadding;
+
+        const RefTop = Ref.offsetTop;
+        const RefBottom = Ref.offsetTop + Ref.clientHeight;
+
+        let ScrollPos = -1;
+
+        // Check if active ref is above top of view
+        if(RefTop < ViewTop) {
+            ScrollPos = RefTop - ViewPadding;
+        } 
+
+        // Check if active ref is below bottom of view
+        if(RefBottom > ViewBottom) {
+            ScrollPos = RefBottom + ViewPadding - window.innerHeight;
+        }
+
+        if(ScrollPos >= 0) {
+            TweenLite.to(View, 0.25, {scrollTo: ScrollPos});
+        }
     }
 
     ActivatePrimary() {

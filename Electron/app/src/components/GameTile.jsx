@@ -1,10 +1,8 @@
-import React, {Component}  from 'react'
-import ReactDOM from 'react-dom'
-import styles from '../styles/local.css'
+import React, {PureComponent}  from 'react'
 
-export default class GameTile extends Component {
+export default class GameTile extends PureComponent {
 
-    shouldComponentUpdate(nextProps, nextState) {
+    AshouldComponentUpdate(nextProps, nextState) {
         // NEEDS MORE IF STATEMENTS, DON'T LEAVE AS IS
         if(this.props.active != nextProps.active) {
             return true;
@@ -18,7 +16,15 @@ export default class GameTile extends Component {
             global.UI.Active.ItemRef = this.refs.Item;
         }
 
-        return ( <div ref="Item" data-active={this.props.active} className="GameTile"><a data-action={"steam://rungameid/" + this.props.game.id}><img className="cover" src={'./cache/' + this.props.game.id + '/header.jpg?t=1508951965'} /></a></div> )
+        
 
+        return ( <div ref="Item" data-active={this.props.active} className="GameTile"><div className="GameTileInner"><img className="TileBase" src="./images/header-blank.png" /><img className="cover" src={'./cache/' + this.props.game.id + '/header.jpg?t=1508951965'} /></div></div> )
+
+    }
+
+    componentDidMount() {
+        global.UI.Refs[this.props.item.ID] = this.refs.Item;
+        //this.props.Ref = global.UI.NewRef(this.refs.Item);
+        console.log(this.props.item.ID);
     }
 }

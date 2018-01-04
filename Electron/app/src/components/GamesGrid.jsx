@@ -1,12 +1,13 @@
-import React, {Component}  from 'react'
+import React, {PureComponent}  from 'react'
 import styles from '../styles/local.css'
 import GameTile from './GameTile.jsx'
 
-export default class GamesGrid extends Component {
+export default class GamesGrid extends PureComponent {
 
     shouldComponentUpdate(nextProps, nextState) {
+        return true;
         // NEEDS MORE IF STATEMENTS, DON'T LEAVE AS IS
-        if(nextProps.list.Active) {
+        if(nextProps.list.Active || this.props.list.Active != nextProps.list.Active) {
             return true;
         } else {
             return false;
@@ -49,10 +50,10 @@ export default class GamesGrid extends Component {
         }
         
         const gameTileRender = (game, index) => {
-            return <GameTile active={game.Active} key={index} game={game.meta}></GameTile>  
+            return <GameTile active={game.Active} key={index} game={game.meta} item={game}></GameTile>  
         }
         
-        return ( <div className="GameGrid"><div className="GameGridTitle">{this.props.list.Title}</div>{ renderRows() }</div> )
+        return ( <div className="GameGrid" data-width={this.props.list.Width}><div className="GameGridTitle">{this.props.list.Title}</div>{ this.props.list.Items.map( gameTileRender ) }</div> )
         
     }
 }

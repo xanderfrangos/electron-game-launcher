@@ -13,14 +13,12 @@ let mainWindow
 app.on('ready', () => {
 
 
-    let mainWindow = new BrowserWindow({width: 800, height: 600, frame: false})
+    let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: false})
     //mainWindow.maximize();
     mainWindow.loadURL(`file://${__dirname}/app/index.html`)
     //mainWindow.setMenu(null);
     
     //mainWindow.setFullScreen(true);
-
-    setTimeout(() => {console.log(global.UI)}, 1000);
 
 })
 
