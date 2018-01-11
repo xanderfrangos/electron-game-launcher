@@ -144,9 +144,12 @@ export default class UINavigation {
                     // Match up with column in last row of above list.
                     var NewList = CurrentLayer.Lists[ListIndex];
                     var NewCol = (OldCol / CurrentList.Width) * NewList.Width;
-                    var NewItemIndex = Math.round(NewList.Items.length - NewList.Width + NewCol);
+                    //var NewItemIndex = Math.round(NewList.Items.length - NewList.Width + NewCol);
+                    var NewItemIndex = (Math.ceil(NewList.Items.length / NewList.Width) * NewList.Width) - NewList.Width + NewCol;
 
-                    console.log(NewCol, NewItemIndex, NewList.Width)
+                    // ( ceil(length / col) * col ) - wid + newcol
+
+                    console.log("ScrollToRefInView", NewCol, NewItemIndex, NewList.Width, NewCol)
 
                     // If there there isn't an equal column position because the row isn't full
                     // enough, we get the last item instead
@@ -347,16 +350,28 @@ export default class UINavigation {
         // Check if active ref is above top of view
         if(RefTop < ViewTop) {
             ScrollPos = RefTop - ViewPadding;
+
+            if(ScrollPos < 0) {
+                ScrollPos = 0;
+            }
+
         } 
 
         // Check if active ref is below bottom of view
         if(RefBottom > ViewBottom) {
             ScrollPos = RefBottom + ViewPadding - window.innerHeight;
+
+            if(ScrollPos < 0) {
+                ScrollPos = 0;
+            }
+
         }
 
         if(ScrollPos >= 0) {
             TweenLite.to(View, 0.25, {scrollTo: ScrollPos});
         }
+
+        console.log("ScrollToRefInView", ScrollPos);
     }
 
     ActivatePrimary() {

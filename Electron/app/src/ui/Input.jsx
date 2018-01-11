@@ -4,14 +4,15 @@ export default class UIInput {
     // We will assume this is being assigned to global.Input for the sake of requestAnimationFrame
 
     constructor() {
-        this.Timer = setTimeout(this.GamepadLoop, 16);
+        this.Timer = setTimeout(this.GamepadLoop, 32);
         this.Gamepads = {
             LastButtons: {},
             LastDirection: "none",
             LastEventTime: 0,
             LastLoopTime: 0,
             ActiveGamepad: 0,
-            InputInterval: 32
+            InputInterval: 16,
+            BackgroundInput: true, // Only should be true for testing
         }
     }
 
@@ -21,7 +22,7 @@ export default class UIInput {
 
         if(Input.Gamepads.LastLoopTime - Input.Gamepads.LastEventTime > Input.Gamepads.InputInterval) {
             Input.Gamepads.LastEventTime = Input.Gamepads.LastLoopTime;
-            if(document.hasFocus()) {
+            if(document.hasFocus() || global.Input.Gamepads.BackgroundInput) {
                 let gamepads = navigator.getGamepads();
                 
                 for(var i = 0; i < 4; i++) {
@@ -35,7 +36,8 @@ export default class UIInput {
             }
         }
 
-
+        //global.Input.Gamepads.LastLoopTime += 32;
+        //global.Input.Gamepads.Timer = setTimeout(global.Input.GamepadLoop, 32);
         global.Input.Gamepads.LastLoopTime = requestAnimationFrame(global.Input.GamepadLoop);
     }
 
@@ -67,21 +69,21 @@ export default class UIInput {
             }
         });
         
-        if(Math.abs(gp.axes[0]) > 0.75 || Math.abs(gp.axes[1]) > 0.75)
+        if(Math.abs(gp.axes[0]) > 0.7 || Math.abs(gp.axes[1]) > 0.7)
             isActive = true;
         
-        if(gp.axes[0] < -0.75) {
+        if(gp.axes[0] < -0.7) {
             // RS X Left
             global.UI.MoveFocus("left");
-        } else if(gp.axes[0] > 0.75) {
+        } else if(gp.axes[0] > 0.7) {
             // RS X Right
             global.UI.MoveFocus("right");
         } 
         
-        if(gp.axes[1] < -0.75) {
+        if(gp.axes[1] < -0.7) {
             // RS Y Up
             global.UI.MoveFocus("up");
-        } else if(gp.axes[1] > 0.75) {
+        } else if(gp.axes[1] > 0.7) {
             // RS Y Down
             global.UI.MoveFocus("down");
         }
@@ -93,7 +95,7 @@ export default class UIInput {
 
 
     HandleKeyDown(e) {
-        if(!document.hasFocus())
+        if(!document.hasFocus() && !global.Input.Gamepads.BackgroundInput)
             return false;
 
         console.log(e);

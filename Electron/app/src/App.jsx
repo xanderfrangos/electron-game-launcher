@@ -83,11 +83,63 @@ export default class App extends Component {
                 
                 <div id="sidebar">
                     <div className="view">
+                        <div className="row">
+                            <div className="logo"><img src="./images/logo-white.png" /></div>
+                            <div className="time">7:09 PM</div>
+                        </div> 
+                        <div className="row active">
+                            <div className="item">
+                                <div className="title">Favorites</div>
+                                <div className="count">5</div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="item">
+                                <div className="title">Recent Games</div>
+                                <div className="count">3</div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="item">
+                                <div className="title">All Games</div>
+                                <div className="count">107</div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="row">
+                            <div className="item">
+                                <div className="title">Co-op</div>
+                                <div className="count">10</div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="item">
+                                <div className="title">Racing</div>
+                                <div className="count">7</div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="item">
+                                <div className="title">Shooter</div>
+                                <div className="count">22</div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="item">
+                                <div className="title">Haven't Started</div>
+                                <div className="count">32</div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="item">
+                                <div className="title">Need to finish</div>
+                                <div className="count">64</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="main" ref="MainView">
-                    <div className="view">
-                        <div className="logo-top"><img src="./images/logo-white.png" /></div>    
+                    <div className="view">   
                         <GamesGrid list={this.state.lists[0]} />
                         <GamesGrid list={this.state.lists[1]} />
                         <GamesGrid list={this.state.lists[2]} />

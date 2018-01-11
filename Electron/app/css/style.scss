@@ -73,8 +73,12 @@ i {
 b {
     font-weight: bold;
 }
+
+condensed {
+    font-family: 'Cabin Condensed', sans-serif;
+}
 body, html {
-    font-family: sans-serif;
+    font-family: 'Cabin', sans-serif;
     font-weight: 500;
     line-height: 1;
     font-size: 17px;
@@ -92,25 +96,30 @@ body {
     font-family: "Cabin";
 }
 
+html {
+    font-size: 1vw; // TV Mode
+    font-size: 12.8px; // Desktop Mode
+}
+
 
 
 
 
 
 ::-webkit-scrollbar {
-    width: 0.5vw;
+    width: 0.5rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    border-radius: 0.5vw;
+    border-radius: 0.5rem;
     
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 0.5vw;
-    border-radius: 0.5vw;
+    -webkit-border-radius: 0.5rem;
+    border-radius: 0.5rem;
     background: rgba(173, 184, 194, 0.8); 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
@@ -125,7 +134,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100rem;
     height: 100vh;
     overflow: hidden;
     z-index: 1;
@@ -142,6 +151,8 @@ body {
     height: 100vh;
     overflow-x:hidden;
     overflow-y:scroll; // manage scrollbar content overflow settings
+    border: none !important;
+    outline: none !important;
     
 }
 
@@ -199,33 +210,95 @@ main {
     display: flex;
     flex-direction: row;
     background: #151719;
+    padding-left: 25rem; 
 }
 
 
 #sidebar {
-    position: relative;
+    position: fixed;
     z-index: 6;   
-    width: 28%;
-    background: #292e35;
+    width: 25rem;
+    //background: #292e35;
+    border-right: 0.25rem solid #313131;
     min-height: 100vh;
+    top:0;
+    left:0;
+
+    .logo {
+        float:left;
+        //height: 10rem;
+        padding: 5rem 0;
+        img {
+            width: 5rem;
+        }
+    }
+
+    .time {
+        @extend condensed;
+        padding: 5.6rem 0 0;
+        float:right;
+        font-size: 2rem;
+        font-weight: 200;
+    }
+
+    .row {
+        @extend clear;
+        width: 100%;
+        box-sizing: border-box;
+        background: rgba(white, 0.0);
+        padding: 0 2rem 0 5rem;
+        &.active {
+            background: rgba(white, 0.3);
+        }
+        .item {
+            @extend clear;
+            padding: 1.75rem 0;
+            font-size: 1.2rem;
+
+            .title {
+                float:left;
+            }
+            .count {
+                @extend condensed;
+                float:right;
+            }
+        }
+    }
+
+    hr {
+        &:before {
+            content: ' ';
+            display: block;
+            width: 100%;
+            height: 0.15rem;
+            background: #313131;
+        }
+        background: none;
+        width: 100%;
+        display: block;
+        box-sizing: border-box;
+        padding: 0 2rem 0 5rem;
+        border:none;
+        outline:none;
+    }
 }
 
 #main {
-    width: 72%;
     box-sizing: border-box;
     //max-width: 1280px;
     margin: 0 auto 100px;
-    padding: 1vw;
+    padding: 0 4rem;
     position: relative;
     z-index: 5;
+    max-width: 115rem;
 }
 
 .logo-top {
     img {
-        width: 8vw;
+        width: 8rem;
         height: auto;
         display: block;
-        margin: 6vw auto;
+        margin: 6rem auto;
     }
 }
 
@@ -255,11 +328,11 @@ main {
 
     .GameGridTitle {
         width: 100%;
-        padding: 0 0.5vw;
+        padding: 0 0.5rem;
         box-sizing: border-box;
-        font-size: 1.5vw;
+        font-size: 1.5rem;
         font-weight: 200;
-        margin: 2vw 0 1vw;
+        margin: 2rem 0 1rem;
     }
 
     .row {
@@ -285,18 +358,18 @@ main {
         display: block;
         //flex: 1 360px;
         //flex-grow: 2;
-        padding: 0.5vw;
+        padding: 0.25rem;
         width: 100%;
         box-sizing: border-box;
 
-        perspective: 100vw;
+        perspective: 100rem;
         transform-style: preserve-3d;
         position: relative;
         //box-shadow: 0 10px 43px -13px rgba(0,0,0,0);
         transition: box-shadow 0.2s, transform 0.2s, background 0.2s, opacity 0.2s;
-        transform: scale(01);
+        transform: scale(1);
         will-change: box-shadow, transform, background, opacity;
-        border-radius: 5px;
+        //border-radius: 5px;
         //z-index: 1;
         opacity: 0.65;
         user-select: none;
@@ -305,9 +378,37 @@ main {
         &[data-active="true"] {
             z-index: 3;
             //transform: scale(1.15);
-            background: white;
+            //background: white;
             //box-shadow: 0 10px 43px -13px black;
             opacity: 1;
+            box-shadow: 0 0 0 0.2rem #17befe;
+            animation: GameTileBorderGlow 2s infinite;
+            @keyframes GameTileBorderGlow {
+                0% { box-shadow: 0 0 0 0.2rem #17befe; }
+                50% { box-shadow: 0 0 0 0.2rem #96e1ff; }
+                100% { box-shadow: 0 0 0 0.2rem #17befe; }
+            }
+
+            .GameTileInner {
+                box-shadow: 0 0 0 0.4rem rgba(white,1), 0 0 11rem -2rem rgba(white,1);
+                box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe;
+                animation: GameTileInnerGlow 2s infinite;
+                @keyframes GameTileInnerGlow {
+                    0% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; }
+                    50% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #9fe4ff; }
+                    100% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; }
+                }
+                .title {
+                    opacity: 1;
+                    transform: translateY(0%);
+                    animation: GameTileTitleGlow 2s infinite;
+                    @keyframes GameTileTitleGlow {
+                        0% { background: rgba(#17befe, 0.67); }
+                        50% { background: rgba(#82c9e5, 0.8); }
+                        100% { background: rgba(#17befe, 0.67); }
+                    }
+                }
+            }
         }
         
         &:hover {
@@ -320,12 +421,31 @@ main {
         
         .GameTileInner {
             position: relative;
+            overflow: hidden;
         }
 
         .TileBase {
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            padding: 0.5rem 0;
+            position: absolute;
+            bottom: 0;
+            opacity: 0;
+            background: rgba(29, 191, 254, 0.67);
+            color: white;
+            width: 100%;
+            font-weight: 900;
+            box-shadow: 0 0 0 1px rgba(29, 191, 254, 0.67);
+            text-align: center;
+            font-family: 'Cabin Condensed';
+            text-shadow: 0 0.05rem 0.125rem rgb(42, 82, 97);
+            transform: translateY(100%);
+            transition: transform 0.3s, opacity 0.3s;
         }
         
 
@@ -337,7 +457,7 @@ main {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border-radius: 5px;
+            //border-radius: 5px;
         }
 
     }
