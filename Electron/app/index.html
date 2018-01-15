@@ -25,12 +25,12 @@
 
 
     <div id="background"></div>
-    <div id="app" onKeyDown="global.Input.HandleKeyDown(event)" tabIndex="0"></div>
+    <div id="app" onKeyDown="global.Input.HandleKeyDown(event)" onKeyUp="global.Input.HandleKeyUp(event)" tabIndex="0"></div>
 
 
     <script>
         require('./build/bundle.js')
-        var backgroundWorker = new Worker('./src/js/test.js')            
+        var backgroundWorker = new Worker('./src/js/test.js')     
     </script>
 
 <script>

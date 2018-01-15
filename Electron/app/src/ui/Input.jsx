@@ -6,27 +6,34 @@ export default class UIInput {
     constructor() {
         this.Timer = setTimeout(this.GamepadLoop, 300);
         this.Gamepads = {
-            LastButtons: {},
             LastDirection: "none",
             LastEventTime: 0,
             LastLoopTime: 0,
             ActiveGamepad: 0,
-            InputInterval: 16,
+            InputInterval: 8, // No need to poll more often, waste of CPU
+            Down: {
+                Buttons: [],
+                DirectionDown: false,
+                DirectionalTimeTotal: 0,
+                DirectionalTimeBuffer: 0,
+                DirectionalTimeLast: 0 ,
+            },
             BackgroundInput: true, // Only should be true for testing
         }
-
-        //window.addEventListener("gamepadconnected", function(e) { gamepadHandler(e, true); }, false);
-        //window.addEventListener("gamepaddisconnected", function(e) { gamepadHandler(e, false); }, false);
+        
     }
 
 
-    GamepadLoop() {
+    GamepadLoop(timestamp) {
         let Input = global.Input; // I'm lazy
 
-        if(Input.Gamepads.LastLoopTime - Input.Gamepads.LastEventTime > Input.Gamepads.InputInterval) {
-            Input.Gamepads.LastEventTime = Input.Gamepads.LastLoopTime;
+        if(timestamp - Input.Gamepads.LastEventTime > Input.Gamepads.InputInterval) {
+            //console.log(timestamp - Input.Gamepads.LastEventTime)
+            Input.Gamepads.LastEventTime = performance.now();
+            
             if(document.hasFocus() || global.Input.Gamepads.BackgroundInput) {
                 let gamepads = navigator.getGamepads();
+                Input.Gamepads.Down.DirectionDown = false
                 
                 for(var i = 0; i < 4; i++) {
                     if(gamepads[i] != null) {
@@ -36,60 +43,134 @@ export default class UIInput {
                         }
                     }
                 }
+
+                if(Input.Gamepads.Down.DirectionDown === false) {
+                    Input.ResetDirectionalTime()
+                }
             }
         }
 
-        //global.Input.Gamepads.LastLoopTime += 32;
-        //global.Input.Gamepads.Timer = setTimeout(global.Input.GamepadLoop, 32);
-        global.Input.Gamepads.LastLoopTime = requestAnimationFrame(global.Input.GamepadLoop);
+        global.Input.Gamepads.LastLoopTime = performance.now()
+        requestAnimationFrame(global.Input.GamepadLoop);
+        
+    }
+
+    ResetDirectionalTime() {
+        let Down = Input.Gamepads.Down
+        Down.DirectionalTimeBuffer = 0
+        Down.DirectionalTimeLast = 0
+        Down.DirectionalTimeTotal = 0
+    }
+
+    TryMoveFocus(direction) {
+        let Input = global.Input; // I'm lazy
+        let delta = performance.now() - Input.Gamepads.Down.DirectionalTimeLast
+        let MovedFocus = -1
+        
+        if(Input.Gamepads.Down.DirectionalTimeLast === 0) {
+            // First time
+            Input.Gamepads.Down.DirectionalTimeBuffer = -325
+            MovedFocus = global.UI.MoveFocus(direction)
+        } else if(Input.Gamepads.Down.DirectionalTimeBuffer >= 55) {
+            // Move in direction again, reset buffer
+            Input.Gamepads.Down.DirectionalTimeBuffer = 0
+            Input.Gamepads.Down.DirectionalTimeTotal += delta
+            MovedFocus = global.UI.MoveFocus(direction)
+        } else {
+            // Fill buffer and wait
+            Input.Gamepads.Down.DirectionalTimeBuffer += delta
+            Input.Gamepads.Down.DirectionalTimeTotal += delta
+        }
+
+        Input.Gamepads.Down.DirectionalTimeLast = performance.now()
+
+        if(MovedFocus === true) {
+            global.Sounds.MovedFocus.play();
+        } if(MovedFocus === false) {
+            global.Sounds.EndOfList.play();
+            Input.Gamepads.Down.DirectionalTimeBuffer = -2500
+            
+            // Play bounce animation
+            let elem = global.UI.Refs[global.UI.Active.Item.ID]
+            var tl = new TimelineLite();
+            let dirBase = window.outerWidth / 1000;
+            let dir1 = 8 * dirBase;
+            let dir2 = -4 * dirBase;
+
+            if(direction == "up") {
+                tl.to(elem, 0.1, {top: dir1 * -1}).to(elem, 0.1, {top: dir2 * -1}).to(elem, 0.1, {top:0});
+            } else if(direction == "down") {
+                tl.to(elem, 0.1, {top: dir1}).to(elem, 0.1, {top: dir2}).to(elem, 0.1, {top:0});
+            } else if(direction == "left") {
+                tl.to(elem, 0.1, {left: dir1 * -1}).to(elem, 0.1, {left: dir2 * -1}).to(elem, 0.1, {left:0});
+            } else if(direction == "right") {
+                tl.to(elem, 0.1, {left: dir1}).to(elem, 0.1, {left: dir2}).to(elem, 0.1, {left:0});
+            }
+            
+        }
     }
 
     GamepadEvent(gp, index) {
+        let Input = global.Input; // I'm lazy
         let isActive = false;
+        let DirectionDown = false;
         gp.buttons.forEach((value, index) => {
             if(value.pressed == true) {
-                console.log(index)
+                //console.log(index)
                 isActive = true;
 
+                // Find appropriate action and defer execution to next frame
+                // Not sure if I should try requestAnimationFrame or setTimeout to help with lag
                 switch(index) {
                     case 12:
-                        global.UI.MoveFocus("up");
+                        DirectionDown = true
+                        Input.TryMoveFocus("up")
                         break;
                     case 13:
-                        global.UI.MoveFocus("down");
+                        DirectionDown = true
+                        Input.TryMoveFocus("down")
                         break;
                     case 14:
-                        global.UI.MoveFocus("left");
+                        DirectionDown = true
+                        Input.TryMoveFocus("left")
                         break;
                     case 15:
-                        global.UI.MoveFocus("right");
+                        DirectionDown = true
+                        Input.TryMoveFocus("right")
                         break;
                     case 0:
-                        global.UI.Active.Item.PrimaryAction(global.UI.Active.Item);
+                        global.UI.Active.Item.PrimaryAction(global.UI.Active.Item)
                         break;
                 }
 
             }
         });
         
-        if(Math.abs(gp.axes[0]) > 0.7 || Math.abs(gp.axes[1]) > 0.7)
+        if(Math.abs(gp.axes[0]) > 0.75 || Math.abs(gp.axes[1]) > 0.75)
             isActive = true;
         
-        if(gp.axes[0] < -0.7) {
+        if(gp.axes[0] < -0.75) {
             // RS X Left
-            global.UI.MoveFocus("left");
-        } else if(gp.axes[0] > 0.7) {
+            DirectionDown = true
+            Input.TryMoveFocus("left")
+        } else if(gp.axes[0] > 0.75) {
             // RS X Right
-            global.UI.MoveFocus("right");
+            DirectionDown = true
+            Input.TryMoveFocus("right")
         } 
         
-        if(gp.axes[1] < -0.7) {
+        if(gp.axes[1] < -0.75) {
             // RS Y Up
-            global.UI.MoveFocus("up");
-        } else if(gp.axes[1] > 0.7) {
+            DirectionDown = true
+            Input.TryMoveFocus("up")
+        } else if(gp.axes[1] > 0.75) {
             // RS Y Down
-            global.UI.MoveFocus("down");
+            DirectionDown = true
+            Input.TryMoveFocus("down")
         }
+
+        if(DirectionDown)
+            Input.Gamepads.Down.DirectionDown = true
 
         return isActive;
     }
@@ -98,24 +179,43 @@ export default class UIInput {
 
 
     HandleKeyDown(e) {
-        if(!document.hasFocus() && !global.Input.Gamepads.BackgroundInput)
+        let Input = global.Input; // I'm lazy
+        if(!document.hasFocus() && !Input.Gamepads.BackgroundInput)
             return false;
 
-        console.log(e);
+        console.log(e.key + "Down");
         if (e.key == "ArrowUp") {
-            global.UI.MoveFocus("up");
+            Input.Gamepads.Down.DirectionDown = true
+            Input.TryMoveFocus("up");
             e.preventDefault();
           } else if (e.key == "ArrowDown") {
-            global.UI.MoveFocus("down");
+            Input.Gamepads.Down.DirectionDown = true
+            Input.TryMoveFocus("down");
             e.preventDefault();
           } else if (e.key == "ArrowLeft") {
-            global.UI.MoveFocus("left");
+            Input.Gamepads.Down.DirectionDown = true
+            Input.TryMoveFocus("left");
             e.preventDefault();
           } else if (e.key == "ArrowRight") {
-            global.UI.MoveFocus("right");
+            Input.Gamepads.Down.DirectionDown = true
+            Input.TryMoveFocus("right");
             e.preventDefault();
           }
           
+    }
+
+    HandleKeyUp(e) {
+        let Input = global.Input; // I'm lazy
+        if(!document.hasFocus() && !global.Input.Gamepads.BackgroundInput)
+        return false;
+
+        console.log(e.key + "Up");
+    if (e.key == "ArrowUp" || e.key == "ArrowDown" || e.key == "ArrowLeft" || e.key == "ArrowRight") {
+        Input.Gamepads.Down.DirectionDown = false
+        global.Input.ResetDirectionalTime()
+        e.preventDefault();
+      } 
+
     }
     
 

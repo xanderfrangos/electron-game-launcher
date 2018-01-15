@@ -110,7 +110,7 @@ export default class UINavigation {
         global.AppJS.setState({"lists": this.Active.Layer.Lists});
     }
 
-    MoveFocus(direction) {
+    MoveFocus(direction, isRepeat = false) {
         var CurrentLayer = this.Active.Layer;
         var CurrentList = this.Active.List;
         var CurrentItem = this.Active.Item;
@@ -135,7 +135,8 @@ export default class UINavigation {
 
                 if (ListIndex < 0) {
                     // Cannot go up any further Abort!
-                    global.Sounds.EndOfList.play();
+
+
                     return false;
 
                 } else {
@@ -150,7 +151,7 @@ export default class UINavigation {
 
                     // ( ceil(length / col) * col ) - wid + newcol
 
-                    console.log("ScrollToRefInView", NewCol, NewItemIndex, NewList.Width, NewCol)
+                    //console.log("ScrollToRefInView", NewCol, NewItemIndex, NewList.Width, NewCol)
 
                     // If there there isn't an equal column position because the row isn't full
                     // enough, we get the last item instead
@@ -160,14 +161,11 @@ export default class UINavigation {
 
                     // Set new List/Item Index
                     this.SetCurrentListIndex(ListIndex, NewItemIndex);
-                    global.Sounds.MovedFocus.play();
-
                 }
 
             } else {
                 // Can go up. So we go up!
                 this.SetCurrentListItemIndex(DesiredIndex);
-                global.Sounds.MovedFocus.play();
             }
 
             // End Direction Up
@@ -191,7 +189,6 @@ export default class UINavigation {
 
                 if (ListIndex > CurrentLayer.Lists.length - 1) {
                     // Cannot go down any further Abort!
-                    global.Sounds.EndOfList.play();
                     return false;
 
                 } else {
@@ -211,24 +208,23 @@ export default class UINavigation {
 
                     // Set new List/Item Index
                     this.SetCurrentListIndex(ListIndex, NewItemIndex);
-                    global.Sounds.MovedFocus.play();
 
                 }
 
             } else {
                 // Can go up. So we go up!
                 this.SetCurrentListItemIndex(DesiredIndex);
-                global.Sounds.MovedFocus.play();
             }
 
             // End Direction Up
         } else if (direction == "left") {
             // Determine if can go left. If not, try to go to next.
             var DesiredIndex = CurrentList.ActiveItem - 1;
-            console.log((CurrentList.ActiveItem + 1) % CurrentList.Width);
 
             if (DesiredIndex < 0) {
-                // Cannot go right. Find next list, if available. Start with next list
+                // Cannot go left. Find next list, if available. Start with next list
+                return false
+                /*
                 var ListIndex = CurrentLayer.ActiveList - 1;
 
                 while (ListIndex >= 0) {
@@ -244,6 +240,7 @@ export default class UINavigation {
                 if (ListIndex < 0) {
                     // Cannot go right any further Abort!
                     global.Sounds.EndOfList.play();
+                    Input.Gamepads.Down.DirectionalTimeBuffer = -2500
                     return false;
 
                 } else {
@@ -252,18 +249,16 @@ export default class UINavigation {
 
                     // Set new List/Item Index
                     this.SetCurrentListIndex(ListIndex, NewItemIndex);
-                    global.Sounds.MovedFocus.play();
 
                 }
+                */
 
-            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 11) {
-                // Right side is blocked Abort!
-                global.Sounds.EndOfList.play();
+            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 1) {
+                // left side is blocked Abort!
                 return false;
             } else {
                 // Can go right. So we go right!
                 this.SetCurrentListItemIndex(DesiredIndex);
-                global.Sounds.MovedFocus.play();
             }
 
             // End Direction Right
@@ -274,6 +269,8 @@ export default class UINavigation {
 
             if (DesiredIndex > CurrentList.Items.length - 1) {
                 // Cannot go right. Find next list, if available. Start with next list
+                return false
+                /*
                 var ListIndex = CurrentLayer.ActiveList + 1;
 
                 while (ListIndex < CurrentLayer.Lists.length - 1) {
@@ -288,7 +285,6 @@ export default class UINavigation {
 
                 if (ListIndex > CurrentLayer.Lists.length - 1) {
                     // Cannot go right any further Abort!
-                    global.Sounds.EndOfList.play();
                     return false;
 
                 } else {
@@ -297,18 +293,16 @@ export default class UINavigation {
 
                     // Set new List/Item Index
                     this.SetCurrentListIndex(ListIndex, NewItemIndex);
-                    global.Sounds.MovedFocus.play();
 
                 }
+                */
 
-            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 10) {
+            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 0) {
                 // Right side is blocked Abort!
-                global.Sounds.EndOfList.play();
                 return false;
             } else {
                 // Can go right. So we go right!
-                this.SetCurrentListItemIndex(DesiredIndex);
-                global.Sounds.MovedFocus.play();
+                this.SetCurrentListItemIndex(DesiredIndex);               
             }
 
             // End Direction Right
@@ -321,6 +315,8 @@ export default class UINavigation {
 
         // Scroll to new item
         this.ScrollToRefInView(document.getElementById("app"), global.UI.Refs[global.UI.Active.Item.ID], (window.innerWidth * 0.1));
+
+        return true;
     }
 
     ScrollToRef() {
@@ -385,7 +381,7 @@ export default class UINavigation {
             TweenLite.to(View, 0.25, {scrollTo: ScrollPos});
         }
 
-        console.log("ScrollToRefInView", ScrollPos);
+        //console.log("ScrollToRefInView", ScrollPos);
     }
 
     ActivatePrimary() {

@@ -13,7 +13,7 @@ let mainWindow
 app.on('ready', () => {
 
 
-    let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: true})
+    let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: false})
     //mainWindow.maximize();
     
     
