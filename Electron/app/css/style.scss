@@ -94,6 +94,13 @@ body, html {
 
 body {
     font-family: "Cabin";
+    &.noFocus {
+        .GameGrid {
+            * {
+                animation: none !important;
+            }
+        }
+    }
 }
 
 html {

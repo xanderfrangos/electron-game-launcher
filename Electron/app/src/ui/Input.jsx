@@ -19,7 +19,7 @@ export default class UIInput {
                 DirectionalTimeBuffer: 0,
                 DirectionalTimeLast: 0 ,
             },
-            BackgroundInput: true, // Only should be true for testing
+            BackgroundInput: false, // Only should be true for testing
         }
         
     }

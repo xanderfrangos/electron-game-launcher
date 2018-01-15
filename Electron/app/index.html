@@ -31,6 +31,13 @@
     <script>
         require('./build/bundle.js')
         var backgroundWorker = new Worker('./src/js/test.js')     
+        setInterval(() => {
+            if(document.hasFocus()) {
+                document.body.className = "hasFocus"
+            } else {
+                document.body.className = "noFocus"
+            }
+        },250)
     </script>
 
 <script>
