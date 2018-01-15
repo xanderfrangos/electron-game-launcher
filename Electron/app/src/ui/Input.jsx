@@ -12,6 +12,7 @@ export default class UIInput {
             ActiveGamepad: 0,
             InputInterval: 8, // No need to poll more often, waste of CPU
             Down: {
+                LastButtons: [],
                 Buttons: [],
                 DirectionDown: false,
                 DirectionalTimeTotal: 0,
@@ -34,6 +35,8 @@ export default class UIInput {
             if(document.hasFocus() || global.Input.Gamepads.BackgroundInput) {
                 let gamepads = navigator.getGamepads();
                 Input.Gamepads.Down.DirectionDown = false
+                Input.Gamepads.Down.LastButtons = Input.Gamepads.Down.Buttons
+                Input.Gamepads.Down.Buttons = []
                 
                 for(var i = 0; i < 4; i++) {
                     if(gamepads[i] != null) {
@@ -93,18 +96,18 @@ export default class UIInput {
             // Play bounce animation
             let elem = global.UI.Refs[global.UI.Active.Item.ID]
             var tl = new TimelineLite();
-            let dirBase = window.outerWidth / 1000;
+            let dirBase = window.innerWidth / 1000;
             let dir1 = 8 * dirBase;
-            let dir2 = -4 * dirBase;
+            let dir2 = -3 * dirBase;
 
             if(direction == "up") {
-                tl.to(elem, 0.1, {top: dir1 * -1}).to(elem, 0.1, {top: dir2 * -1}).to(elem, 0.1, {top:0});
+                tl.to(elem, 0.07, {top: dir1 * -1}).to(elem, 0.07, {top: dir2 * -1}).to(elem, 0.07, {top:0});
             } else if(direction == "down") {
-                tl.to(elem, 0.1, {top: dir1}).to(elem, 0.1, {top: dir2}).to(elem, 0.1, {top:0});
+                tl.to(elem, 0.07, {top: dir1}).to(elem, 0.07, {top: dir2}).to(elem, 0.07, {top:0});
             } else if(direction == "left") {
-                tl.to(elem, 0.1, {left: dir1 * -1}).to(elem, 0.1, {left: dir2 * -1}).to(elem, 0.1, {left:0});
+                tl.to(elem, 0.07, {left: dir1 * -1}).to(elem, 0.07, {left: dir2 * -1}).to(elem, 0.07, {left:0});
             } else if(direction == "right") {
-                tl.to(elem, 0.1, {left: dir1}).to(elem, 0.1, {left: dir2}).to(elem, 0.1, {left:0});
+                tl.to(elem, 0.07, {left: dir1}).to(elem, 0.07, {left: dir2}).to(elem, 0.07, {left:0});
             }
             
         }
@@ -114,6 +117,7 @@ export default class UIInput {
         let Input = global.Input; // I'm lazy
         let isActive = false;
         let DirectionDown = false;
+        let ButtonsDown = [];
         gp.buttons.forEach((value, index) => {
             if(value.pressed == true) {
                 //console.log(index)
@@ -139,8 +143,27 @@ export default class UIInput {
                         Input.TryMoveFocus("right")
                         break;
                     case 0:
-                        global.UI.Active.Item.PrimaryAction(global.UI.Active.Item)
+                        // A - Accept
+                        Input.Gamepads.Down.Buttons.push(0) 
+                        if(global.Input.Gamepads.Down.LastButtons.includes(0) === false) {
+                            global.UI.Active.Item.PrimaryAction(global.UI.Active.Item)
+                        }
                         break;
+                    case 1:
+                        // B - Back
+                        Input.Gamepads.Down.Buttons.push(1) 
+                        if(global.Input.Gamepads.Down.LastButtons.includes(1) === false) {
+                            
+                        }
+                        break;
+                        case 3:
+                        // Y - More
+                        Input.Gamepads.Down.Buttons.push(3) 
+                        if(global.Input.Gamepads.Down.LastButtons.includes(3) === false) {
+
+                        }
+                        break;
+                        
                 }
 
             }
@@ -169,8 +192,9 @@ export default class UIInput {
             Input.TryMoveFocus("down")
         }
 
-        if(DirectionDown)
+        if(DirectionDown) {
             Input.Gamepads.Down.DirectionDown = true
+        }        
 
         return isActive;
     }
@@ -220,10 +244,9 @@ export default class UIInput {
     
 
     RunGame(game) {
-        console.log(game);
         const { exec } = require('child_process');
-        let tst = exec('start steam://rungameid/' + game.meta.id);
-        console.log(tst);
+        //let tst = exec('start steam://rungameid/' + game.meta.id);
+        console.log('start steam://rungameid/' + game.meta.id);
         //window.open("steam://rungameid/" + game.meta.id, 'sharer', 'toolbar=0,status=0,width=548,height=325');
     }
 
