@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
 import GamesGrid from './components/GamesGrid.jsx'
+import HomePage from './pages/Home.jsx'
 import UILayer from './ui/Layer.jsx'
 import UIList from './ui/List.jsx'
 import UIItem from './ui/Item.jsx'
 import UINavigation from './ui/Navigation.jsx'
 import UIInput from './ui/Input.jsx'
+import UISounds from './ui/Sounds.jsx'
 
 let fs = require('fs');
 
@@ -22,47 +24,14 @@ export default class App extends Component {
     constructor(props) {
     super(props);
     
+
+    // Don't change these. They reference each other.
     global.UI = new UINavigation();
     global.Input = new UIInput();
+    global.Sounds = new UISounds();
 
-    // Build Items
-    let items = [];
-    let items2 = [];
-    let items3 = [];
+    global.Sounds.Startup.play();
 
-    
-
-    sortedApps.forEach(function(element) {
-        let newItem = new UIItem( global.Input.RunGame );
-        newItem.meta = element;
-        items.push(newItem);
-    }, this);
-
-    sortedApps.forEach(function(element) {
-        let newItem = new UIItem(global.Input.RunGame);
-        newItem.meta = element;
-        items2.push(newItem);
-    }, this);
-
-    sortedApps.forEach(function(element) {
-        let newItem = new UIItem(global.Input.RunGame);
-        newItem.meta = element;
-        items3.push(newItem);
-    }, this);
-
-    // Build List w/ Items
-
-    let allList = new UIList(items, "All Games", 3);
-    let recentList = new UIList([items2[8], items2[12], items2[21]], "Recently Played", 3);
-    let favoritesList = new UIList([items3[7], items3[16], items3[22], items3[27], items3[23]], "Favorites", 3);
-
-    let lists = [favoritesList, recentList, allList];
-
-    // Build Layer w/ List
-    let layer = global.UI.NewCacheLayer(lists, "Layer Title");
-    global.UI.NewLayer(layer);
-
-    this.state = { "lists":lists };
 
     global.AppJS = this;
 
@@ -139,13 +108,16 @@ export default class App extends Component {
                     </div>
                 </div>
                 <div id="main" ref="MainView">
-                    <div className="view">   
-                        <GamesGrid list={this.state.lists[0]} />
-                        <GamesGrid list={this.state.lists[1]} />
-                        <GamesGrid list={this.state.lists[2]} />
-                    </div>
+                    <HomePage />
                 </div>
             </main>
         )
     }
+
+
+    componentDidMount() {
+        global.Sounds.UIReady.play()
+    }
+
+
 }

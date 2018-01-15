@@ -135,6 +135,7 @@ export default class UINavigation {
 
                 if (ListIndex < 0) {
                     // Cannot go up any further Abort!
+                    global.Sounds.EndOfList.play();
                     return false;
 
                 } else {
@@ -159,12 +160,14 @@ export default class UINavigation {
 
                     // Set new List/Item Index
                     this.SetCurrentListIndex(ListIndex, NewItemIndex);
+                    global.Sounds.MovedFocus.play();
 
                 }
 
             } else {
                 // Can go up. So we go up!
                 this.SetCurrentListItemIndex(DesiredIndex);
+                global.Sounds.MovedFocus.play();
             }
 
             // End Direction Up
@@ -188,6 +191,7 @@ export default class UINavigation {
 
                 if (ListIndex > CurrentLayer.Lists.length - 1) {
                     // Cannot go down any further Abort!
+                    global.Sounds.EndOfList.play();
                     return false;
 
                 } else {
@@ -207,12 +211,14 @@ export default class UINavigation {
 
                     // Set new List/Item Index
                     this.SetCurrentListIndex(ListIndex, NewItemIndex);
+                    global.Sounds.MovedFocus.play();
 
                 }
 
             } else {
                 // Can go up. So we go up!
                 this.SetCurrentListItemIndex(DesiredIndex);
+                global.Sounds.MovedFocus.play();
             }
 
             // End Direction Up
@@ -237,6 +243,7 @@ export default class UINavigation {
 
                 if (ListIndex < 0) {
                     // Cannot go right any further Abort!
+                    global.Sounds.EndOfList.play();
                     return false;
 
                 } else {
@@ -245,15 +252,18 @@ export default class UINavigation {
 
                     // Set new List/Item Index
                     this.SetCurrentListIndex(ListIndex, NewItemIndex);
+                    global.Sounds.MovedFocus.play();
 
                 }
 
             } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 11) {
                 // Right side is blocked Abort!
+                global.Sounds.EndOfList.play();
                 return false;
             } else {
                 // Can go right. So we go right!
                 this.SetCurrentListItemIndex(DesiredIndex);
+                global.Sounds.MovedFocus.play();
             }
 
             // End Direction Right
@@ -278,6 +288,7 @@ export default class UINavigation {
 
                 if (ListIndex > CurrentLayer.Lists.length - 1) {
                     // Cannot go right any further Abort!
+                    global.Sounds.EndOfList.play();
                     return false;
 
                 } else {
@@ -286,15 +297,18 @@ export default class UINavigation {
 
                     // Set new List/Item Index
                     this.SetCurrentListIndex(ListIndex, NewItemIndex);
+                    global.Sounds.MovedFocus.play();
 
                 }
 
             } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 10) {
                 // Right side is blocked Abort!
+                global.Sounds.EndOfList.play();
                 return false;
             } else {
                 // Can go right. So we go right!
                 this.SetCurrentListItemIndex(DesiredIndex);
+                global.Sounds.MovedFocus.play();
             }
 
             // End Direction Right

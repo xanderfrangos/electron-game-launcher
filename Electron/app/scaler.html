@@ -10,64 +10,70 @@
 </head>
 
 <body>
-        <div id="title-bar">
-                <div id="title-bar-title">Den</div>
-                <div id="title-bar-btns">
-                    <button id="title-min-btn">-</button>
-                    <button id="title-max-btn">+</button>
-                    <button id="title-close-btn">x</button>
-                </div>
-            </div>
-            <script>require('./src/js/titlebar.js')</script>
+    <div id="title-bar">
+        <div id="title-bar-title">Den</div>
+        <div id="title-bar-btns">
+            <button id="title-min-btn">-</button>
+            <button id="title-max-btn">+</button>
+            <button id="title-close-btn">x</button>
+        </div>
+    </div>
+    <script>require('./src/js/titlebar.js')</script>
 
 
+    <webview id="webview" class="h" src="data:text/plain,Hello, world!" plugins nodeintegration disablewebsecurity allowfileaccessfromfiles></webview>
 
-
-
-
-
-
-
-
-
-
-
-
-        <webview src="file:///C:/Projects/electron-game-launcher/Electron/app/index.html" class="h" plugins nodeintegration disablewebsecurity allowfileaccessfromfiles></webview>
     <script>
-        var wv = document.getElementById("webview");
-        var doOnce = true;
-        var thePath = 'file:///C:/Projects/electron-game-launcher/Electron/app/index.html';
-        // file:///C:/Projects/electron-game-launcher/Electron/app/index.html
-        
-        var webview = document.querySelector('webview')
-webview.addEventListener('dom-ready', () => {
-    console.log("b")
-  //
-  if(doOnce) {
-      doOnce = false;
-      
-  //webview.loadURL(thePath);
-  console.log(thePath);
-  //webview.openDevTools()
-  }
 
-})
+        var { ipcRenderer, remote, webview } = require('electron');
 
-window.addEventListener('load', () => {
-    console.log("ba")
-    
-});
+        var appPath = "";
+        ipcRenderer.on('appPath', (event, arg) => {
+            appPath = arg;
+        });
+
+        let mainValue = ipcRenderer.send('ready', 1);
+
     </script>
-    <style>
+
+    <script>
+        var doOnce = true;
+        // file:///C:/Projects/electron-game-launcher/Electron/app/index.html
+
+        var webview = document.querySelector('webview')
+        webview.addEventListener('dom-ready', () => {
+            console.log("dom-ready")
+
+            if (doOnce) {
+                doOnce = false;
+                var wv = document.getElementById("webview");
+                wv.loadURL("file:///" + appPath + "/app/index.html");
+                wv.webview.openDevTools()
+            }
+        })
+
+        window.addEventListener('load', () => {
+            console.log("ba")
+        });
+    </script>
+
+<style>
         webview {
-            width:100%;height:100%;transform:scale(1);position:absolute;top:0;left:0;transform-origin:0% 0%;
+            width: 100%;
+            height: 100%;
+            transform: scale(1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0% 0%;
         }
     </style>
+    
     <script>
         var TargetHeight = 320;
         SetTargetResolution = (Height) => {
             TargetHeight = Height;
+            var webview = document.getElementById("webview");
             const Scale = Height / window.innerHeight;
             webview.style.width = (Scale * 100) + "%";
             webview.style.height = (Scale * 100) + "%";
@@ -76,7 +82,7 @@ window.addEventListener('load', () => {
         window.addEventListener('resize', () => {
             SetTargetResolution(TargetHeight);
         });
-        setTimeout(() => {SetTargetResolution(TargetHeight)}, 200);
+        setTimeout(() => { SetTargetResolution(TargetHeight) }, 200);
 
     </script>
 </body>

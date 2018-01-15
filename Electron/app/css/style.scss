@@ -98,7 +98,7 @@ body {
 
 html {
     font-size: 1vw; // TV Mode
-    font-size: 12.8px; // Desktop Mode
+    //font-size: 12.8px; // Desktop Mode
 }
 
 
@@ -160,7 +160,7 @@ html {
 
 #title-bar {
     -webkit-app-region: drag;
-    //background: linear-gradient(to bottom, rgba(11,19,26,0.85) 0%,rgba(11,19,26,0) 100%);
+    background: linear-gradient(to bottom, rgba(#151719,0.85) 0%,rgba(#151719,0) 100%);
     //background: #111926;
     padding: none;
     margin: 0px; 
@@ -374,6 +374,7 @@ main {
         opacity: 0.65;
         user-select: none;
         cursor: pointer;
+        filter: grayscale(0.35);
 
         &[data-active="true"] {
             z-index: 3;
@@ -381,6 +382,7 @@ main {
             //background: white;
             //box-shadow: 0 10px 43px -13px black;
             opacity: 1;
+            filter: grayscale(0);
             box-shadow: 0 0 0 0.2rem #17befe;
             animation: GameTileBorderGlow 2s infinite;
             @keyframes GameTileBorderGlow {

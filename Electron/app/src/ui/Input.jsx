@@ -4,7 +4,7 @@ export default class UIInput {
     // We will assume this is being assigned to global.Input for the sake of requestAnimationFrame
 
     constructor() {
-        this.Timer = setTimeout(this.GamepadLoop, 32);
+        this.Timer = setTimeout(this.GamepadLoop, 300);
         this.Gamepads = {
             LastButtons: {},
             LastDirection: "none",
@@ -14,6 +14,9 @@ export default class UIInput {
             InputInterval: 16,
             BackgroundInput: true, // Only should be true for testing
         }
+
+        //window.addEventListener("gamepadconnected", function(e) { gamepadHandler(e, true); }, false);
+        //window.addEventListener("gamepaddisconnected", function(e) { gamepadHandler(e, false); }, false);
     }
 
 
