@@ -3,7 +3,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 400;
-    src: local('Cabin Italic'), local('Cabin-Italic'), url('fonts/.ttf') format('truetype');
+    src: local('Cabin Italic'), local('Cabin-Italic'), url('fonts/Cabin-Italic.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -11,7 +11,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 400;
-    src: local('Cabin Italic'), local('Cabin-Italic'), url('fonts/.ttf') format('truetype');
+    src: local('Cabin Italic'), local('Cabin-Italic'), url('fonts/Cabin-Italic.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -19,7 +19,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 400;
-    src: local('Cabin Italic'), local('Cabin-Italic'), url('fonts/.ttf') format('truetype');
+    src: local('Cabin Italic'), local('Cabin-Italic'), url('fonts/Cabin-Italic.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -27,7 +27,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 500;
-    src: local('Cabin Medium Italic'), local('Cabin-MediumItalic'), url('fonts/.ttf') format('truetype');
+    src: local('Cabin Medium Italic'), local('Cabin-MediumItalic'), url('fonts/Cabin-MediumItalic.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -35,7 +35,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 500;
-    src: local('Cabin Medium Italic'), local('Cabin-MediumItalic'), url(https://fonts.gstatic.com/s/cabin/v12/YWDgsctIlvDHExORxGFrliEAvth_LlrfE80CYdSH47w.woff2) format('truetype');
+    src: local('Cabin Medium Italic'), local('Cabin-MediumItalic'), url('fonts/Cabin-MediumItalic.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -43,7 +43,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 500;
-    src: local('Cabin Medium Italic'), local('Cabin-MediumItalic'), url(https://fonts.gstatic.com/s/cabin/v12/l3VlC5SZU-ZceiU15Vs2gPk_vArhqVIZ0nv9q090hN8.woff2) format('truetype');
+    src: local('Cabin Medium Italic'), local('Cabin-MediumItalic'), url('fonts/Cabin-MediumItalic.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -51,7 +51,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 600;
-    src: local('Cabin SemiBold Italic'), local('Cabin-SemiBoldItalic'), url(https://fonts.gstatic.com/s/cabin/v12/JsoA0yJYUMPajiJdvsZTRiEAvth_LlrfE80CYdSH47w.woff2) format('truetype');
+    src: local('Cabin SemiBold Italic'), local('Cabin-SemiBoldItalic'), url('fonts/Cabin-SemiBoldItalic.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -59,7 +59,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 600;
-    src: local('Cabin SemiBold Italic'), local('Cabin-SemiBoldItalic'), url(https://fonts.gstatic.com/s/cabin/v12/XKKLBXrVari_f7hEZ8yXKSEAvth_LlrfE80CYdSH47w.woff2) format('truetype');
+    src: local('Cabin SemiBold Italic'), local('Cabin-SemiBoldItalic'), url('fonts/Cabin-SemiBoldItalic.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -67,7 +67,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 600;
-    src: local('Cabin SemiBold Italic'), local('Cabin-SemiBoldItalic'), url(https://fonts.gstatic.com/s/cabin/v12/Sn-0zpaF2c3wYt9xdgoYFfk_vArhqVIZ0nv9q090hN8.woff2) format('truetype');
+    src: local('Cabin SemiBold Italic'), local('Cabin-SemiBoldItalic'), url('fonts/Cabin-SemiBoldItalic.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -75,7 +75,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 700;
-    src: local('Cabin Bold Italic'), local('Cabin-BoldItalic'), url(https://fonts.gstatic.com/s/cabin/v12/hu5_Wp_wN_gAb92A2zi6BCEAvth_LlrfE80CYdSH47w.woff2) format('truetype');
+    src: local('Cabin Bold Italic'), local('Cabin-BoldItalic'), url('fonts/Cabin-BoldItalic.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -83,7 +83,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 700;
-    src: local('Cabin Bold Italic'), local('Cabin-BoldItalic'), url(https://fonts.gstatic.com/s/cabin/v12/Deis1sISmO5MBfjq7AlPgSEAvth_LlrfE80CYdSH47w.woff2) format('truetype');
+    src: local('Cabin Bold Italic'), local('Cabin-BoldItalic'), url('fonts/Cabin-BoldItalic.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -91,7 +91,7 @@
     font-family: 'Cabin';
     font-style: italic;
     font-weight: 700;
-    src: local('Cabin Bold Italic'), local('Cabin-BoldItalic'), url(https://fonts.gstatic.com/s/cabin/v12/Ww23LQNlhn4dAm9uegPaX_k_vArhqVIZ0nv9q090hN8.woff2) format('truetype');
+    src: local('Cabin Bold Italic'), local('Cabin-BoldItalic'), url('fonts/Cabin-BoldItalic.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -99,7 +99,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 400;
-    src: local('Cabin'), local('Cabin-Regular'), url(https://fonts.gstatic.com/s/cabin/v12/XD3SRQ5RIOkebMXiWCcecw.woff2) format('truetype');
+    src: local('Cabin'), local('Cabin-Regular'), url('fonts/Cabin-Regular.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -107,7 +107,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 400;
-    src: local('Cabin'), local('Cabin-Regular'), url(https://fonts.gstatic.com/s/cabin/v12/k7PW6rJMpqdxnc4QEePsDA.woff2) format('truetype');
+    src: local('Cabin'), local('Cabin-Regular'), url('fonts/Cabin-Regular.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -115,7 +115,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 400;
-    src: local('Cabin'), local('Cabin-Regular'), url(https://fonts.gstatic.com/s/cabin/v12/yQOMOX5hR0-6LTD879t-PQ.woff2) format('truetype');
+    src: local('Cabin'), local('Cabin-Regular'), url('fonts/Cabin-Regular.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -123,7 +123,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 500;
-    src: local('Cabin Medium'), local('Cabin-Medium'), url(https://fonts.gstatic.com/s/cabin/v12/0q_6BTBSpJcX-xXVQHTMUhTbgVql8nDJpwnrE27mub0.woff2) format('truetype');
+    src: local('Cabin Medium'), local('Cabin-Medium'), url('fonts/Cabin-Medium.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -131,7 +131,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 500;
-    src: local('Cabin Medium'), local('Cabin-Medium'), url(https://fonts.gstatic.com/s/cabin/v12/36C6zrZRL-2192O2oBAa6BTbgVql8nDJpwnrE27mub0.woff2) format('truetype');
+    src: local('Cabin Medium'), local('Cabin-Medium'), url('fonts/Cabin-Medium.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -139,7 +139,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 500;
-    src: local('Cabin Medium'), local('Cabin-Medium'), url(https://fonts.gstatic.com/s/cabin/v12/XHvvZj_uvRvYentxl9M1VvesZW2xOQ-xsNqO47m55DA.woff2) format('truetype');
+    src: local('Cabin Medium'), local('Cabin-Medium'), url('fonts/Cabin-Medium.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -147,7 +147,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 600;
-    src: local('Cabin SemiBold'), local('Cabin-SemiBold'), url(https://fonts.gstatic.com/s/cabin/v12/bD5tCimFI7jv7C1G7ASsABTbgVql8nDJpwnrE27mub0.woff2) format('truetype');
+    src: local('Cabin SemiBold'), local('Cabin-SemiBold'), url('fonts/Cabin-SemiBold.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -155,7 +155,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 600;
-    src: local('Cabin SemiBold'), local('Cabin-SemiBold'), url(https://fonts.gstatic.com/s/cabin/v12/JRTb45TS0zQ51GaEPkhz3BTbgVql8nDJpwnrE27mub0.woff2) format('truetype');
+    src: local('Cabin SemiBold'), local('Cabin-SemiBold'), url('fonts/Cabin-SemiBold.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -163,7 +163,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 600;
-    src: local('Cabin SemiBold'), local('Cabin-SemiBold'), url(https://fonts.gstatic.com/s/cabin/v12/pOvYyCQeTTtw6RxdlpulSvesZW2xOQ-xsNqO47m55DA.woff2) format('truetype');
+    src: local('Cabin SemiBold'), local('Cabin-SemiBold'), url('fonts/Cabin-SemiBold.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -171,7 +171,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 700;
-    src: local('Cabin Bold'), local('Cabin-Bold'), url(https://fonts.gstatic.com/s/cabin/v12/UXGhLjKiqzg6toFP8iMMURTbgVql8nDJpwnrE27mub0.woff2) format('truetype');
+    src: local('Cabin Bold'), local('Cabin-Bold'), url('fonts/Cabin-Bold.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -179,7 +179,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 700;
-    src: local('Cabin Bold'), local('Cabin-Bold'), url(https://fonts.gstatic.com/s/cabin/v12/x3m-U6JeQcwjGsnYLXQv4xTbgVql8nDJpwnrE27mub0.woff2) format('truetype');
+    src: local('Cabin Bold'), local('Cabin-Bold'), url('fonts/Cabin-Bold.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -187,7 +187,7 @@
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 700;
-    src: local('Cabin Bold'), local('Cabin-Bold'), url(https://fonts.gstatic.com/s/cabin/v12/82B-3YlzWJm8zbCrVEmc_vesZW2xOQ-xsNqO47m55DA.woff2) format('truetype');
+    src: local('Cabin Bold'), local('Cabin-Bold'), url('fonts/Cabin-Bold.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -195,7 +195,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 400;
-    src: local('Cabin Condensed'), local('CabinCondensed-Regular'), url(https://fonts.gstatic.com/s/cabincondensed/v11/B0txb0blf2N29WdYPJjMSjkEpIsZXaQ8oRNDg1FPpuk.woff2) format('truetype');
+    src: local('Cabin Condensed'), local('CabinCondensed-Regular'), url('fonts/CabinCondensed-Regular.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -203,7 +203,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 400;
-    src: local('Cabin Condensed'), local('CabinCondensed-Regular'), url(https://fonts.gstatic.com/s/cabincondensed/v11/B0txb0blf2N29WdYPJjMSpxJ83IsFXPkaOMREZp9U_I.woff2) format('truetype');
+    src: local('Cabin Condensed'), local('CabinCondensed-Regular'), url('fonts/CabinCondensed-Regular.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -211,7 +211,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 400;
-    src: local('Cabin Condensed'), local('CabinCondensed-Regular'), url(https://fonts.gstatic.com/s/cabincondensed/v11/B0txb0blf2N29WdYPJjMStWMqZ82NGJlZbN8XLKSRYo.woff2) format('truetype');
+    src: local('Cabin Condensed'), local('CabinCondensed-Regular'), url('fonts/CabinCondensed-Regular.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -219,7 +219,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 500;
-    src: local('Cabin Condensed Medium'), local('CabinCondensed-Medium'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEFL2yTj5X6i8NezwCMUVXmo.woff2) format('truetype');
+    src: local('Cabin Condensed Medium'), local('CabinCondensed-Medium'), url('fonts/CabinCondensed-Medium.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -227,7 +227,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 500;
-    src: local('Cabin Condensed Medium'), local('CabinCondensed-Medium'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEFtF9zhirMoJKFLur7Agono.woff2) format('truetype');
+    src: local('Cabin Condensed Medium'), local('CabinCondensed-Medium'), url('fonts/CabinCondensed-Medium.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -235,7 +235,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 500;
-    src: local('Cabin Condensed Medium'), local('CabinCondensed-Medium'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEC2V0Dcx-GzP0u75aFRGU4E.woff2) format('truetype');
+    src: local('Cabin Condensed Medium'), local('CabinCondensed-Medium'), url('fonts/CabinCondensed-Medium.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -243,7 +243,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 600;
-    src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEIhw1Cem6tyx7vw4jJZO0gM.woff2) format('truetype');
+    src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('fonts/CabinCondensed-SemiBold.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -251,7 +251,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 600;
-    src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEH5hnJouy1Aemy7oHFnYwDA.woff2) format('truetype');
+    src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('fonts/CabinCondensed-SemiBold.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -259,7 +259,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 600;
-    src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEEbBiZVUr6I3CXzgk1sO27Y.woff2) format('truetype');
+    src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('fonts/CabinCondensed-SemiBold.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
   /* vietnamese */
@@ -267,7 +267,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 700;
-    src: local('Cabin Condensed Bold'), local('CabinCondensed-Bold'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEECf37jDqGqFWFvLurewvBY.woff2) format('truetype');
+    src: local('Cabin Condensed Bold'), local('CabinCondensed-Bold'), url('fonts/CabinCondensed-Bold.ttf') format('truetype');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
@@ -275,7 +275,7 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 700;
-    src: local('Cabin Condensed Bold'), local('CabinCondensed-Bold'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEDXtTgJAVj4z5pUejDGNXZs.woff2) format('truetype');
+    src: local('Cabin Condensed Bold'), local('CabinCondensed-Bold'), url('fonts/CabinCondensed-Bold.ttf') format('truetype');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
@@ -283,6 +283,6 @@
     font-family: 'Cabin Condensed';
     font-style: normal;
     font-weight: 700;
-    src: local('Cabin Condensed Bold'), local('CabinCondensed-Bold'), url(https://fonts.gstatic.com/s/cabincondensed/v11/Ez4zJbsGr2BgXcNUWBVgEBZQ88-B6efqEZdRzbHKsrc.woff2) format('truetype');
+    src: local('Cabin Condensed Bold'), local('CabinCondensed-Bold'), url('fonts/CabinCondensed-Bold.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
   }
