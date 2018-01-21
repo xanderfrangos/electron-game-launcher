@@ -44,6 +44,19 @@
 
 </script>
 
+<script>
+    
+            var { ipcRenderer, remote, webview } = require('electron');
+    
+            var appPath = "";
+            ipcRenderer.on('appPath', (event, arg) => {
+                appPath = arg;
+            });
+    
+            let mainValue = ipcRenderer.send('ready', 1);
+    
+        </script>
+
 </body>
 
 </html>

@@ -16,6 +16,10 @@ let appDataPath = app.getPath("userData") + "\\Den Data\\"
 app.on('ready', () => {
 
 
+    let splashWindow = new BrowserWindow({width: 480, height: 300, frame: false})
+
+    splashWindow.loadURL(`file://${__dirname}/app/splash.html`)
+
     let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: false})
     //mainWindow.maximize();
     
@@ -27,7 +31,7 @@ app.on('ready', () => {
         mainWindow.webContents.send("appPath", app.getAppPath());
     });
 
-    mainWindow.on('message', MainThreadMessage);
+    //mainWindow.on('message', MainThreadMessage);
 
     mainWindow.loadURL(`file://${__dirname}/app/index.html`)
     //mainWindow.setFullScreen(true);

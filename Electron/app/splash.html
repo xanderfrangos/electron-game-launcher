@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Den Game Launcher</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+    </script>
+</head>
+
+<body>
+
+    <div id="splash">
+        <img src="images/logo-white.png" />
+        <div class="statusText">Loading...</div>
+    </div>
+
+    <script>
+
+        var { ipcRenderer, remote, webview } = require('electron');
+
+        var appPath = "";
+        ipcRenderer.on('appPath', (event, arg) => {
+            appPath = arg;
+        });
+
+        let mainValue = ipcRenderer.send('ready', 1);
+
+    </script>
+
+    <script>
+
+        window.addEventListener('load', () => {
+            console.log("ba")
+        });
+    </script>
+</body>
+
+</html>
