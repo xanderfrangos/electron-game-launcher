@@ -4,10 +4,13 @@ const {app, BrowserWindow, ipcMain} = electron
 
 // Let electron reloads by itself when webpack watches changes in ./app/
 require('electron-reload')(__dirname)
+const fs = require('fs');
 
 // To avoid being garbage collected
 let mainWindow
 
+let config = {}
+let appDataPath = app.getPath("userData") + "\\Den Data\\"
 
 
 app.on('ready', () => {
@@ -24,11 +27,43 @@ app.on('ready', () => {
         mainWindow.webContents.send("appPath", app.getAppPath());
     });
 
+    mainWindow.on('message', MainThreadMessage);
+
     mainWindow.loadURL(`file://${__dirname}/app/index.html`)
     //mainWindow.setFullScreen(true);
+    loadConfig()
 
+    mainWindow.on('ready', () => {
+        console.log("Main Browser Ready")
+    })
+
+    mainWindow.webContents.send("config", {"appDataPath": appDataPath, "config": config})
 })
 
 
 
 
+loadConfig = () => {
+
+    if(!fs.existsSync(appDataPath)) {
+        fs.mkdirSync(appDataPath)
+    }
+
+    if(!fs.existsSync(appDataPath + "config.json")) {
+        saveConfig({})
+    }
+
+    config = JSON.parse(fs.readFileSync(appDataPath + "config.json", 'utf8'))
+    console.log(config)
+
+}
+
+
+saveConfig = (settingsJSON) => {
+    fs.writeFileSync(appDataPath + "config.json", JSON.stringify(settingsJSON))
+}
+
+
+MainThreadMessage = (message) => {
+    console.log(message)
+}
