@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="css/style.css">
     <script>
     </script>
+    <script src="src/js/howler.min.js"></script>
 </head>
 
 <body>
 
     <div id="splash">
-        <img src="images/logo-white.png" />
+        <div class="splash-inner">
+            <img src="images/logo-white.png" />
         <div class="statusText">Loading...</div>
+        </div>
     </div>
 
     <script>
@@ -25,7 +28,7 @@
             appPath = arg;
         });
 
-        let mainValue = ipcRenderer.send('ready', 1);
+        let mainValue = ipcRenderer.send('LoadingReady', 1);
 
     </script>
 
@@ -34,6 +37,16 @@
         window.addEventListener('load', () => {
             console.log("ba")
         });
+
+
+        const path = 'src/sounds/'
+
+        let StartupSound = new Howl({
+            src: [path + 'Startup - Audio On.wav']
+          })
+
+          StartupSound.play()
+          Howler.volume(0.25)
     </script>
 </body>
 

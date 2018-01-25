@@ -74,7 +74,7 @@
         SetTargetResolution = (Height) => {
             TargetHeight = Height;
             var webview = document.getElementById("webview");
-            const Scale = Height / window.innerHeight;
+            const Scale = Height / (window.innerHeight * window.devicePixelRatio);
             webview.style.width = (Scale * 100) + "%";
             webview.style.height = (Scale * 100) + "%";
             webview.style.transform = "scale(" + (1 / Scale) + ")";

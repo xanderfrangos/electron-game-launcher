@@ -30,20 +30,28 @@ export default class App extends Component {
     global.Input = new UIInput();
     global.Sounds = new UISounds();
 
-    global.Sounds.Startup.play();
+    //global.Sounds.Startup.play();
 
 
     global.AppJS = this;
-
+    this.nada = false;
 
   }
 
-
+    forceRefresh() {
+        this.nada = true;
+        this.forceUpdate();
+        this.nada = false;
+        this.forceUpdate();
+    }
 
   
 
 
     render() {
+
+        if(this.nada)
+        return ( <main></main>)
 
         global.UI.MainView = this.refs.MainView;
         
