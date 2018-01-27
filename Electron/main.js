@@ -3,6 +3,7 @@ const electron = require('electron')
 const {app, BrowserWindow, ipcMain} = electron
 const path = require('path');
 
+
 // Let electron reloads by itself when webpack watches changes in ./app/
 require('electron-reload')(__dirname)
 const fs = require('fs');
@@ -14,21 +15,27 @@ let config = {}
 let appDataPath = app.getPath("userData") + "\\Den Data\\"
 
 
+
 app.on('ready', () => {
 
 
-    let splashWindow = new BrowserWindow({width: 480, height: 300, frame: false, transparent:true})
+    let splashWindow = new BrowserWindow( {width: 480, height: 300, frame: false, transparent:true, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} } )
 
     splashWindow.loadURL(`file://${__dirname}/app/splash.html`)
 
-    let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: false})
+    let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: false, transparent:false, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} })
 
     mainWindow.hide()
+
+    //const swca = require('windows-swca');
+    //swca.SetWindowCompositionAttribute(mainWindow, ACCENT_ENABLE_BLURBEHIND, 0x00000000);
+    
     
     ipcMain.on('ready', function() {
         console.log("Page ready")
         mainWindow.webContents.send("appPath", app.getAppPath());
         mainWindow.webContents.send("appConfig", {"appDataPath": appDataPath, "config": config})
+
         
         setTimeout(() => {
             splashWindow.destroy()
