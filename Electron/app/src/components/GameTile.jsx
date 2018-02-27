@@ -2,15 +2,6 @@ import React, {PureComponent}  from 'react'
 
 export default class GameTile extends PureComponent {
 
-    AshouldComponentUpdate(nextProps, nextState) {
-        // NEEDS MORE IF STATEMENTS, DON'T LEAVE AS IS
-        if(this.props.active != nextProps.active) {
-            return true;
-        } else {
-            return false;
-        }
-      }
-
     render() {
         if(this.props.active) {
             global.UI.Active.ItemRef = this.refs.Item;
@@ -32,7 +23,5 @@ export default class GameTile extends PureComponent {
 
     componentDidMount() {
         global.UI.Refs[this.props.item.ID] = this.refs.Item;
-        //this.props.Ref = global.UI.NewRef(this.refs.Item);
-        console.log(this.props.item.ID);
     }
 }

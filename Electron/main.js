@@ -23,7 +23,7 @@ app.on('ready', () => {
 
     splashWindow.loadURL(`file://${__dirname}/app/splash.html`)
 
-    let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: false, transparent:false, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} })
+    let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: false, transparent:false, webPreferences: {blinkFeatures: 'CSSBackdropFiltera'} })
 
     mainWindow.hide()
 
@@ -49,8 +49,27 @@ app.on('ready', () => {
     //mainWindow.setFullScreen(true);
     loadConfig()
 
+    if(config.windowPosX && config.windowPoxY)
+        mainWindow.setPosition(config.windowPosX, config.windowPoxY)
+
+    if(config.windowSizeX && config.windowSizeY)
+        mainWindow.setSize(config.windowSizeX, config.windowSizeY)
+    
     mainWindow.on('ready', () => {
         console.log("Main Browser Ready")
+    })
+    mainWindow.on('close', () => {
+        console.log("Main Browser Closing")
+        console.log(mainWindow.getSize(), mainWindow.getPosition())
+
+        let size = mainWindow.getSize()
+        let pos = mainWindow.getPosition()
+        config.windowSizeX = size[0]
+        config.windowSizeY = size[1]
+        config.windowPosX = pos[0]
+        config.windowPoxY = pos[1]
+
+        saveConfig(config)
     })
 
     

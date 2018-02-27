@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import GamesGrid from './components/GamesGrid.jsx'
+import SidebarMainItem from './components/SidebarMainItem.jsx'
 import HomePage from './pages/Home.jsx'
 import UILayer from './ui/Layer.jsx'
 import UIList from './ui/List.jsx'
@@ -36,6 +37,13 @@ export default class App extends Component {
     global.AppJS = this;
     this.nada = false;
 
+
+        // Sidebar
+        let sbFavorites = new UIItem();
+        
+
+
+
   }
 
     forceRefresh() {
@@ -46,12 +54,18 @@ export default class App extends Component {
     }
 
   
-
+    renderSidebarItem(itemName, itemCount) {
+        return (
+            <div className="row">
+                <SidebarMainItem></SidebarMainItem>
+            </div>
+        )
+    } 
 
     render() {
 
         if(this.nada)
-        return ( <main></main>)
+            return ( <main></main>)
 
         global.UI.MainView = this.refs.MainView;
         
