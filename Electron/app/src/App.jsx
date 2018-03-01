@@ -66,7 +66,7 @@ export default class App extends Component {
     render() {
 
         if(this.nada)
-            return ( <main></main>)
+            return null
 
         global.UI.MainView = this.refs.MainView;
         

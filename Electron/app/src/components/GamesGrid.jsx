@@ -50,7 +50,7 @@ export default class GamesGrid extends PureComponent {
         }
         
         const gameTileRender = (game, index) => {
-            return <GameTile active={game.Active} key={index} game={game.meta} item={game}></GameTile>  
+            return <GameTile active={game.Active} key={index} game={game.meta} item={game} coverDelay={index * 50}></GameTile>  
         }
         
         return ( <div className="GameGrid" data-width={this.props.list.Width}><div className="GameGridTitle">{this.props.list.Title}</div>{ this.props.list.Items.map( gameTileRender ) }</div> )

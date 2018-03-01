@@ -247,7 +247,7 @@ main {
     height: 100%;
     backdrop-filter: blur(0.5rem);
     z-index: 10;
-    background: linear-gradient(to right, rgba(26,42,48,0.95) 0%,rgba(2,3,3,0.95) 100%);
+    background: linear-gradient(135deg, rgba(26,42,48,0.95) 0%,rgba(2,3,3,0.95) 100%);
     display: none;
 }
 
@@ -538,6 +538,7 @@ main {
             //box-shadow: 0 0 0 1px rgba(29, 191, 254, 0.67);
             text-align: center;
             font-family: 'Cabin Condensed';
+            //font-weight: 500;
             text-shadow: 0 0.05rem 0.125rem rgb(42, 82, 97);
             transform: translateY(100%);
             transition: transform 0.3s, opacity 0.3s;
@@ -553,7 +554,19 @@ main {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            will-change: opacity;
             //border-radius: 5px;
+            
+            &[src="./images/header-blank.png"] {
+                display: none;
+            }
+            
+            animation: GameTileCoverIn 0.4s !important;
+            @keyframes GameTileCoverIn {
+                0% { opacity: 0; }
+                30% { opacity: 0; }
+                100% { opacity: 1; }
+            }
         }
 
     }
