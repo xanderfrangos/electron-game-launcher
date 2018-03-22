@@ -3,6 +3,8 @@ const electron = require('electron')
 const {app, BrowserWindow, ipcMain} = electron
 const path = require('path');
 
+const { exec } = require('child_process');
+
 
 // Let electron reloads by itself when webpack watches changes in ./app/
 require('electron-reload')(__dirname)
@@ -13,6 +15,15 @@ let mainWindow
 
 let config = {}
 let appDataPath = app.getPath("userData") + "\\Den Data\\"
+
+runSteamCrawler = () => {
+    const crawler = exec('"' + app.getAppPath() + '\\app\\util\\steam-console.exe'+'" -dbPath "' + appDataPath + 'games.steam.json"', {}, (error, stdout, stderr) => {
+        if (error) {
+            console.log(error);
+        }
+        console.log(stdout);
+      });
+}
 
 
 
@@ -72,6 +83,7 @@ app.on('ready', () => {
         saveConfig(config)
     })
 
+    runSteamCrawler();
     
 })
 

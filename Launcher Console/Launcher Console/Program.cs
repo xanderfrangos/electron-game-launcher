@@ -28,6 +28,25 @@ namespace Launcher_Console {
             string SteamLocation = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", @"SteamPath", "").ToString();
             string SteamAppsLocation = SteamLocation + @"/steamapps";
 
+            string ImagesLocation = "cache";
+            string dbPath = "apps.json";
+
+            if (argsList.Contains("-imagesDirectory")) {
+                try {
+                    ImagesLocation = argsList[argsList.IndexOf("-imagesDirectory") + 1];
+                } catch {
+
+                }
+            }
+
+            if (argsList.Contains("-dbPath")) {
+                try {
+                    dbPath = argsList[argsList.IndexOf("-dbPath") + 1];
+                } catch {
+
+                }
+            }
+
             if (Directory.Exists(SteamAppsLocation)) {
 
                 // Add games from default library
@@ -45,25 +64,35 @@ namespace Launcher_Console {
                 string json = JsonConvert.SerializeObject(AllApps);
 
                 // Write apps DB file
-                File.WriteAllText("apps.json", json);
-                Console.WriteLine("\r\nDatabase saved to apps.json!");
+                Console.WriteLine("\r\nSaving database to " + dbPath);
+                try {
+                    Directory.CreateDirectory(Path.GetDirectoryName(dbPath));
+                } catch {
 
-                if (argsList.Contains("-buildcache")) {
+                }
+                
+                File.WriteAllText(dbPath, json);
+                Console.WriteLine("\r\nSaved " + AllApps.Count + " games to the database!");
+
+
+
+                if (argsList.Contains("-buildcache") || argsList.Contains("-imagesDirectory")) {
                     Console.WriteLine("\r\nAcquiring game graphics from Steam...");
-                    if (!Directory.Exists("cache")) {
-                        Directory.CreateDirectory("cache");
+                    Console.WriteLine("Saving images to: " + ImagesLocation + "/");
+                    if (!Directory.Exists(ImagesLocation)) {
+                        Directory.CreateDirectory(ImagesLocation);
                     }
                     foreach (AppInfo app in AllApps) {
                         Console.WriteLine("Downloading images for " + app.name + " (" + app.id + ")");
 
-                        if (!Directory.Exists("cache/" + app.id)) {
-                            Directory.CreateDirectory("cache/" + app.id);
+                        if (!Directory.Exists(ImagesLocation + "/" + app.id)) {
+                            Directory.CreateDirectory(ImagesLocation + "/" + app.id);
                         }
                         try {
                             WebClient webClient1 = new WebClient();
-                            webClient1.DownloadFile(new Uri("http://cdn.akamai.steamstatic.com/steam/apps/" + app.id + "/header.jpg"), @"cache/" + app.id + "/header.jpg");
+                            webClient1.DownloadFile(new Uri("http://cdn.akamai.steamstatic.com/steam/apps/" + app.id + "/header.jpg"), @ImagesLocation + "/" + app.id + "/header.jpg");
                             WebClient webClient2 = new WebClient();
-                            webClient2.DownloadFile(new Uri("http://cdn.edgecast.steamstatic.com/steam/apps/" + app.id + "/capsule_616x353.jpg"), @"cache/" + app.id + "/capsule_616x353.jpg");
+                            webClient2.DownloadFile(new Uri("http://cdn.edgecast.steamstatic.com/steam/apps/" + app.id + "/capsule_616x353.jpg"), @ImagesLocation + "/" + app.id + "/capsule_616x353.jpg");
                         } catch(Exception e) {
 
                         }
@@ -75,7 +104,6 @@ namespace Launcher_Console {
 
 
             Console.WriteLine("\r\nDone!");
-            Console.ReadKey();
 
         }
 
@@ -127,7 +155,7 @@ namespace Launcher_Console {
 
                     apps.Add(app);
 
-                    Console.WriteLine("Added " + app.name + " (" + app.id + ") to the database");
+                    //Console.WriteLine("Added " + app.name + " (" + app.id + ") to the database");
                 }
             }
             return apps;
