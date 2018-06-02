@@ -1,71 +1,71 @@
+//import { exec } from 'child_process';
+
+
+
+
 // Basic init
 const electron = require('electron')
 const {app, BrowserWindow, ipcMain} = electron
 const path = require('path');
 
-const { exec } = require('child_process');
 
+//const electronAcrylic = require('electron-acrylic');
+
+const { execSync } = require('child_process');
+
+
+module.exports = {
+    // Hack for loading from den-launcher
+}
 
 // Let electron reloads by itself when webpack watches changes in ./app/
-require('electron-reload')(__dirname)
+//require('electron-reload')(__dirname)
 const fs = require('fs');
 
 // To avoid being garbage collected
 let mainWindow
+let splashWindow
 
 let config = {}
-let appDataPath = app.getPath("userData") + "\\Den Data\\"
+let appDataPath = stringEscape(app.getPath("appData")) + "\\Den Game Launcher\\"
+let appFilesPath = "${__dirname}";
+let games = {
+    steam: {},
+    steamRAW: [],
+    manual: []
+}
 
-runSteamCrawler = () => {
-    const crawler = exec('"' + app.getAppPath() + '\\app\\util\\steam-console.exe'+'" -dbPath "' + appDataPath + 'games.steam.json"', {}, (error, stdout, stderr) => {
+runSteamCrawler = (includeImages = false, callback = () => { console.log("Steam crawler done!")} ) => {
+    const crawler = execSync('"' + app.getAppPath() + '\\app\\util\\steam-console.exe'+'" -dbPath "' + appDataPath + 'games.steam.json"' + (includeImages ? ' -imagesDirectory "' + appDataPath + 'cache\\SteamGraphics"' : '') + '', {}, (error, stdout, stderr) => {
         if (error) {
             console.log(error);
         }
         console.log(stdout);
+        callback()
       });
+
+
+
 }
 
 
-
 app.on('ready', () => {
+    appFilesPath = "C:\\Projects\\electron-game-launcher\\Electron\\";
 
 
-    let splashWindow = new BrowserWindow( {width: 480, height: 300, frame: false, transparent:true, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} } )
+    splashWindow = new BrowserWindow( {width: 480, height: 300, show:false , frame: false, transparent:true, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} } )
 
-    splashWindow.loadURL(`file://${__dirname}/app/splash.html`)
 
-    let mainWindow = new BrowserWindow({width: 1280, height: 720, frame: false, transparent:false, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} })
+    mainWindow = new BrowserWindow({width: 1280, height: 720, show:false, frame: false, transparent:true, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} })
 
-    mainWindow.hide()
-
-    //const swca = require('windows-swca');
-    //swca.SetWindowCompositionAttribute(mainWindow, ACCENT_ENABLE_BLURBEHIND, 0x00000000);
+    ipcMain.on('MainThreadMessage', (event, arg) => {MainThreadMessage(arg)})
     
-    
-    ipcMain.on('ready', function() {
-        console.log("Page ready")
-        mainWindow.webContents.send("appPath", app.getAppPath());
-        mainWindow.webContents.send("appConfig", {"appDataPath": appDataPath, "config": config})
 
-        
-        setTimeout(() => {
-            splashWindow.destroy()
-            mainWindow.show()
-        },250)
-    });
 
-    //mainWindow.on('message', MainThreadMessage);
+    app.on('window-all-closed', function() {
+          app.quit();
+      });
 
-    mainWindow.loadURL(`file://${__dirname}/app/index.html`)
-    //mainWindow.setFullScreen(true);
-    loadConfig()
-
-    if(config.windowPosX && config.windowPoxY)
-        mainWindow.setPosition(config.windowPosX, config.windowPoxY)
-
-    if(config.windowSizeX && config.windowSizeY)
-        mainWindow.setSize(config.windowSizeX, config.windowSizeY)
-    
     mainWindow.on('ready', () => {
         console.log("Main Browser Ready")
     })
@@ -81,11 +81,75 @@ app.on('ready', () => {
         config.windowPoxY = pos[1]
 
         saveConfig(config)
+
+        app.quit()
     })
 
-    runSteamCrawler();
+    splashWindow.on('close', () => {
+        console.log("Splash Browser Closing")
+        app.quit()
+    })
+
+    
+    splashWindow.webContents.once('did-finish-load', splashScreenReady)   
+    splashWindow.loadURL('file://' + appFilesPath + '/app/splash.html')
+    splashWindow.show()
+    
+    
+ 
+
+    //runSteamCrawler(true);
+
+    //showMainScreen()
+
+
     
 })
+
+
+
+splashScreenReady = () => {
+    
+
+    splashWindow.webContents.send("setLoadingText", "Loading config files")
+    loadConfig()
+    splashWindow.webContents.send("setLoadingText", "Updating Steam games")
+    runSteamCrawler(false);
+    splashWindow.webContents.send("setLoadingText", "Loading databases")
+    games.steamRAW = JSON.parse(fs.readFileSync(appDataPath + 'games.steam.json', 'utf8'))
+
+    for(let game of games.steamRAW) {
+        games.steam[game.id] = game;
+    }
+
+
+    showMainScreen()
+    mainWindow.webContents.openDevTools()
+}
+
+
+
+
+showMainScreen = () => {
+    splashWindow.hide() 
+
+    if(config.windowPosX && config.windowPoxY)
+        mainWindow.setPosition(config.windowPosX, config.windowPoxY)
+
+    if(config.windowSizeX && config.windowSizeY)
+        mainWindow.setSize(config.windowSizeX, config.windowSizeY)
+
+    mainWindow.loadURL('file://' + appFilesPath + '/app/index.html')
+
+    mainWindow.webContents.once('did-finish-load', () => {
+        mainWindow.webContents.send("appPath", appFilesPath);
+        mainWindow.webContents.send("appConfig", {"appDataPath": appDataPath, "config": config, "games": games})
+        mainWindow.webContents.send("appStart", appFilesPath);
+        mainWindow.show()
+    });
+    
+    
+}
 
 
 
@@ -101,7 +165,7 @@ loadConfig = () => {
     }
 
     config = JSON.parse(fs.readFileSync(appDataPath + "config.json", 'utf8'))
-    console.log(config)
+    console.log("Config loaded: ", config)
 
 }
 

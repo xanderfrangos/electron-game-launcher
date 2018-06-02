@@ -13,9 +13,7 @@ export default class GameTile extends PureComponent {
     render() {
         if(this.props.active) {
             global.UI.Active.ItemRef = this.refs.Item;
-        }
-
-        console.log(window.appDataPath)        
+        }     
 
         return ( 
         <div ref="Item" data-active={this.props.active} className="GameTile">

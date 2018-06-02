@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import GamesGrid from './components/GamesGrid.jsx'
 import SidebarMainItem from './components/SidebarMainItem.jsx'
-import HomePage from './pages/Home.jsx'
+//import HomePage from './pages/Home.jsx'
+import GameListPage from './pages/GameList.jsx'
 import UILayer from './ui/Layer.jsx'
 import UIList from './ui/List.jsx'
 import UIItem from './ui/Item.jsx'
@@ -10,15 +11,15 @@ import UIInput from './ui/Input.jsx'
 import UISounds from './ui/Sounds.jsx'
 
 let fs = require('fs');
-
-let db = JSON.parse(fs.readFileSync('./apps.json', 'utf8'));
+/*
+let db = JSON.parse(fs.readFileSync(appDataPath + 'games.steam.json', 'utf8'));
 
 let sortedApps = db.sort(function(a, b) {
     var textA = a.name.toLowerCase();
     var textB = b.name.toLowerCase();
     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
 });
-
+*/
 
 export default class App extends Component {
 
@@ -26,11 +27,7 @@ export default class App extends Component {
     super(props);
     
 
-    // Don't change these. They reference each other.
-    global.UI = new UINavigation();
-    global.Input = new UIInput();
-    global.Sounds = new UISounds();
-    global.Sounds.Mute()
+
 
     //global.Sounds.Startup.play();
 
@@ -45,6 +42,25 @@ export default class App extends Component {
 
 
 
+
+
+
+    this.state = { "UILayer":this.props.UILayer };
+        console.log("UILayer", this.props)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
     forceRefresh() {
@@ -55,11 +71,11 @@ export default class App extends Component {
     }
 
   
-    renderSidebarItem(itemName, itemCount) {
+    renderSidebarItem(item, itemCount) {
+        let itemInfo = item 
+        console.log("renderSidebarItem", item)
         return (
-            <div className="row">
-                <SidebarMainItem></SidebarMainItem>
-            </div>
+                <SidebarMainItem title={item.meta.Title} active={item.Active} count={item.meta.Lists.length} item={item}></SidebarMainItem>
         )
     } 
 
@@ -84,10 +100,55 @@ export default class App extends Component {
                                     <div className="item logo">DEN</div>
                                     <div className="item time">8:21</div>
                                 </div> 
+
+                                { this.props.Sidebar.map(this.renderSidebarItem) }
+                                
+                                <div className="row bottom">
+                                    <div className="item">
+                                        <img src="images/icons/add.svg" />
+                                    </div>
+                                    <div className="item">
+                                        <img src="images/icons/fullscreen.svg" />
+                                    </div>
+                                    <div className="item">
+                                        <img src="images/icons/settings.svg" />
+                                    </div>
+                                    <div className="item">
+                                        <img src="images/icons/power.svg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="main" ref="MainView">
+                    <GameListPage UILayer={this.state.UILayer} />
+                    </div>
+                
+                </div>
+                
+                
+            </main>
+        )
+    }
+
+
+    componentDidMount() {
+        global.Sounds.UIReady.play()
+    }
+
+
+}
+
+
+// 
+
+/*
+
+
                                 <div className="row active">
                                     <div className="item">
-                                        <div className="title">Favorites</div>
-                                        <div className="count">5</div>
+                                        <div className="title"><span>Favorites</span></div>
+                                        <div className="count"><span>5</span></div>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -135,38 +196,6 @@ export default class App extends Component {
                                         <div className="count">64</div>
                                     </div>
                                 </div>
-                                <div className="row bottom">
-                                    <div className="item">
-                                        <img src="images/icons/add.svg" />
-                                    </div>
-                                    <div className="item">
-                                        <img src="images/icons/fullscreen.svg" />
-                                    </div>
-                                    <div className="item">
-                                        <img src="images/icons/settings.svg" />
-                                    </div>
-                                    <div className="item">
-                                        <img src="images/icons/power.svg" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="main" ref="MainView">
-                        <HomePage />
-                    </div>
-                
-                </div>
-                
-                
-            </main>
-        )
-    }
 
 
-    componentDidMount() {
-        global.Sounds.UIReady.play()
-    }
-
-
-}
+*/

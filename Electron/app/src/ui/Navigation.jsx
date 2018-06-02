@@ -10,7 +10,7 @@ export default class UINavigation {
         this.AllowInput = true;
         this.FollowInput = true;
         this.Items = []
-        this.Refs = [];
+        this.Refs = {};
         this.Counters = {
             LayerCache: 0,
             Refs: 0,
@@ -77,12 +77,16 @@ export default class UINavigation {
         this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
         this.Layers[this.Layers.length - 1] = layerID;
         this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
+
+        this.SetCurrentListIndex(this.LayerCache[this.Layers[this.Layers.length - 1]].ActiveList);
     }
 
     SetCurrentListItemIndex(ItemIndex) {
         this.Active.List.ActiveItem = ItemIndex;
 
         this.UpdateActiveObject();
+
+        this.ActivateFocusEvent();
     }
 
     SetCurrentListIndex(ListIndex, ItemIndex = 0) {
@@ -90,6 +94,8 @@ export default class UINavigation {
         this.Active.Layer.Lists[ListIndex].ActiveItem = ItemIndex;
 
         this.UpdateActiveObject();
+
+        this.ActivateFocusEvent();
     }
 
     UpdateActiveObject() {
@@ -310,6 +316,9 @@ export default class UINavigation {
 
         const oldItem = ReactDOM.findDOMNode(global.UI.Refs[CurrentItem.ID])
         const newItem = ReactDOM.findDOMNode(global.UI.Refs[global.UI.Active.Item.ID])
+
+        console.log("MoveFocus", CurrentItem.ID, global.UI.Active.Item.ID, oldItem, newItem)
+
         oldItem.dataset.active = "false"
         newItem.dataset.active = "true"
 
@@ -396,6 +405,15 @@ export default class UINavigation {
         this
             .CurrentItem
             .SecondaryAction();
+    }
+    ActivateFocusEvent() {
+        //this.RefreshCurrentItem();
+        try {
+            global.UI.Active.Item.FocusAction();
+        } catch (e) {
+            console.log("Error on FocusAction",e)
+        }
+
     }
 
 }

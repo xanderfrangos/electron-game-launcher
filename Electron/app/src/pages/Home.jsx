@@ -6,25 +6,25 @@ import UIItem from '../ui/Item.jsx'
 
 let fs = require('fs');
 
-let db = JSON.parse(fs.readFileSync('apps.json', 'utf8'));
-
-let sortedApps = db.sort(function(a, b) {
-    var textA = a.name.toLowerCase();
-    var textB = b.name.toLowerCase();
-    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-});
 
 
 export default class HomePage extends Component {
 
     constructor(props) {
     super(props);
-    
+    /*
     // Build Items
     let items = [];
     let items2 = [];
     let items3 = [];
 
+    let db = gamesDB.steam;
+
+    let sortedApps = db.sort(function(a, b) {
+        var textA = a.name.toLowerCase();
+        var textB = b.name.toLowerCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
     
 
     sortedApps.forEach(function(element) {
@@ -59,11 +59,10 @@ export default class HomePage extends Component {
 
     this.state = { "lists":lists };
 
-
-    
-
-
+*/
   }
+    
+    
 
 
 
@@ -71,6 +70,9 @@ export default class HomePage extends Component {
 
 
     render() {
+
+        if(appDataPath === false) 
+            return (<div></div>)
 
         global.UI.MainView = this.refs.MainView;
         

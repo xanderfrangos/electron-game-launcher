@@ -4,6 +4,11 @@ export default class UILayer {
         this.ID = -1;
         this.Title = title;
         this.Lists = lists;
+
+        // If only a single list object is provided instead of array, conver to array
+        if(!Array.isArray(lists))
+            this.Lists = [lists];
+
         this.ActiveList = 0;
         this.IsHorizontal = false; // false = Vertical, true = Horizontal
     }

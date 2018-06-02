@@ -97,7 +97,7 @@ body, html {
 body {
     font-family: "Cabin";
     font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, rgba(23,36,42,1) 0%,rgba(3,5,6,1) 100%);
+    background: linear-gradient(135deg, rgba(#17242a,1) 0%,rgba(3,5,6,1) 100%);
     &.noFocus {
         .GameGrid {
             * {
@@ -280,7 +280,7 @@ main {
         display: flex;
         justify-content: space-between;
         
-        &.active {
+        &.active, &[data-active="true"] {
             background: rgba(white, 0.3);
             background: linear-gradient(to right, rgba(61,123,146,1) 0%,rgba(54,110,130,1) 100%);
             .item {

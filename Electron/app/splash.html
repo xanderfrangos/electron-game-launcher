@@ -15,30 +15,33 @@
     <div id="splash">
         <div class="splash-inner">
             <img src="images/logo-white.png" />
-        <div class="statusText">Loading...</div>
+        <div id="loadingText" class="statusText"></div>
         </div>
     </div>
 
     <script>
-
         var { ipcRenderer, remote, webview } = require('electron');
 
-        var appPath = "";
-        ipcRenderer.on('appPath', (event, arg) => {
-            appPath = arg;
-        });
+        
 
-        let mainValue = ipcRenderer.send('LoadingReady', 1);
+        let mainValue = ipcRenderer.send('SplashReady', 1);
+        ipcRenderer.send('MainThreadMessage', "WOW");
+
+        setText = (loadingText) => {
+            let text = document.getElementById("loadingText");
+            text.innerText = loadingText;
+            ipcRenderer.send('MainThreadMessage', "WOW");
+        }
+
+        setText("Loading")
+
+        ipcRenderer.on('setLoadingText', (event, arg) => {
+            setText(arg)
+        });
 
     </script>
 
     <script>
-
-        window.addEventListener('load', () => {
-            console.log("ba")
-        });
-
-
         const path = 'src/sounds/'
 
         let StartupSound = new Howl({

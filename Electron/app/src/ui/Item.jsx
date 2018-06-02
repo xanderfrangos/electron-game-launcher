@@ -1,7 +1,9 @@
 export default class UIItem {
-    constructor(primaryAction) {
+    constructor(primaryAction = () => {}, focusAction = () => {}, secondaryAction = () => {}) {
         this.Active = false;
         this.PrimaryAction = primaryAction;
+        this.SecondaryAction = secondaryAction;
+        this.FocusAction = focusAction;
         this.meta = {};
         this.ID = 0;
         if(global.UI) {
