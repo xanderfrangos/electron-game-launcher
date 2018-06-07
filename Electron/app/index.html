@@ -33,9 +33,23 @@
         ipcRenderer.send('MainThreadMessage', text);
     }
 
-    setTimeout(() => { window.dLog("HELLO WORLD2") }, 500);
+    var clock = document.getElementById('clock');
 
-    
+setInterval(function(){
+    clock = document.getElementById('clock');
+  clock.innerHTML = global.getCurrentTime();
+}, 10000);
+
+global.getCurrentTime = () => {
+  var currentDate = new Date();
+  var hours = currentDate.getHours() > 12 ? currentDate.getHours() - 12 : currentDate.getHours();
+  hours === 0 ? hours = 12 : hours = hours;
+  var m = (currentDate.getHours() >= 12 ? "PM" : "AM")
+  var minutes = currentDate.getMinutes();
+  var seconds = currentDate.getSeconds() < 10 ? '0' + currentDate.getSeconds() : currentDate.getSeconds();
+  var currentTime = hours + ':' + (minutes < 10 ? "0" + minutes : minutes);
+  return currentTime;
+}
 
 </script>
 </head>

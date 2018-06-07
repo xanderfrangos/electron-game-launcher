@@ -57,6 +57,31 @@
         });
     </script>
 
+<script>
+    
+    var { ipcRenderer, remote, webview } = require('electron');
+
+    var appPath = false;
+    var appDataPath = false;
+    var config = {};
+    ipcRenderer.on('appConfig', (event, args) => {
+        console.log('ayyy')
+        console.log(args)
+        appDataPath = args.appDataPath
+        config = args.config
+        gamesDB = args.games
+        //global.AppJS.forceRefresh()
+        dLog("HELLOWORLD")
+    });
+
+    let mainValue = ipcRenderer.send('ready', 1);
+
+    dLog = (text) => {
+        ipcRenderer.send('MainThreadMessage', text);
+    }
+
+</script>
+
 <style>
         webview {
             width: 100%;

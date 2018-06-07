@@ -15,15 +15,24 @@ var { ipcRenderer, remote, webview } = require('electron');
 let navItems = [];
 
 const addListToNav = (layerID) => {
-    let list = global.UI.LayerCache[layerID]
+    const list = global.UI.LayerCache[layerID]
 
-    let newItem = new UIItem( () => {
+    const newItem = new UIItem( () => {
         console.log("nav click", list)
-    }, () => {
-        //global.AppJS.setState({"UILayer": []})
+        global.UI.NewLayer(layerID)
+        global.UI.SetCurrentListIndex(0);
         global.AppJS.setState({"UILayer": list})
-        global.AppJS.forceRefresh();
+        //global.AppJS.forceRefresh();
     } );
+
+
+
+        newItem.FocusAction = () => {
+            //global.AppJS.setState({"UILayer": []})
+            global.AppJS.setState({"UILayer": list})
+            //global.AppJS.forceRefresh();
+            //global.AppJS.forceUpdate();
+        }
         newItem.meta = list;
         navItems.push(newItem);
 }
@@ -41,6 +50,11 @@ ipcRenderer.on('appStart', (event, args) => {
     let items2 = [];
     let items3 = [];
 
+
+    let list1Items = [];
+    let list1AItems = [];
+    let list2Items = [];
+
     let db = gamesDB.steam;
     let dbArr = Object.values(gamesDB.steam)
 
@@ -53,22 +67,62 @@ ipcRenderer.on('appStart', (event, args) => {
     });
     
 
+
+    // Home
     sortedApps.forEach(function(element) {
         let newItem = new UIItem( global.Input.RunGame );
+        newItem.BackAction = () => {
+            global.UI.PreviousLayer()
+        }
         newItem.meta = element;
         items.push(newItem);
     }, this);
 
     sortedApps.forEach(function(element) {
         let newItem = new UIItem(global.Input.RunGame);
+        newItem.BackAction = () => {
+            global.UI.PreviousLayer()
+        }
         newItem.meta = element;
         items2.push(newItem);
     }, this);
 
     sortedApps.forEach(function(element) {
         let newItem = new UIItem(global.Input.RunGame);
+        newItem.BackAction = () => {
+            global.UI.PreviousLayer()
+        }
         newItem.meta = element;
         items3.push(newItem);
+    }, this);
+
+
+    // Test Lists
+    sortedApps.forEach(function(element) {
+        let newItem = new UIItem(global.Input.RunGame);
+        newItem.BackAction = () => {
+            global.UI.PreviousLayer()
+        }
+        newItem.meta = element;
+        list1Items.push(newItem);
+    }, this);
+
+    sortedApps.forEach(function(element) {
+        let newItem = new UIItem(global.Input.RunGame);
+        newItem.BackAction = () => {
+            global.UI.PreviousLayer()
+        }
+        newItem.meta = element;
+        list1AItems.push(newItem);
+    }, this);
+
+    sortedApps.forEach(function(element) {
+        let newItem = new UIItem(global.Input.RunGame);
+        newItem.BackAction = () => {
+            global.UI.PreviousLayer()
+        }
+        newItem.meta = element;
+        list2Items.push(newItem);
     }, this);
 
     // Build List w/ Items
@@ -77,28 +131,20 @@ ipcRenderer.on('appStart', (event, args) => {
     let recentList = new UIList([items2[8], items2[12], items2[21]], "Recently Played", 3);
     let favoritesList = new UIList([items3[7], items3[16], items3[22], items3[27], items3[23]], "Favorites", 3);
 
-    let HomeList = [favoritesList, recentList, allList];
-
-    let TestList1 = [favoritesList];
-    let TestList2 = [recentList];
-    let TestList3 = [recentList, favoritesList];
-    let TestList4 = [favoritesList, recentList];
+    let tL1 = new UIList([list1Items[9], list1Items[10], list1Items[11], list1Items[12], list1Items[13], list1Items[14], list1Items[15], list1Items[16]], "Test List 1", 3);
+    let tL1A = new UIList([list1Items[39], list1Items[40], list1Items[41]], "Recent from TL1", 3);
+    let tL2 = new UIList([list2Items[23], list2Items[33], list2Items[42], list2Items[45], list2Items[7]], "Test List 2", 3);
 
     // Build Layer w/ List
-    let homeID = global.UI.NewCacheLayer(HomeList, "Home");
+    let homeID = global.UI.NewCacheLayer([favoritesList, recentList, allList], "Home");
     addListToNav(homeID)
 
-    let list1ID = global.UI.NewCacheLayer(TestList1, "Test List 1");
+    let list1ID = global.UI.NewCacheLayer([tL1, tL1A], "Test List 1");
     addListToNav(list1ID);
 
-    let list2ID = global.UI.NewCacheLayer(TestList2, "Test List 2");
+    let list2ID = global.UI.NewCacheLayer(tL2, "Test List 2");
     addListToNav(list2ID);
     
-    let list3ID = global.UI.NewCacheLayer(TestList3, "Test List 3");
-    addListToNav(list3ID);
-
-    let list4ID = global.UI.NewCacheLayer(TestList4, "Test List 4");
-    addListToNav(list4ID);
 
     let navList = new UIList(navItems, "Game Lists", 1);
     let navID = global.UI.NewCacheLayer(navList, "Navigation");
@@ -106,7 +152,7 @@ ipcRenderer.on('appStart', (event, args) => {
     global.UI.ChangeLayer(navID)
 
     render(
-        <App Sidebar={global.UI.LayerCache[global.UI.Layers[0]].Lists[0].Items} UILayer={global.UI.LayerCache[homeID]}/>,
+        <App Sidebar={global.UI.LayerCache[global.UI.Layers[0]].Lists[0]} UILayer={global.UI.LayerCache[global.UI.Layers[0]].Lists[0].Items[0].meta}/>,
         document.getElementById('app')
     )
 });

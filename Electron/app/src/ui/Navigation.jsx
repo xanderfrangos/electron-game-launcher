@@ -9,8 +9,10 @@ export default class UINavigation {
         this.CurrentLayerID = 0;
         this.AllowInput = true;
         this.FollowInput = true;
-        this.Items = []
+        this.Lists = {};
+        this.Items = {};
         this.Refs = {};
+        this.Components = {};
         this.Counters = {
             LayerCache: 0,
             Refs: 0,
@@ -53,6 +55,10 @@ export default class UINavigation {
     }
 
     PreviousLayer() {
+
+        this.Layers.splice(-1,1);
+        this.UpdateActiveObject();
+        /*
         var CurrentLayerID = this.Layers[this.Layers.length - 1];
         this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
         this
@@ -60,6 +66,7 @@ export default class UINavigation {
             .splice(this.Layers.length - 1, 1);
         this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
         this.DestroyLayer(CurrentLayerID);
+        */
     }
 
     NewLayer(layerID) {
@@ -70,19 +77,18 @@ export default class UINavigation {
             .Layers
             .push(layerID);
         this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
-        this.SetCurrentListIndex(0);
+        this.UpdateActiveObject();
     }
 
     ChangeLayer(layerID) {
         this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
         this.Layers[this.Layers.length - 1] = layerID;
         this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
-
-        this.SetCurrentListIndex(this.LayerCache[this.Layers[this.Layers.length - 1]].ActiveList);
+        this.UpdateActiveObject();
     }
 
     SetCurrentListItemIndex(ItemIndex) {
-        this.Active.List.ActiveItem = ItemIndex;
+        this.Active.List.ActiveIndex = ItemIndex;
 
         this.UpdateActiveObject();
 
@@ -90,8 +96,8 @@ export default class UINavigation {
     }
 
     SetCurrentListIndex(ListIndex, ItemIndex = 0) {
-        this.Active.Layer.ActiveList = ListIndex;
-        this.Active.Layer.Lists[ListIndex].ActiveItem = ItemIndex;
+        this.Active.Layer.ActiveIndex = ListIndex;
+        this.Active.Layer.Lists[ListIndex].ActiveIndex = ItemIndex;
 
         this.UpdateActiveObject();
 
@@ -99,17 +105,79 @@ export default class UINavigation {
     }
 
     UpdateActiveObject() {
+        const Last = {
+            Layer: this.Active.Layer.ID,
+            List: this.Active.List.ID,
+            Item: this.Active.Item.ID
+        }
+
+        console.log("UpdateActiveObject", Last)
+
         this.Active.Layer.Active = false;
         this.Active.List.Active = false;
         this.Active.Item.Active = false;
 
+        try {
+            //global.UI.Components[global.UI.Active.Layer.ID].forceUpdate();
+        } catch (e) {
+            console.log("Unable to update active Layer Ref", e);
+        }
+
+        try {
+            //global.UI.Components[global.UI.Active.List.ID].forceUpdate();
+        } catch (e) {
+            console.log("Unable to update active List Ref", e);
+        }
+
+        try {
+            //global.UI.Components[global.UI.Active.Item.ID].forceUpdate();
+        } catch (e) {
+            console.log("Unable to update active Item Ref", e);
+        }
+
         this.Active.Layer = this.LayerCache[this.Layers[this.Layers.length - 1]];
-        this.Active.List = this.Active.Layer.Lists[this.Active.Layer.ActiveList];
-        this.Active.Item = this.Active.List.Items[this.Active.List.ActiveItem];
+        this.Active.List = this.Active.Layer.Lists[this.Active.Layer.ActiveIndex];
+        this.Active.Item = this.Active.List.Items[this.Active.List.ActiveIndex];
 
         this.Active.Layer.Active = true;
         this.Active.List.Active = true;
         this.Active.Item.Active = true;
+
+        try {
+            const oldItem = ReactDOM.findDOMNode(global.UI.Refs[Last.Item])
+            oldItem.dataset.active = "false"
+        } catch(e) {
+            console.log("Couldn't deactivate old Item", e)
+        }
+
+        try {
+            const newItem = ReactDOM.findDOMNode(global.UI.Refs[global.UI.Active.Item.ID])
+            newItem.dataset.active = "true"
+        } catch(e) {
+            console.log("Couldn't activate new Item", e)
+        }
+
+        
+        
+
+        try {
+            //global.UI.Components[global.UI.Active.Layer.ID].forceUpdate();
+        } catch (e) {
+            console.log("Unable to update active Layer Ref", e);
+        }
+
+        try {
+            //global.UI.Components[global.UI.Active.List.ID].forceUpdate();
+        } catch (e) {
+            console.log("Unable to update active List Ref", e);
+        }
+
+        try {
+            //global.UI.Components[global.UI.Active.Item.ID].forceUpdate();
+        } catch (e) {
+            console.log("Unable to update active Item Ref", e);
+        }
+        
     }
 
     UpdateState() {
@@ -123,11 +191,11 @@ export default class UINavigation {
 
         if (direction == "up") {
             // Determine if can go up. If not, try to go to previous one.
-            var DesiredIndex = CurrentList.ActiveItem - CurrentList.Width;
+            var DesiredIndex = CurrentList.ActiveIndex - CurrentList.Width;
 
             if (DesiredIndex < 0) {
                 // Cannot go up. Find previous list, if available. Start with above list
-                var ListIndex = CurrentLayer.ActiveList - 1;
+                var ListIndex = CurrentLayer.ActiveIndex - 1;
 
                 while (ListIndex > 0) {
                     // Make sure this list has at least 1 item in it. Otherwise, skip.
@@ -147,7 +215,7 @@ export default class UINavigation {
 
                 } else {
                     // Move to new list at new item Determine old column.
-                    var OldCol = CurrentList.ActiveItem - (Math.floor(CurrentList.ActiveItem / CurrentList.Width) * CurrentList.Width);
+                    var OldCol = CurrentList.ActiveIndex - (Math.floor(CurrentList.ActiveIndex / CurrentList.Width) * CurrentList.Width);
 
                     // Match up with column in last row of above list.
                     var NewList = CurrentLayer.Lists[ListIndex];
@@ -177,11 +245,11 @@ export default class UINavigation {
             // End Direction Up
         } else if (direction == "down") {
             // Determine if can go down. If not, try to go to next one.
-            var DesiredIndex = CurrentList.ActiveItem + CurrentList.Width;
+            var DesiredIndex = CurrentList.ActiveIndex + CurrentList.Width;
 
             if (DesiredIndex > CurrentList.Items.length - 1) {
                 // Cannot go down. Find next list, if available. Start with next list
-                var ListIndex = CurrentLayer.ActiveList + 1;
+                var ListIndex = CurrentLayer.ActiveIndex + 1;
 
                 while (ListIndex < CurrentLayer.Lists.length - 1) {
                     // Make sure this list has at least 1 item in it. Otherwise, skip.
@@ -199,7 +267,7 @@ export default class UINavigation {
 
                 } else {
                     // Move to new list at new item Determine old column.
-                    var OldCol = CurrentList.ActiveItem - (Math.floor(CurrentList.ActiveItem / CurrentList.Width) * CurrentList.Width);
+                    var OldCol = CurrentList.ActiveIndex - (Math.floor(CurrentList.ActiveIndex / CurrentList.Width) * CurrentList.Width);
 
                     // Match up with column in first row of next list.
                     var NewList = CurrentLayer.Lists[ListIndex];
@@ -225,13 +293,13 @@ export default class UINavigation {
             // End Direction Up
         } else if (direction == "left") {
             // Determine if can go left. If not, try to go to next.
-            var DesiredIndex = CurrentList.ActiveItem - 1;
+            var DesiredIndex = CurrentList.ActiveIndex - 1;
 
             if (DesiredIndex < 0) {
                 // Cannot go left. Find next list, if available. Start with next list
                 return false
                 /*
-                var ListIndex = CurrentLayer.ActiveList - 1;
+                var ListIndex = CurrentLayer.ActiveIndex - 1;
 
                 while (ListIndex >= 0) {
                     // Make sure this list has at least 1 item in it. Otherwise, skip.
@@ -259,7 +327,7 @@ export default class UINavigation {
                 }
                 */
 
-            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 1) {
+            } else if ((CurrentList.ActiveIndex + 1) % CurrentList.Width == 1) {
                 // left side is blocked Abort!
                 return false;
             } else {
@@ -270,14 +338,14 @@ export default class UINavigation {
             // End Direction Right
         } else if (direction == "right") {
             // Determine if can go right. If not, try to go to next.
-            var DesiredIndex = CurrentList.ActiveItem + 1;
-            console.log((CurrentList.ActiveItem + 1) % CurrentList.Width);
+            var DesiredIndex = CurrentList.ActiveIndex + 1;
+            console.log((CurrentList.ActiveIndex + 1) % CurrentList.Width);
 
             if (DesiredIndex > CurrentList.Items.length - 1) {
                 // Cannot go right. Find next list, if available. Start with next list
                 return false
                 /*
-                var ListIndex = CurrentLayer.ActiveList + 1;
+                var ListIndex = CurrentLayer.ActiveIndex + 1;
 
                 while (ListIndex < CurrentLayer.Lists.length - 1) {
                     // Make sure this list has at least 1 item in it. Otherwise, skip.
@@ -303,7 +371,7 @@ export default class UINavigation {
                 }
                 */
 
-            } else if ((CurrentList.ActiveItem + 1) % CurrentList.Width == 0) {
+            } else if ((CurrentList.ActiveIndex + 1) % CurrentList.Width == 0) {
                 // Right side is blocked Abort!
                 return false;
             } else {
@@ -316,8 +384,6 @@ export default class UINavigation {
 
         const oldItem = ReactDOM.findDOMNode(global.UI.Refs[CurrentItem.ID])
         const newItem = ReactDOM.findDOMNode(global.UI.Refs[global.UI.Active.Item.ID])
-
-        console.log("MoveFocus", CurrentItem.ID, global.UI.Active.Item.ID, oldItem, newItem)
 
         oldItem.dataset.active = "false"
         newItem.dataset.active = "true"

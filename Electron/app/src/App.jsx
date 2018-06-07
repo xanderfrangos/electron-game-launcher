@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import GamesGrid from './components/GamesGrid.jsx'
 import SidebarMainItem from './components/SidebarMainItem.jsx'
 //import HomePage from './pages/Home.jsx'
@@ -21,47 +21,21 @@ let sortedApps = db.sort(function(a, b) {
 });
 */
 
-export default class App extends Component {
+export default class App extends PureComponent {
 
     constructor(props) {
     super(props);
     
-
-
-
     //global.Sounds.Startup.play();
-
 
     global.AppJS = this;
     this.nada = false;
 
-
-        // Sidebar
-        let sbFavorites = new UIItem();
-        
-
-
-
-
-
-
     this.state = { "UILayer":this.props.UILayer };
         console.log("UILayer", this.props)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
+
+  
 
     forceRefresh() {
         this.nada = true;
@@ -71,13 +45,6 @@ export default class App extends Component {
     }
 
   
-    renderSidebarItem(item, itemCount) {
-        let itemInfo = item 
-        console.log("renderSidebarItem", item)
-        return (
-                <SidebarMainItem title={item.meta.Title} active={item.Active} count={item.meta.Lists.length} item={item}></SidebarMainItem>
-        )
-    } 
 
     render() {
 
@@ -93,15 +60,27 @@ export default class App extends Component {
                 </div>
                 <div id="base">
                 
-                    <div id="sidebar">
+                    <div data-active={this.props.Sidebar.Active} id="sidebar">
                         <div className="sidebarInner">
                             <div className="view">
                                 <div className="row">
                                     <div className="item logo">DEN</div>
-                                    <div className="item time">8:21</div>
+                                    <div id="clock" className="item time">{global.getCurrentTime()}</div>
                                 </div> 
 
-                                { this.props.Sidebar.map(this.renderSidebarItem) }
+                                { this.props.Sidebar.Items.map( (item, itemIndex) => {
+        let itemInfo = item 
+
+        let count = 0;
+        for(let list of item.meta.Lists) {
+            count += list.Items.length;
+        }
+
+        console.log("renderSidebarItem", this.props.Sidebar, itemIndex, item)
+        return (
+                <SidebarMainItem key={item.ID} title={item.meta.Title} active={this.props.Sidebar.ActiveIndex == itemIndex} count={count} item={item}></SidebarMainItem>
+        )
+    }  ) }
                                 
                                 <div className="row bottom">
                                     <div className="item">
@@ -121,7 +100,7 @@ export default class App extends Component {
                         </div>
                     </div>
                     <div id="main" ref="MainView">
-                    <GameListPage UILayer={this.state.UILayer} />
+                    <GameListPage layerID={this.state.UILayer.ID} activeIndex={this.state.UILayer.ActiveIndex} active={this.state.UILayer.Active} UILayer={this.state.UILayer} />
                     </div>
                 
                 </div>

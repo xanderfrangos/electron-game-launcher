@@ -1,6 +1,6 @@
-import React, {PureComponent}  from 'react'
+import React, {Component}  from 'react'
 
-export default class GameTile extends PureComponent {
+export default class GameTile extends Component {
     
     constructor(props) {
         super(props);
@@ -8,15 +8,29 @@ export default class GameTile extends PureComponent {
             coverPath: "./images/header-blank.png"
         };
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return true;
+        if (this.props.item.ID !== nextProps.item.ID) {
+            return true;
+          }
+          if (this.props.item.Active !== nextProps.item.Active) {
+            return true;
+          }
+          if (this.state.coverPath !== nextState.coverPath) {
+            return true;
+          }
+        return false;
+      }
     
 
     render() {
-        if(this.props.active) {
+        if(this.props.Active) {
             global.UI.Active.ItemRef = this.refs.Item;
         }     
 
         return ( 
-        <div ref="Item" data-active={this.props.active} className="GameTile">
+        <div ref="Item" data-active={this.props.item.Active} className="GameTile">
             <div className="GameTileInner">
                 <img className="TileBase" src="./images/header-blank.png" />
                 <img className="cover" src={this.state.coverPath || "./images/header-blank.png"} />
@@ -29,6 +43,7 @@ export default class GameTile extends PureComponent {
 
     componentDidMount() {
         global.UI.Refs[this.props.item.ID] = this.refs.Item;
+        global.UI.Components[this.props.item.ID] = this;
         
         // Lazy load cover image
         let cover = new Image();
@@ -37,7 +52,7 @@ export default class GameTile extends PureComponent {
         } 
         
         setTimeout(() => {
-            cover.src = window.appDataPath + 'cache/SteamGraphics/' + this.props.game.id + '/header.jpg?t=1508951965';
+            cover.src = window.appDataPath + 'cache/SteamGraphics/' + this.props.game.id + '/header.jpg?t=' + Date.now();
         }, this.props.coverDelay || 0)
     }
 }

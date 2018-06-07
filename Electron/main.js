@@ -57,6 +57,7 @@ app.on('ready', () => {
 
 
     mainWindow = new BrowserWindow({width: 1280, height: 720, show:false, frame: false, transparent:true, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} })
+    
 
     ipcMain.on('MainThreadMessage', (event, arg) => {MainThreadMessage(arg)})
     
@@ -94,23 +95,17 @@ app.on('ready', () => {
     splashWindow.webContents.once('did-finish-load', splashScreenReady)   
     splashWindow.loadURL('file://' + appFilesPath + '/app/splash.html')
     splashWindow.show()
-    
-    
- 
 
+    
     //runSteamCrawler(true);
-
     //showMainScreen()
-
-
-    
 })
 
 
 
 splashScreenReady = () => {
     
-
+    splashWindow.show();
     splashWindow.webContents.send("setLoadingText", "Loading config files")
     loadConfig()
     splashWindow.webContents.send("setLoadingText", "Updating Steam games")
