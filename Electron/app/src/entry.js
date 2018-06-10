@@ -146,12 +146,12 @@ ipcRenderer.on('appStart', (event, args) => {
     addListToNav(list2ID);
     
 
-
+    const { ipcRenderer, remote, webview } = require('electron');
 
     const addItem = new UIItem();
-    const fullscreenItem = new UIItem();
+    const fullscreenItem = new UIItem(() => {ipcRenderer.send('sidebarFullscreen', 1);});
     const settingsItem = new UIItem();
-    const exitItem = new UIItem();
+    const exitItem = new UIItem(() => {console.log("exitItem");ipcRenderer.send('sidebarExit', 1);});
 
     const navBottomList = new UIList([addItem, fullscreenItem, settingsItem, exitItem], "Bottom Options", 4);
 

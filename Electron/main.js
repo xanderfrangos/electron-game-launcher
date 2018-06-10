@@ -142,6 +142,16 @@ showMainScreen = () => {
         mainWindow.webContents.send("appStart", appFilesPath);
         mainWindow.show()
     });
+
+    ipcMain.on('sidebarExit', () => {
+        console.log("sidebarExit")
+        mainWindow.close()
+    });
+
+    ipcMain.on('sidebarFullscreen', () => {
+        console.log("sidebarFullscreen")
+        mainWindow.setFullScreen(true)
+    });
     
     
 }

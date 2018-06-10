@@ -12,7 +12,7 @@ export default class SidebarBottomItem extends PureComponent {
         }
 
         return (
-                    <div ref="Item" data-active={this.props.active} className="item">
+                    <div ref="Item" data-active={this.props.item.active} className="item">
                         <img src={this.props.src} />
                     </div>
                 )

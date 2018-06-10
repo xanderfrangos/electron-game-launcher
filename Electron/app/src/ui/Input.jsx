@@ -156,7 +156,7 @@ export default class UIInput {
                             global.UI.Active.Item.BackAction(global.UI.Active.Item)
                         }
                         break;
-                        case 3:
+                    case 3:
                         // Y - More
                         Input.Gamepads.Down.Buttons.push(3) 
                         if(global.Input.Gamepads.Down.LastButtons.includes(3) === false) {
