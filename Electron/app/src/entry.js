@@ -146,13 +146,23 @@ ipcRenderer.on('appStart', (event, args) => {
     addListToNav(list2ID);
     
 
+
+
+    const addItem = new UIItem();
+    const fullscreenItem = new UIItem();
+    const settingsItem = new UIItem();
+    const exitItem = new UIItem();
+
+    const navBottomList = new UIList([addItem, fullscreenItem, settingsItem, exitItem], "Bottom Options", 4);
+
+
     let navList = new UIList(navItems, "Game Lists", 1);
-    let navID = global.UI.NewCacheLayer(navList, "Navigation");
+    let navID = global.UI.NewCacheLayer([navList, navBottomList], "Navigation");
     //global.UI.NewLayer(navID);
     global.UI.ChangeLayer(navID)
 
     render(
-        <App Sidebar={global.UI.LayerCache[global.UI.Layers[0]].Lists[0]} UILayer={global.UI.LayerCache[global.UI.Layers[0]].Lists[0].Items[0].meta}/>,
+        <App Sidebar={global.UI.LayerCache[global.UI.Layers[0]].Lists} UILayer={global.UI.LayerCache[global.UI.Layers[0]].Lists[0].Items[0].meta}/>,
         document.getElementById('app')
     )
 });

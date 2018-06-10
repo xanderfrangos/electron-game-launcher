@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 import GamesGrid from './components/GamesGrid.jsx'
 import SidebarMainItem from './components/SidebarMainItem.jsx'
+import SidebarBottomItem from './components/SidebarBottomItem.jsx'
 //import HomePage from './pages/Home.jsx'
 import GameListPage from './pages/GameList.jsx'
 import UILayer from './ui/Layer.jsx'
@@ -33,6 +34,9 @@ export default class App extends PureComponent {
 
     this.state = { "UILayer":this.props.UILayer };
         console.log("UILayer", this.props)
+
+
+
   }
 
   
@@ -60,7 +64,7 @@ export default class App extends PureComponent {
                 </div>
                 <div id="base">
                 
-                    <div data-active={this.props.Sidebar.Active} id="sidebar">
+                    <div data-active={this.props.Sidebar[0].Active} id="sidebar">
                         <div className="sidebarInner">
                             <div className="view">
                                 <div className="row">
@@ -68,7 +72,7 @@ export default class App extends PureComponent {
                                     <div id="clock" className="item time">{global.getCurrentTime()}</div>
                                 </div> 
 
-                                { this.props.Sidebar.Items.map( (item, itemIndex) => {
+                                { this.props.Sidebar[0].Items.map( (item, itemIndex) => {
         let itemInfo = item 
 
         let count = 0;
@@ -76,25 +80,21 @@ export default class App extends PureComponent {
             count += list.Items.length;
         }
 
-        console.log("renderSidebarItem", this.props.Sidebar, itemIndex, item)
+        console.log("renderSidebarItem", this.props.Sidebar[0], itemIndex, item)
         return (
-                <SidebarMainItem key={item.ID} title={item.meta.Title} active={this.props.Sidebar.ActiveIndex == itemIndex} count={count} item={item}></SidebarMainItem>
+                <SidebarMainItem key={item.ID} title={item.meta.Title} active={this.props.Sidebar[0].ActiveIndex == itemIndex} count={count} item={item}></SidebarMainItem>
         )
     }  ) }
                                 
                                 <div className="row bottom">
-                                    <div className="item">
-                                        <img src="images/icons/add.svg" />
-                                    </div>
-                                    <div className="item">
-                                        <img src="images/icons/fullscreen.svg" />
-                                    </div>
-                                    <div className="item">
-                                        <img src="images/icons/settings.svg" />
-                                    </div>
-                                    <div className="item">
-                                        <img src="images/icons/power.svg" />
-                                    </div>
+
+                                    <SidebarBottomItem active={this.props.Sidebar[1].Items[0].Active} item={this.props.Sidebar[1].Items[0]} key={11} src="images/icons/add.svg" active="true"></SidebarBottomItem>
+
+                                    <SidebarBottomItem active={this.props.Sidebar[1].Items[1].Active} item={this.props.Sidebar[1].Items[1]} key={12} src="images/icons/fullscreen.svg" active="true"></SidebarBottomItem>
+
+                                    <SidebarBottomItem active={this.props.Sidebar[1].Items[2].Active} item={this.props.Sidebar[1].Items[2]} key={13} src="images/icons/settings.svg" active="true"></SidebarBottomItem>
+
+                                    <SidebarBottomItem active={this.props.Sidebar[1].Items[3].Active} item={this.props.Sidebar[1].Items[3]} key={14} src="images/icons/power.svg" active="true"></SidebarBottomItem>
                                 </div>
                             </div>
                         </div>

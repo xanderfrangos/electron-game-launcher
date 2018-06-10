@@ -302,6 +302,26 @@ main {
             
             .item {
                 opacity: 1;
+                text-align: center;
+                position: relative;
+                &.active, &[data-active="true"] {
+                    &:before {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 4rem;
+                        height: 4rem;
+                        background: linear-gradient(to right, rgba(61,123,146,1) 0%,rgba(54,110,130,1) 100%);
+                        transform: translate(-50%, -50%) scale(1);
+                        border-radius: 0.3rem;
+                        z-index: 1;
+                    }
+                    img {
+                        position: relative;
+                        z-index: 2;
+                    }
+                }
+
             }
             img {
                 padding: 0.2rem;
