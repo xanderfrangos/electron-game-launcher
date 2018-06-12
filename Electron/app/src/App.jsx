@@ -32,7 +32,7 @@ export default class App extends PureComponent {
     global.AppJS = this;
     this.nada = false;
 
-    this.state = { "UILayer":this.props.UILayer };
+    this.state = { "UILayer":this.props.UILayer, "showQuit":false };
         console.log("UILayer", this.props)
 
 
@@ -60,7 +60,22 @@ export default class App extends PureComponent {
         return (
             <main>
                 <div id="overlay">
-                
+                    {
+                        () => {
+                            if(this.state.showQuit) {
+                                return(<div class="overlayLayer center">
+                                <div class="messageBox">
+                                    <div class="title">Close Den</div>
+                                    <p>Would you like to exit Den?</p>
+                                    <div class="options">
+                                        <div class="item">Yes</div>
+                                        <div class="item">No</div>
+                                    </div>
+                                </div>
+                            </div>)
+                            }
+                        }
+                    }
                 </div>
                 <div id="base">
                 

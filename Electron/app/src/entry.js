@@ -151,7 +151,12 @@ ipcRenderer.on('appStart', (event, args) => {
     const addItem = new UIItem();
     const fullscreenItem = new UIItem(() => {ipcRenderer.send('sidebarFullscreen', 1);});
     const settingsItem = new UIItem();
-    const exitItem = new UIItem(() => {console.log("exitItem");ipcRenderer.send('sidebarExit', 1);});
+    const exitItem = new UIItem(() => {
+        console.log("exitItem");
+        global.AppJS.setState({"showQuit": true})
+        global.AppJS.forceRefresh()
+        //ipcRenderer.send('sidebarExit', 1);
+    });
 
     const navBottomList = new UIList([addItem, fullscreenItem, settingsItem, exitItem], "Bottom Options", 4);
 

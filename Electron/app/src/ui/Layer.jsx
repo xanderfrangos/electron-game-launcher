@@ -17,6 +17,12 @@ export default class UILayer {
 
         this.ActiveIndex = 0;
         this.IsHorizontal = false; // false = Vertical, true = Horizontal
+
+        if(global.UI) {
+            this.ID = global.UI.Counters.Refs;
+            global.UI.Counters.Refs++;
+            global.UI.LayerIDs[this.ID] = this;
+        }
     }
 
     

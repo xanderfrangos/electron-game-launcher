@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html class="desktop">
-
 <head>
     <meta charset="utf-8">
     <title>Den Game Launcher</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="src/js/jquery-3.3.1.slim.min.js"></script>
     <script src="src/js/gsap/TweenMax.js"></script>
     <script src="src/js/gsap/easing/EasePack.js"></script>
     <script src="src/js/gsap/plugins/ScrollToPlugin.js"></script>
     <script src="src/js/howler.min.js"></script>
+    <script>if (window.module) module = window.module;</script>
     
 <script>
     
@@ -64,6 +66,7 @@ global.getCurrentTime = () => {
             <button id="title-close-btn"><img src="images/icons/close.svg" /></button>
         </div>
     </div>
+    <script>require('./src/js/jquery-3.3.1.slim.min.js')</script>
     <script>require('./src/js/titlebar.js')</script>
 
 
@@ -81,6 +84,20 @@ global.getCurrentTime = () => {
                 document.body.className = "noFocus"
             }
         },250)
+    </script>
+
+    <script>
+
+        fsEventRecieved = (event, args) => {
+        console.log(event, args)
+        if(args) {
+            $("html").removeClass("desktop")
+        } else {
+            $("html").addClass("desktop")
+        }
+    }
+    
+    ipcRenderer.on('fullscreenMode', fsEventRecieved)
     </script>
 
 <script>

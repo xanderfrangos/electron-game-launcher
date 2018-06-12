@@ -112,6 +112,13 @@ html {
     font-size: 1vw; // TV Mode
     //font-size: 12.8px; // Desktop Mode
     //background: #151719;
+    background: rgba(3,5,6,1);
+    &.desktop {
+        font-size: 15px;
+        #title-bar {
+            display: block;
+        }
+    }
 }
 
 
@@ -175,6 +182,7 @@ html {
     -webkit-app-region: drag;
     //background: linear-gradient(to bottom, rgba(#151719,0.85) 0%,rgba(#151719,0) 100%);
     //background: #111926;
+    display: none;
     padding: none;
     margin: 0px; 
     position: fixed;
@@ -193,7 +201,8 @@ html {
     //backdrop-filter: blur(1rem);
     //background: rgba(49, 49, 49, 0.84);
     //background: rgb(49, 49, 49);
-    padding: 20px;
+    padding: 15px;
+    background: rgba(9, 14, 16, 0.8);
 }
 
 
@@ -237,6 +246,7 @@ main {
     flex-direction: row;
     //background: #151719;
     padding-left: 23rem; 
+    margin: auto;
 }
 
 #overlay {
@@ -248,7 +258,49 @@ main {
     backdrop-filter: blur(0.5rem);
     z-index: 10;
     background: linear-gradient(135deg, rgba(26,42,48,0.95) 0%,rgba(2,3,3,0.95) 100%);
-    display: none;
+    display: block;
+    &:empty {
+        display: none;
+    }
+
+    .overlayLayer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-height: 100vh;
+        &.center {
+
+        }
+    }
+
+    .messageBox {
+        background: #2a5261;
+    padding: 2rem;
+    width: 30rem;
+    box-shadow: 0 0.75rem 2rem -1rem black;
+
+        .title {
+            font-size: 2rem;
+            font-weight: 300;
+            padding-bottom: 1rem;
+        }
+        p {
+            color: #a5c1cc;
+        }
+        .options {
+            @extend clear;
+            margin-top: 0.5rem;
+            .item {
+                float: right;
+                padding: 0.75rem 1.5rem;
+                background: #1c3c48;
+                border-radius: 0.25rem;
+                margin-left: 0.5rem;
+            }
+        }
+    }
+
 }
 
 #sidebar {
@@ -279,6 +331,7 @@ main {
         padding: 0 1.4rem;
         display: flex;
         justify-content: space-between;
+        border-radius: 0.25rem;
         
         &.active, &[data-active="true"] {
             background: rgba(white, 0.3);
@@ -287,6 +340,7 @@ main {
                 opacity: 1;
                 .count {
                     opacity: 1;
+                    background: rgba(#fff,0.3);
                 }
             }
         }
@@ -315,6 +369,11 @@ main {
                         transform: translate(-50%, -50%) scale(1);
                         border-radius: 50%;
                         z-index: 1;
+                        //animation: sbBottomFocus 0.2s;
+                        @keyframes sbBottomFocus {
+                            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.88); }
+                            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                        }
                     }
                     img {
                         position: relative;
@@ -351,6 +410,8 @@ main {
                 border-radius: 5rem;
                 padding: 0.25rem;
                 margin: -0.25rem 0;
+                background: rgba(#fff, 0);
+                color: white;
             }
         }
         
@@ -398,7 +459,12 @@ main {
     padding: 0 5rem;
     position: relative;
     z-index: 5;
-    max-width: 115rem;
+    max-width: 95rem;
+    
+}
+
+#base {
+    margin: auto;
 }
 
 .logo-top {
@@ -483,6 +549,7 @@ main {
         user-select: none;
         cursor: pointer;
         filter: grayscale(0.35);
+        
 
         &[data-active="true"] {
             z-index: 3;
@@ -537,6 +604,7 @@ main {
             position: relative;
             overflow: hidden;
             border: 0.2rem solid transparent;
+            border-radius: 0.25rem;
         }
 
         .TileBase {

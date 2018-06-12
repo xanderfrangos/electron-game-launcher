@@ -1,3 +1,873 @@
-@font-face{font-family:'Cabin';font-style:italic;font-weight:400;src:local("Cabin Italic"),local("Cabin-Italic"),url("fonts/Cabin-Italic.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin';font-style:italic;font-weight:400;src:local("Cabin Italic"),local("Cabin-Italic"),url("fonts/Cabin-Italic.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin';font-style:italic;font-weight:400;src:local("Cabin Italic"),local("Cabin-Italic"),url("fonts/Cabin-Italic.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin';font-style:italic;font-weight:500;src:local("Cabin Medium Italic"),local("Cabin-MediumItalic"),url("fonts/Cabin-MediumItalic.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin';font-style:italic;font-weight:500;src:local("Cabin Medium Italic"),local("Cabin-MediumItalic"),url("fonts/Cabin-MediumItalic.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin';font-style:italic;font-weight:500;src:local("Cabin Medium Italic"),local("Cabin-MediumItalic"),url("fonts/Cabin-MediumItalic.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin';font-style:italic;font-weight:600;src:local("Cabin SemiBold Italic"),local("Cabin-SemiBoldItalic"),url("fonts/Cabin-SemiBoldItalic.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin';font-style:italic;font-weight:600;src:local("Cabin SemiBold Italic"),local("Cabin-SemiBoldItalic"),url("fonts/Cabin-SemiBoldItalic.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin';font-style:italic;font-weight:600;src:local("Cabin SemiBold Italic"),local("Cabin-SemiBoldItalic"),url("fonts/Cabin-SemiBoldItalic.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin';font-style:italic;font-weight:700;src:local("Cabin Bold Italic"),local("Cabin-BoldItalic"),url("fonts/Cabin-BoldItalic.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin';font-style:italic;font-weight:700;src:local("Cabin Bold Italic"),local("Cabin-BoldItalic"),url("fonts/Cabin-BoldItalic.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin';font-style:italic;font-weight:700;src:local("Cabin Bold Italic"),local("Cabin-BoldItalic"),url("fonts/Cabin-BoldItalic.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin';font-style:normal;font-weight:400;src:local("Cabin"),local("Cabin-Regular"),url("fonts/Cabin-Regular.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin';font-style:normal;font-weight:400;src:local("Cabin"),local("Cabin-Regular"),url("fonts/Cabin-Regular.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin';font-style:normal;font-weight:400;src:local("Cabin"),local("Cabin-Regular"),url("fonts/Cabin-Regular.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin';font-style:normal;font-weight:500;src:local("Cabin Medium"),local("Cabin-Medium"),url("fonts/Cabin-Medium.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin';font-style:normal;font-weight:500;src:local("Cabin Medium"),local("Cabin-Medium"),url("fonts/Cabin-Medium.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin';font-style:normal;font-weight:500;src:local("Cabin Medium"),local("Cabin-Medium"),url("fonts/Cabin-Medium.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin';font-style:normal;font-weight:600;src:local("Cabin SemiBold"),local("Cabin-SemiBold"),url("fonts/Cabin-SemiBold.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin';font-style:normal;font-weight:600;src:local("Cabin SemiBold"),local("Cabin-SemiBold"),url("fonts/Cabin-SemiBold.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin';font-style:normal;font-weight:600;src:local("Cabin SemiBold"),local("Cabin-SemiBold"),url("fonts/Cabin-SemiBold.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin';font-style:normal;font-weight:700;src:local("Cabin Bold"),local("Cabin-Bold"),url("fonts/Cabin-Bold.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin';font-style:normal;font-weight:700;src:local("Cabin Bold"),local("Cabin-Bold"),url("fonts/Cabin-Bold.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin';font-style:normal;font-weight:700;src:local("Cabin Bold"),local("Cabin-Bold"),url("fonts/Cabin-Bold.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:400;src:local("Cabin Condensed"),local("CabinCondensed-Regular"),url("fonts/CabinCondensed-Regular.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:400;src:local("Cabin Condensed"),local("CabinCondensed-Regular"),url("fonts/CabinCondensed-Regular.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:400;src:local("Cabin Condensed"),local("CabinCondensed-Regular"),url("fonts/CabinCondensed-Regular.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:500;src:local("Cabin Condensed Medium"),local("CabinCondensed-Medium"),url("fonts/CabinCondensed-Medium.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:500;src:local("Cabin Condensed Medium"),local("CabinCondensed-Medium"),url("fonts/CabinCondensed-Medium.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:500;src:local("Cabin Condensed Medium"),local("CabinCondensed-Medium"),url("fonts/CabinCondensed-Medium.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:600;src:local("Cabin Condensed SemiBold"),local("CabinCondensed-SemiBold"),url("fonts/CabinCondensed-SemiBold.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:600;src:local("Cabin Condensed SemiBold"),local("CabinCondensed-SemiBold"),url("fonts/CabinCondensed-SemiBold.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:600;src:local("Cabin Condensed SemiBold"),local("CabinCondensed-SemiBold"),url("fonts/CabinCondensed-SemiBold.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:700;src:local("Cabin Condensed Bold"),local("CabinCondensed-Bold"),url("fonts/CabinCondensed-Bold.ttf") format("truetype");unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:700;src:local("Cabin Condensed Bold"),local("CabinCondensed-Bold"),url("fonts/CabinCondensed-Bold.ttf") format("truetype");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Cabin Condensed';font-style:normal;font-weight:700;src:local("Cabin Condensed Bold"),local("CabinCondensed-Bold"),url("fonts/CabinCondensed-Bold.ttf") format("truetype");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2212,U+2215}clear:after,#sidebar .row:after,#sidebar .row .item:after,clear:before,#sidebar .row:before,#sidebar .row .item:before,.clear:after,.clear:before{content:' ';display:block;clear:both}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}*{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.split-1-2,.split-2-4{width:50%}.split-1-3{width:33.333%}.split-2-3{width:66.666%}.split-1-4{width:25%}.split-3-4{width:75%}.split-1-5{width:20%}.split-2-5{width:40%}.split-3-5{width:60%}.split-4-5{width:80%}.split-1-2,.split-2-4,.split-1-3,.split-2-3,.split-1-4,.split-3-4,.split-1-5,.split-2-5,.split-3-5,.split-4-5{float:left;-webkit-box-sizing:border-box;box-sizing:border-box;position:relative}@media (max-width: 960px){.split-1-3,.split-2-3,.split-1-2,.split-1-5,.split-2-5,.split-3-5,.split-4-5{width:100%;padding:0 !important}}i{font-style:italic}b{font-weight:bold}condensed,#sidebar .row .item.logo,#sidebar .row .item.time{font-family:'Cabin Condensed', sans-serif;font-family:"Segoe UI", sans-serif}body,html{font-family:'Cabin', sans-serif;font-family:"Segoe UI", sans-serif;font-weight:500;line-height:1;font-size:17px;color:white;width:100%;height:100%;overflow:hidden}@media (max-width: 960px){body,html{font-size:15px}}body{font-family:"Cabin";font-family:"Segoe UI", sans-serif;background:linear-gradient(135deg, #17242a 0%, #030506 100%)}body.noFocus .GameGrid *{-webkit-animation:none !important;animation:none !important}html{font-size:1vw}::-webkit-scrollbar{width:0.5rem}::-webkit-scrollbar-track{border-radius:0.5rem}::-webkit-scrollbar-thumb{border-radius:0.5rem;background:rgba(173,184,194,0.2)}::-webkit-scrollbar-thumb:window-inactive{background:rgba(127,137,146,0)}#background{background:#151719 url("../images/bg2.jpg") center center;background-size:cover;position:fixed;top:0;left:0;width:100rem;height:100vh;overflow:hidden;z-index:1;will-change:transform;display:none}#app{top:0;left:0;width:100vw;height:100vh;overflow-x:hidden;overflow-y:scroll;border:none !important;outline:none !important}#title-bar{-webkit-app-region:drag;padding:none;margin:0px;position:fixed;top:0;left:0;z-index:1000;width:100%}#title-bar-title{padding:10px;font-size:15px;text-transform:uppercase;font-weight:700;padding:20px}#title-bar-btns{-webkit-app-region:no-drag;position:fixed;top:0px;right:0px;z-index:1000;margin:0px}#title-bar-btns button{-webkit-appearance:none;outline:none;border:none;background:rgba(1,3,5,0);border-radius:50%;width:40px;height:28px;padding:0px;line-height:1;text-align:center;color:white;cursor:pointer}#title-bar-btns button img{height:100%;padding:6px;-webkit-box-sizing:border-box;box-sizing:border-box}#title-bar-btns button.title-max-btn img{padding:8px}main{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;padding-left:23rem}#overlay{position:fixed;top:0;left:0;width:100%;height:100%;-webkit-backdrop-filter:blur(0.5rem);backdrop-filter:blur(0.5rem);z-index:10;background:linear-gradient(135deg, rgba(26,42,48,0.95) 0%, rgba(2,3,3,0.95) 100%);display:none}#sidebar{position:fixed;z-index:6;width:23rem;min-height:100vh;top:0;left:0;padding:5rem 0rem 5rem 4.5rem;-webkit-box-sizing:border-box;box-sizing:border-box}#sidebar .row{width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,0);padding:0 1.4rem;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}#sidebar .row.active,#sidebar .row[data-active="true"]{background:rgba(255,255,255,0.3);background:-webkit-gradient(linear, left top, right top, from(#3d7b92), to(#366e82));background:linear-gradient(to right, #3d7b92 0%, #366e82 100%)}#sidebar .row.active .item,#sidebar .row[data-active="true"] .item{opacity:1}#sidebar .row.active .item .count,#sidebar .row[data-active="true"] .item .count{opacity:1}#sidebar .row.bottom{position:absolute;bottom:4rem;left:0;width:100%;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;padding:0 0rem 0 4.4rem}#sidebar .row.bottom .item{opacity:1;text-align:center;position:relative}#sidebar .row.bottom .item.active:before,#sidebar .row.bottom .item[data-active="true"]:before{position:absolute;top:50%;left:50%;width:4rem;height:4rem;background:-webkit-gradient(linear, left top, right top, from(#3d7b92), to(#366e82));background:linear-gradient(to right, #3d7b92 0%, #366e82 100%);-webkit-transform:translate(-50%, -50%) scale(1);transform:translate(-50%, -50%) scale(1);border-radius:50%;z-index:1}#sidebar .row.bottom .item.active img,#sidebar .row.bottom .item[data-active="true"] img{position:relative;z-index:2}#sidebar .row.bottom img{padding:0.2rem;width:1.8rem}#sidebar .row .item{padding:0.7rem 0;font-size:1.2rem;opacity:0.5;font-size:1.1rem;-webkit-box-flex:1;-ms-flex:1;flex:1}#sidebar .row .item .title{float:left;font-weight:400}#sidebar .row .item .count{float:right;opacity:0.5;text-align:center;background:white;color:black;width:2.5rem;border-radius:5rem;padding:0.25rem;margin:-0.25rem 0}#sidebar .row .item.logo{padding:0rem 0 1.4rem;font-size:1.9rem;font-weight:700;opacity:1}#sidebar .row .item.time{padding:0rem 0 1.4rem;font-size:1.9rem;font-weight:400;text-align:right;opacity:1}#sidebar hr{background:none;width:100%;display:block;-webkit-box-sizing:border-box;box-sizing:border-box;border:none;outline:none;padding:1rem 0}#sidebar hr:before{content:' ';display:block;width:100%;height:0.1rem;background:white;opacity:0.1}#main{-webkit-box-sizing:border-box;box-sizing:border-box;padding:0 5rem;position:relative;z-index:5;max-width:115rem}.logo-top img{width:8rem;height:auto;display:block;margin:6rem auto}.GameGrid{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;padding:4px;margin-top:-8px}.GameGrid[data-width="2"] .GameTile{width:50%}.GameGrid[data-width="3"] .GameTile{width:33.333%}.GameGrid[data-width="4"] .GameTile{width:25%}.GameGrid[data-width="5"] .GameTile{width:20%}.GameGrid[data-width="6"] .GameTile{width:16.666666%}.GameGrid .GameGridTitle{width:100%;padding:0 0.5rem;-webkit-box-sizing:border-box;box-sizing:border-box;font-size:1.9rem;font-weight:200;margin:5rem 0 1rem}.GameGrid .row{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;padding:4px;margin-top:-8px}.GameGrid .row:before{position:absolute;top:0;right:100%;padding:0 25px;font-size:65px;opacity:0.25}.GameGrid .GameTile{display:block;padding:0.4rem;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-perspective:100rem;perspective:100rem;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;position:relative;-webkit-transition:background 0.2s, opacity 0.2s, -webkit-box-shadow 0.2s, -webkit-transform 0.2s;transition:background 0.2s, opacity 0.2s, -webkit-box-shadow 0.2s, -webkit-transform 0.2s;transition:box-shadow 0.2s, transform 0.2s, background 0.2s, opacity 0.2s;transition:box-shadow 0.2s, transform 0.2s, background 0.2s, opacity 0.2s, -webkit-box-shadow 0.2s, -webkit-transform 0.2s;-webkit-transform:scale(1);transform:scale(1);will-change:box-shadow, transform, background, opacity;opacity:0.65;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;-webkit-filter:grayscale(0.35);filter:grayscale(0.35)}.GameGrid .GameTile[data-active="true"]{z-index:3;opacity:1;-webkit-filter:grayscale(0);filter:grayscale(0)}.GameGrid .GameTile[data-active="true"] .GameTileInner{-webkit-animation:GameTileInnerGlowa 2s infinite;animation:GameTileInnerGlowa 2s infinite;-webkit-box-shadow:0 0 0 0.2rem #63A5BE;box-shadow:0 0 0 0.2rem #63A5BE;-webkit-animation:GameTileBorderGlow 2s infinite;animation:GameTileBorderGlow 2s infinite}@-webkit-keyframes GameTileInnerGlow{0%{-webkit-box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #3fc9fe;box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #3fc9fe}50%{-webkit-box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #9fe4ff;box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #9fe4ff}100%{-webkit-box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #3fc9fe;box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #3fc9fe}}@keyframes GameTileInnerGlow{0%{-webkit-box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #3fc9fe;box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #3fc9fe}50%{-webkit-box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #9fe4ff;box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #9fe4ff}100%{-webkit-box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #3fc9fe;box-shadow:0 0 0 1rem rgba(255,255,255,0),0 0 11rem -2rem #3fc9fe}}@-webkit-keyframes GameTileBorderGlow{0%{-webkit-box-shadow:0 0 0 0.2rem #63A5BE;box-shadow:0 0 0 0.2rem #63A5BE}50%{-webkit-box-shadow:0 0 0 0.2rem #96e1ff;box-shadow:0 0 0 0.2rem #96e1ff}100%{-webkit-box-shadow:0 0 0 0.2rem #63A5BE;box-shadow:0 0 0 0.2rem #63A5BE}}@keyframes GameTileBorderGlow{0%{-webkit-box-shadow:0 0 0 0.2rem #63A5BE;box-shadow:0 0 0 0.2rem #63A5BE}50%{-webkit-box-shadow:0 0 0 0.2rem #96e1ff;box-shadow:0 0 0 0.2rem #96e1ff}100%{-webkit-box-shadow:0 0 0 0.2rem #63A5BE;box-shadow:0 0 0 0.2rem #63A5BE}}.GameGrid .GameTile[data-active="true"] .GameTileInner .title{opacity:1;-webkit-transform:translateY(0%);transform:translateY(0%);-webkit-animation:GameTileTitleGlow 2s infinite;animation:GameTileTitleGlow 2s infinite}@-webkit-keyframes GameTileTitleGlow{0%{background:rgba(99,165,190,0.67)}50%{background:rgba(130,201,229,0.8)}100%{background:rgba(99,165,190,0.67)}}@keyframes GameTileTitleGlow{0%{background:rgba(99,165,190,0.67)}50%{background:rgba(130,201,229,0.8)}100%{background:rgba(99,165,190,0.67)}}.GameGrid .GameTile .GameTileInner{position:relative;overflow:hidden;border:0.2rem solid transparent}.GameGrid .GameTile .TileBase{width:100%;height:auto;display:block}.GameGrid .GameTile .title{font-size:1.2rem;padding:0.5vw 0;position:absolute;bottom:0;opacity:0;background:rgba(29,191,254,0.67);color:white;width:100%;font-weight:900;text-align:center;font-family:'Cabin Condensed';text-shadow:0 0.05rem 0.125rem #2a5261;-webkit-transform:translateY(100%);transform:translateY(100%);-webkit-transition:opacity 0.3s, -webkit-transform 0.3s;transition:opacity 0.3s, -webkit-transform 0.3s;transition:transform 0.3s, opacity 0.3s;transition:transform 0.3s, opacity 0.3s, -webkit-transform 0.3s}.GameGrid .GameTile .cover{width:100%;height:auto;display:block;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);will-change:opacity;-webkit-animation:GameTileCoverIn 0.4s !important;animation:GameTileCoverIn 0.4s !important}.GameGrid .GameTile .cover[src="./images/header-blank.png"]{display:none}@-webkit-keyframes GameTileCoverIn{0%{opacity:0}30%{opacity:0}100%{opacity:1}}@keyframes GameTileCoverIn{0%{opacity:0}30%{opacity:0}100%{opacity:1}}#splash{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;background:rgba(21,23,25,0.9);-webkit-animation:splashIn 0.5s;animation:splashIn 0.5s}@-webkit-keyframes splashIn{0%{-webkit-transform:scale(0.95);transform:scale(0.95);opacity:0}100%{-webkit-transform:scale(1);transform:scale(1);opacity:1}}@keyframes splashIn{0%{-webkit-transform:scale(0.95);transform:scale(0.95);opacity:0}100%{-webkit-transform:scale(1);transform:scale(1);opacity:1}}#splash .splash-inner{position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%)}#splash img{width:100px;height:auto;display:block;margin:auto;padding-bottom:20px}#splash .statusText{color:white;text-align:center}
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 400;
+  src: local("Cabin Italic"), local("Cabin-Italic"), url("fonts/Cabin-Italic.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 400;
+  src: local("Cabin Italic"), local("Cabin-Italic"), url("fonts/Cabin-Italic.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 400;
+  src: local("Cabin Italic"), local("Cabin-Italic"), url("fonts/Cabin-Italic.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 500;
+  src: local("Cabin Medium Italic"), local("Cabin-MediumItalic"), url("fonts/Cabin-MediumItalic.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 500;
+  src: local("Cabin Medium Italic"), local("Cabin-MediumItalic"), url("fonts/Cabin-MediumItalic.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 500;
+  src: local("Cabin Medium Italic"), local("Cabin-MediumItalic"), url("fonts/Cabin-MediumItalic.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 600;
+  src: local("Cabin SemiBold Italic"), local("Cabin-SemiBoldItalic"), url("fonts/Cabin-SemiBoldItalic.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 600;
+  src: local("Cabin SemiBold Italic"), local("Cabin-SemiBoldItalic"), url("fonts/Cabin-SemiBoldItalic.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 600;
+  src: local("Cabin SemiBold Italic"), local("Cabin-SemiBoldItalic"), url("fonts/Cabin-SemiBoldItalic.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 700;
+  src: local("Cabin Bold Italic"), local("Cabin-BoldItalic"), url("fonts/Cabin-BoldItalic.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 700;
+  src: local("Cabin Bold Italic"), local("Cabin-BoldItalic"), url("fonts/Cabin-BoldItalic.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-weight: 700;
+  src: local("Cabin Bold Italic"), local("Cabin-BoldItalic"), url("fonts/Cabin-BoldItalic.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Cabin"), local("Cabin-Regular"), url("fonts/Cabin-Regular.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Cabin"), local("Cabin-Regular"), url("fonts/Cabin-Regular.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Cabin"), local("Cabin-Regular"), url("fonts/Cabin-Regular.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 500;
+  src: local("Cabin Medium"), local("Cabin-Medium"), url("fonts/Cabin-Medium.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 500;
+  src: local("Cabin Medium"), local("Cabin-Medium"), url("fonts/Cabin-Medium.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 500;
+  src: local("Cabin Medium"), local("Cabin-Medium"), url("fonts/Cabin-Medium.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 600;
+  src: local("Cabin SemiBold"), local("Cabin-SemiBold"), url("fonts/Cabin-SemiBold.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 600;
+  src: local("Cabin SemiBold"), local("Cabin-SemiBold"), url("fonts/Cabin-SemiBold.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 600;
+  src: local("Cabin SemiBold"), local("Cabin-SemiBold"), url("fonts/Cabin-SemiBold.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Cabin Bold"), local("Cabin-Bold"), url("fonts/Cabin-Bold.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Cabin Bold"), local("Cabin-Bold"), url("fonts/Cabin-Bold.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Cabin Bold"), local("Cabin-Bold"), url("fonts/Cabin-Bold.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Cabin Condensed"), local("CabinCondensed-Regular"), url("fonts/CabinCondensed-Regular.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Cabin Condensed"), local("CabinCondensed-Regular"), url("fonts/CabinCondensed-Regular.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Cabin Condensed"), local("CabinCondensed-Regular"), url("fonts/CabinCondensed-Regular.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 500;
+  src: local("Cabin Condensed Medium"), local("CabinCondensed-Medium"), url("fonts/CabinCondensed-Medium.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 500;
+  src: local("Cabin Condensed Medium"), local("CabinCondensed-Medium"), url("fonts/CabinCondensed-Medium.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 500;
+  src: local("Cabin Condensed Medium"), local("CabinCondensed-Medium"), url("fonts/CabinCondensed-Medium.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  src: local("Cabin Condensed SemiBold"), local("CabinCondensed-SemiBold"), url("fonts/CabinCondensed-SemiBold.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  src: local("Cabin Condensed SemiBold"), local("CabinCondensed-SemiBold"), url("fonts/CabinCondensed-SemiBold.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  src: local("Cabin Condensed SemiBold"), local("CabinCondensed-SemiBold"), url("fonts/CabinCondensed-SemiBold.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+/* vietnamese */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Cabin Condensed Bold"), local("CabinCondensed-Bold"), url("fonts/CabinCondensed-Bold.ttf") format("truetype");
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB; }
+/* latin-ext */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Cabin Condensed Bold"), local("CabinCondensed-Bold"), url("fonts/CabinCondensed-Bold.ttf") format("truetype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Cabin Condensed Bold"), local("CabinCondensed-Bold"), url("fonts/CabinCondensed-Bold.ttf") format("truetype");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
+clear:after, #overlay .messageBox .options:after, #sidebar .row:after, #sidebar .row .item:after, clear:before, #overlay .messageBox .options:before, #sidebar .row:before, #sidebar .row .item:before, .clear:after, .clear:before {
+  content: ' ';
+  display: block;
+  clear: both; }
+
+/** * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol,
+ul {
+  list-style: none; }
+
+blockquote,
+q {
+  quotes: none; }
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+* {
+  user-select: none; }
+
+.split-1-2, .split-2-4 {
+  width: 50%; }
+
+.split-1-3 {
+  width: 33.333%; }
+
+.split-2-3 {
+  width: 66.666%; }
+
+.split-1-4 {
+  width: 25%; }
+
+.split-3-4 {
+  width: 75%; }
+
+.split-1-5 {
+  width: 20%; }
+
+.split-2-5 {
+  width: 40%; }
+
+.split-3-5 {
+  width: 60%; }
+
+.split-4-5 {
+  width: 80%; }
+
+.split-1-2, .split-2-4, .split-1-3, .split-2-3, .split-1-4, .split-3-4, .split-1-5, .split-2-5, .split-3-5, .split-4-5 {
+  float: left;
+  box-sizing: border-box;
+  position: relative; }
+
+@media (max-width: 960px) {
+  .split-1-3, .split-2-3, .split-1-2, .split-1-5, .split-2-5, .split-3-5, .split-4-5 {
+    width: 100%;
+    padding: 0 !important; } }
+
+i {
+  font-style: italic; }
+
+b {
+  font-weight: bold; }
+
+condensed, #sidebar .row .item.logo, #sidebar .row .item.time {
+  font-family: 'Cabin Condensed', sans-serif;
+  font-family: "Segoe UI", sans-serif; }
+
+body, html {
+  font-family: 'Cabin', sans-serif;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 500;
+  line-height: 1;
+  font-size: 17px;
+  color: white;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  @media (max-width: 960px) {
+    body, html {
+      font-size: 15px; } }
+
+body {
+  font-family: "Cabin";
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #17242a 0%, #030506 100%); }
+  body.noFocus .GameGrid * {
+    animation: none !important; }
+
+html {
+  font-size: 1vw;
+  background: #030506; }
+  html.desktop {
+    font-size: 15px; }
+    html.desktop #title-bar {
+      display: block; }
+
+::-webkit-scrollbar {
+  width: 0.5rem; }
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 0.5rem; }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0.5rem;
+  border-radius: 0.5rem;
+  background: rgba(173, 184, 194, 0.2); }
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(127, 137, 146, 0); }
+
+#background {
+  background: #151719 url("../images/bg2.jpg") center center;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100rem;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  will-change: transform;
+  display: none; }
+
+#app {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border: none !important;
+  outline: none !important; }
+
+#title-bar {
+  -webkit-app-region: drag;
+  display: none;
+  padding: none;
+  margin: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%; }
+
+#title-bar-title {
+  padding: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 15px;
+  background: rgba(9, 14, 16, 0.8); }
+
+#title-bar-btns {
+  -webkit-app-region: no-drag;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  z-index: 1000;
+  margin: 0px; }
+  #title-bar-btns button {
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    background: rgba(1, 3, 5, 0);
+    border-radius: 50%;
+    width: 40px;
+    height: 28px;
+    padding: 0px;
+    line-height: 1;
+    text-align: center;
+    color: white;
+    cursor: pointer; }
+    #title-bar-btns button img {
+      height: 100%;
+      padding: 6px;
+      box-sizing: border-box; }
+    #title-bar-btns button.title-max-btn img {
+      padding: 8px; }
+
+main {
+  display: flex;
+  flex-direction: row;
+  padding-left: 23rem;
+  margin: auto; }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0.5rem);
+  z-index: 10;
+  background: linear-gradient(135deg, rgba(26, 42, 48, 0.95) 0%, rgba(2, 3, 3, 0.95) 100%);
+  display: block; }
+  #overlay:empty {
+    display: none; }
+  #overlay .overlayLayer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 100vh; }
+  #overlay .messageBox {
+    background: #2a5261;
+    padding: 2rem;
+    width: 30rem;
+    box-shadow: 0 0.75rem 2rem -1rem black; }
+    #overlay .messageBox .title {
+      font-size: 2rem;
+      font-weight: 300;
+      padding-bottom: 1rem; }
+    #overlay .messageBox p {
+      color: #a5c1cc; }
+    #overlay .messageBox .options {
+      margin-top: 0.5rem; }
+      #overlay .messageBox .options .item {
+        float: right;
+        padding: 0.75rem 1.5rem;
+        background: #1c3c48;
+        border-radius: 0.25rem;
+        margin-left: 0.5rem; }
+
+#sidebar {
+  position: fixed;
+  z-index: 6;
+  width: 23rem;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  padding: 5rem 0rem 5rem 4.5rem;
+  box-sizing: border-box; }
+  #sidebar .row {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0);
+    padding: 0 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.25rem; }
+    #sidebar .row.active, #sidebar .row[data-active="true"] {
+      background: rgba(255, 255, 255, 0.3);
+      background: linear-gradient(to right, #3d7b92 0%, #366e82 100%); }
+      #sidebar .row.active .item, #sidebar .row[data-active="true"] .item {
+        opacity: 1; }
+        #sidebar .row.active .item .count, #sidebar .row[data-active="true"] .item .count {
+          opacity: 1;
+          background: rgba(255, 255, 255, 0.3); }
+    #sidebar .row.bottom {
+      position: absolute;
+      bottom: 4rem;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 0 0rem 0 4.4rem; }
+      #sidebar .row.bottom .item {
+        opacity: 1;
+        text-align: center;
+        position: relative; }
+        #sidebar .row.bottom .item.active:before, #sidebar .row.bottom .item[data-active="true"]:before {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 4rem;
+          height: 4rem;
+          background: linear-gradient(to right, #3d7b92 0%, #366e82 100%);
+          transform: translate(-50%, -50%) scale(1);
+          border-radius: 50%;
+          z-index: 1; }
+@keyframes sbBottomFocus {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.88); }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); } }
+        #sidebar .row.bottom .item.active img, #sidebar .row.bottom .item[data-active="true"] img {
+          position: relative;
+          z-index: 2; }
+      #sidebar .row.bottom img {
+        padding: 0.2rem;
+        width: 1.8rem; }
+    #sidebar .row .item {
+      padding: 0.7rem 0;
+      font-size: 1.2rem;
+      opacity: 0.5;
+      font-size: 1.1rem;
+      flex: 1; }
+      #sidebar .row .item .title {
+        float: left;
+        font-weight: 400; }
+      #sidebar .row .item .count {
+        float: right;
+        opacity: 0.5;
+        text-align: center;
+        background: white;
+        color: black;
+        width: 2.5rem;
+        border-radius: 5rem;
+        padding: 0.25rem;
+        margin: -0.25rem 0;
+        background: rgba(255, 255, 255, 0);
+        color: white; }
+    #sidebar .row .item.logo {
+      padding: 0rem 0 1.4rem;
+      font-size: 1.9rem;
+      font-weight: 700;
+      opacity: 1; }
+    #sidebar .row .item.time {
+      padding: 0rem 0 1.4rem;
+      font-size: 1.9rem;
+      font-weight: 400;
+      text-align: right;
+      opacity: 1; }
+  #sidebar hr {
+    background: none;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    padding: 1rem 0; }
+    #sidebar hr:before {
+      content: ' ';
+      display: block;
+      width: 100%;
+      height: 0.1rem;
+      background: white;
+      opacity: 0.1; }
+
+#main {
+  box-sizing: border-box;
+  padding: 0 5rem;
+  position: relative;
+  z-index: 5;
+  max-width: 95rem; }
+
+#base {
+  margin: auto; }
+
+.logo-top img {
+  width: 8rem;
+  height: auto;
+  display: block;
+  margin: 6rem auto; }
+
+.GameGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 4px;
+  margin-top: -8px; }
+  .GameGrid[data-width="2"] .GameTile {
+    width: 50%; }
+  .GameGrid[data-width="3"] .GameTile {
+    width: 33.333%; }
+  .GameGrid[data-width="4"] .GameTile {
+    width: 25%; }
+  .GameGrid[data-width="5"] .GameTile {
+    width: 20%; }
+  .GameGrid[data-width="6"] .GameTile {
+    width: 16.666666%; }
+  .GameGrid .GameGridTitle {
+    width: 100%;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    font-size: 1.9rem;
+    font-weight: 200;
+    margin: 5rem 0 1rem; }
+  .GameGrid .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 4px;
+    margin-top: -8px; }
+    .GameGrid .row:before {
+      position: absolute;
+      top: 0;
+      right: 100%;
+      padding: 0 25px;
+      font-size: 65px;
+      opacity: 0.25; }
+  .GameGrid .GameTile {
+    display: block;
+    padding: 0.4rem;
+    width: 100%;
+    box-sizing: border-box;
+    perspective: 100rem;
+    transform-style: preserve-3d;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s, background 0.2s, opacity 0.2s;
+    transform: scale(1);
+    will-change: box-shadow, transform, background, opacity;
+    opacity: 0.65;
+    user-select: none;
+    cursor: pointer;
+    filter: grayscale(0.35); }
+    .GameGrid .GameTile[data-active="true"] {
+      z-index: 3;
+      opacity: 1;
+      filter: grayscale(0); }
+      .GameGrid .GameTile[data-active="true"] .GameTileInner {
+        animation: GameTileInnerGlowa 2s infinite;
+        box-shadow: 0 0 0 0.2rem #63A5BE;
+        animation: GameTileBorderGlow 2s infinite; }
+@keyframes GameTileInnerGlow {
+  0% {
+    box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; }
+  50% {
+    box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #9fe4ff; }
+  100% {
+    box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; } }
+@keyframes GameTileBorderGlow {
+  0% {
+    box-shadow: 0 0 0 0.2rem #63A5BE; }
+  50% {
+    box-shadow: 0 0 0 0.2rem #96e1ff; }
+  100% {
+    box-shadow: 0 0 0 0.2rem #63A5BE; } }
+        .GameGrid .GameTile[data-active="true"] .GameTileInner .title {
+          opacity: 1;
+          transform: translateY(0%);
+          animation: GameTileTitleGlow 2s infinite; }
+@keyframes GameTileTitleGlow {
+  0% {
+    background: rgba(99, 165, 190, 0.67); }
+  50% {
+    background: rgba(130, 201, 229, 0.8); }
+  100% {
+    background: rgba(99, 165, 190, 0.67); } }
+    .GameGrid .GameTile .GameTileInner {
+      position: relative;
+      overflow: hidden;
+      border: 0.2rem solid transparent;
+      border-radius: 0.25rem; }
+    .GameGrid .GameTile .TileBase {
+      width: 100%;
+      height: auto;
+      display: block; }
+    .GameGrid .GameTile .title {
+      font-size: 1.2rem;
+      padding: 0.5vw 0;
+      position: absolute;
+      bottom: 0;
+      opacity: 0;
+      background: rgba(29, 191, 254, 0.67);
+      color: white;
+      width: 100%;
+      font-weight: 900;
+      text-align: center;
+      font-family: 'Cabin Condensed';
+      text-shadow: 0 0.05rem 0.125rem #2a5261;
+      transform: translateY(100%);
+      transition: transform 0.3s, opacity 0.3s; }
+    .GameGrid .GameTile .cover {
+      width: 100%;
+      height: auto;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      will-change: opacity;
+      animation: GameTileCoverIn 0.4s !important; }
+      .GameGrid .GameTile .cover[src="./images/header-blank.png"] {
+        display: none; }
+@keyframes GameTileCoverIn {
+  0% {
+    opacity: 0; }
+  30% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+#splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(21, 23, 25, 0.9);
+  animation: splashIn 0.5s; }
+@keyframes splashIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0; }
+  100% {
+    transform: scale(1);
+    opacity: 1; } }
+  #splash .splash-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  #splash img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: auto;
+    padding-bottom: 20px; }
+  #splash .statusText {
+    color: white;
+    text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

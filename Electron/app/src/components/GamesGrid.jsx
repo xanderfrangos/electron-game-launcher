@@ -54,7 +54,10 @@ export default class GamesGrid extends Component {
         */
         
         const gameTileRender = (game, index) => {
-            return <GameTile ts={game.LastUpdate} ID={game.ID} active={game.Active} key={game.ID} game={game.meta} item={game} coverDelay={index * 50}></GameTile>  
+            const delayPerIdx = 50
+            const maxItems = 30
+            const delay = (index < maxItems ? index * delayPerIdx : maxItems * delayPerIdx);
+            return <GameTile ts={game.LastUpdate} ID={game.ID} active={game.Active} key={game.ID} game={game.meta} item={game} coverDelay={delay}></GameTile>  
         }
         
         return ( <div ref="Item" className="GameGrid" data-width={this.props.list.Width}><div className="GameGridTitle">{this.props.list.Title}</div>{ this.props.list.Items.map( gameTileRender ) }</div> )

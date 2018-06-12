@@ -56,7 +56,7 @@ app.on('ready', () => {
     splashWindow = new BrowserWindow( {width: 480, height: 300, show:false , frame: false, transparent:true, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} } )
 
 
-    mainWindow = new BrowserWindow({width: 1280, height: 720, show:false, frame: false, transparent:true, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} })
+    mainWindow = new BrowserWindow({width: 1280, height: 720, show:false, frame: false, transparent:false, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} })
     
 
     ipcMain.on('MainThreadMessage', (event, arg) => {MainThreadMessage(arg)})
@@ -120,6 +120,7 @@ splashScreenReady = () => {
 
     showMainScreen()
     mainWindow.webContents.openDevTools()
+    setTimeout(() => {mainWindow.focus()}, 750);
 }
 
 
@@ -141,6 +142,7 @@ showMainScreen = () => {
         mainWindow.webContents.send("appConfig", {"appDataPath": appDataPath, "config": config, "games": games})
         mainWindow.webContents.send("appStart", appFilesPath);
         mainWindow.show()
+        
     });
 
     ipcMain.on('sidebarExit', () => {
@@ -150,7 +152,14 @@ showMainScreen = () => {
 
     ipcMain.on('sidebarFullscreen', () => {
         console.log("sidebarFullscreen")
-        mainWindow.setFullScreen(true)
+        if(mainWindow.isFullScreen()) {
+            mainWindow.setFullScreen(false)
+            mainWindow.webContents.send("fullscreenMode", false)
+        } else {
+            mainWindow.setFullScreen(true)
+            mainWindow.webContents.send("fullscreenMode", true)
+        }
+        
     });
     
     

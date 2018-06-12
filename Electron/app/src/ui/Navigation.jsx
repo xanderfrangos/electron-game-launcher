@@ -11,6 +11,7 @@ export default class UINavigation {
         this.FollowInput = true;
         this.Lists = {};
         this.Items = {};
+        this.LayerIDs = {};
         this.Refs = {};
         this.Components = {};
         this.Counters = {
@@ -43,11 +44,11 @@ export default class UINavigation {
     }
 
     CacheLayer(layer) {
-        this.LayerCache[this.Counters.LayerCache] = layer;
-        var LayerID = this.Counters.LayerCache;
-        layer.ID = LayerID;
-        this.Counters.LayerCache++;
-        return LayerID;
+        this.LayerCache[layer.ID] = layer;
+        //var LayerID = this.Counters.LayerCache;
+        //layer.ID = LayerID;
+        //this.Counters.LayerCache++;
+        return layer.ID;
     }
 
     DestroyLayer(layerID) {

@@ -6,7 +6,7 @@ export default class UIItem {
         this.BackAction = backAction;
         this.FocusAction = focusAction;
         this.meta = {};
-        this.ID = 0;
+        this.ID = -1;
         this.LastUpdate = Date.now();
         if(global.UI) {
             this.ID = global.UI.Counters.Refs;
