@@ -56,18 +56,8 @@ export default class UINavigation {
     }
 
     PreviousLayer() {
-
         this.Layers.splice(-1,1);
         this.UpdateActiveObject();
-        /*
-        var CurrentLayerID = this.Layers[this.Layers.length - 1];
-        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = false;
-        this
-            .Layers
-            .splice(this.Layers.length - 1, 1);
-        this.LayerCache[this.Layers[this.Layers.length - 1]].Active = true;
-        this.DestroyLayer(CurrentLayerID);
-        */
     }
 
     NewLayer(layerID) {
@@ -111,8 +101,6 @@ export default class UINavigation {
             List: this.Active.List.ID,
             Item: this.Active.Item.ID
         }
-
-        console.log("UpdateActiveObject", Last)
 
         this.Active.Layer.Active = false;
         this.Active.List.Active = false;

@@ -5,10 +5,9 @@ export default class UILayer {
         this.Title = title;
         this.Lists = lists;
         this.LastUpdate = Date.now();
+        this.defaultBackAction = () => {}
         this.UpdateTS = () => {
-            console.log("TS Before", this.LastUpdate)
             this.LastUpdate = Date.now();
-            console.log("TS After", this.LastUpdate)
         }
 
         // If only a single list object is provided instead of array, conver to array
@@ -22,6 +21,11 @@ export default class UILayer {
             this.ID = global.UI.Counters.Refs;
             global.UI.Counters.Refs++;
             global.UI.LayerIDs[this.ID] = this;
+            global.UI.LayerCache[this.ID] = this;
+        }
+
+        for(var i = 0; i < this.Lists.length; i++) {
+            this.Lists[i].ParentLayer = this
         }
     }
 

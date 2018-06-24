@@ -28,10 +28,7 @@ const addListToNav = (layerID) => {
 
 
         newItem.FocusAction = () => {
-            //global.AppJS.setState({"UILayer": []})
             global.AppJS.setState({"UILayer": list})
-            //global.AppJS.forceRefresh();
-            //global.AppJS.forceUpdate();
         }
         newItem.meta = list;
         navItems.push(newItem);
@@ -57,6 +54,10 @@ ipcRenderer.on('appStart', (event, args) => {
 
     let db = gamesDB.steam;
     let dbArr = Object.values(gamesDB.steam)
+
+    const showQuit = () => {
+        global.AppJS.setState({"showQuit": true})
+    }
 
     console.log(dbArr)
 
@@ -146,24 +147,25 @@ ipcRenderer.on('appStart', (event, args) => {
     addListToNav(list2ID);
     
 
-    const { ipcRenderer, remote, webview } = require('electron');
+    const { ipcRenderer } = require('electron');
 
     const addItem = new UIItem();
     const fullscreenItem = new UIItem(() => {ipcRenderer.send('sidebarFullscreen', 1);});
     const settingsItem = new UIItem();
-    const exitItem = new UIItem(() => {
-        console.log("exitItem");
-        global.AppJS.setState({"showQuit": true})
-        global.AppJS.forceRefresh()
-        //ipcRenderer.send('sidebarExit', 1);
-    });
+    const exitItem = new UIItem(showQuit);
+
+    addItem.meta.src = "images/icons/add.svg"
+    fullscreenItem.meta.src = "images/icons/fullscreen.svg"
+    settingsItem.meta.src = "images/icons/settings.svg"
+    exitItem.meta.src = "images/icons/power.svg"
 
     const navBottomList = new UIList([addItem, fullscreenItem, settingsItem, exitItem], "Bottom Options", 4);
 
 
     let navList = new UIList(navItems, "Game Lists", 1);
-    let navID = global.UI.NewCacheLayer([navList, navBottomList], "Navigation");
-    //global.UI.NewLayer(navID);
+    let nav = new UILayer([navList, navBottomList], "Navigation");
+    nav.defaultBackAction = showQuit
+    let navID = nav.ID;
     global.UI.ChangeLayer(navID)
 
     render(

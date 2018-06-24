@@ -1,7 +1,5 @@
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react'
 import GamesGrid from './components/GamesGrid.jsx'
-import SidebarMainItem from './components/SidebarMainItem.jsx'
-import SidebarBottomItem from './components/SidebarBottomItem.jsx'
 //import HomePage from './pages/Home.jsx'
 import GameListPage from './pages/GameList.jsx'
 import UILayer from './ui/Layer.jsx'
@@ -10,8 +8,11 @@ import UIItem from './ui/Item.jsx'
 import UINavigation from './ui/Navigation.jsx'
 import UIInput from './ui/Input.jsx'
 import UISounds from './ui/Sounds.jsx'
+import DialogBox from './components/DialogBox.jsx'
+import Item from './components/Item.jsx'
 
 let fs = require('fs');
+
 /*
 let db = JSON.parse(fs.readFileSync(appDataPath + 'games.steam.json', 'utf8'));
 
@@ -25,21 +26,21 @@ let sortedApps = db.sort(function(a, b) {
 export default class App extends PureComponent {
 
     constructor(props) {
-    super(props);
-    
-    //global.Sounds.Startup.play();
+        super(props);
 
-    global.AppJS = this;
-    this.nada = false;
+        //global.Sounds.Startup.play();
 
-    this.state = { "UILayer":this.props.UILayer, "showQuit":false };
-        console.log("UILayer", this.props)
+        global.AppJS = this;
+        this.nada = false;
+
+        this.state = {
+            "UILayer": this.props.UILayer,
+            "showQuit": false
+        };
+
+    }
 
 
-
-  }
-
-  
 
     forceRefresh() {
         this.nada = true;
@@ -48,79 +49,104 @@ export default class App extends PureComponent {
         this.forceUpdate();
     }
 
-  
+    showQuit() {
+
+
+        if (this.state.showQuit) {
+
+            const quitBack = () => {global.UI.PreviousLayer(); this.setState({"showQuit":false})}
+
+            let itemYes = new UIItem(() => {
+                // Quit App
+                const { ipcRenderer } = require('electron');
+                ipcRenderer.send('sidebarExit', 1);
+            })
+            let itemNo = new UIItem(quitBack)
+
+            itemYes.meta.label = "Yes"
+            itemNo.meta.label = "No"
+
+            
+
+            itemYes.BackAction = quitBack
+            itemNo.BackAction = quitBack
+
+            let quitLayer = new UILayer(new UIList([itemYes, itemNo], "Quit Den", 2), "Quit Den")
+            global.UI.NewLayer(quitLayer.ID)
+
+
+            return (<DialogBox layer={ quitLayer }
+                      title="Close Den"
+                      options={ quitLayer.Lists[0].Items }>
+                      <p>Would you like to close Den?</p>
+                      </DialogBox>)
+        }
+    }
+
+
 
     render() {
 
-        if(this.nada)
+        if (this.nada)
             return null
 
         global.UI.MainView = this.refs.MainView;
-        
+
         return (
             <main>
-                <div id="overlay">
-                    {
-                        () => {
-                            if(this.state.showQuit) {
-                                return(<div class="overlayLayer center">
-                                <div class="messageBox">
-                                    <div class="title">Close Den</div>
-                                    <p>Would you like to exit Den?</p>
-                                    <div class="options">
-                                        <div class="item">Yes</div>
-                                        <div class="item">No</div>
-                                    </div>
-                                </div>
-                            </div>)
-                            }
-                        }
-                    }
-                </div>
-                <div id="base">
-                
-                    <div data-active={this.props.Sidebar[0].Active} id="sidebar">
-                        <div className="sidebarInner">
-                            <div className="view">
-                                <div className="row">
-                                    <div className="item logo">DEN</div>
-                                    <div id="clock" className="item time">{global.getCurrentTime()}</div>
-                                </div> 
-
-                                { this.props.Sidebar[0].Items.map( (item, itemIndex) => {
-        let itemInfo = item 
-
-        let count = 0;
-        for(let list of item.meta.Lists) {
-            count += list.Items.length;
-        }
-
-        console.log("renderSidebarItem", this.props.Sidebar[0], itemIndex, item)
-        return (
-                <SidebarMainItem key={item.ID} title={item.meta.Title} active={this.props.Sidebar[0].ActiveIndex == itemIndex} count={count} item={item}></SidebarMainItem>
-        )
-    }  ) }
-                                
-                                <div className="row bottom">
-
-                                    <SidebarBottomItem active={this.props.Sidebar[1].Items[0].Active} item={this.props.Sidebar[1].Items[0]} key={11} src="images/icons/add.svg" active="true"></SidebarBottomItem>
-
-                                    <SidebarBottomItem active={this.props.Sidebar[1].Items[1].Active} item={this.props.Sidebar[1].Items[1]} key={12} src="images/icons/fullscreen.svg" active="true"></SidebarBottomItem>
-
-                                    <SidebarBottomItem active={this.props.Sidebar[1].Items[2].Active} item={this.props.Sidebar[1].Items[2]} key={13} src="images/icons/settings.svg" active="true"></SidebarBottomItem>
-
-                                    <SidebarBottomItem active={this.props.Sidebar[1].Items[3].Active} item={this.props.Sidebar[1].Items[3]} key={14} src="images/icons/power.svg" active="true"></SidebarBottomItem>
-                                </div>
-                            </div>
+              <div id="overlay">
+                { this.showQuit() }
+              </div>
+              <div id="base">
+                <div data-active={ this.props.Sidebar[0].Active } id="sidebar">
+                  <div className="sidebarInner">
+                    <div className="view">
+                      <div className="row">
+                        <div className="item logo">DEN</div>
+                        <div id="clock" className="item time">
+                          { global.getCurrentTime() }
                         </div>
+                      </div>
+                      { this.props.Sidebar[0].Items.map((item, itemIndex) => {
+                            let itemInfo = item
+                        
+                            let count = 0;
+                            for (let list of item.meta.Lists) {
+                                count += list.Items.length;
+                            }
+
+                                    return (
+                                        <Item key={item.ID}
+                                            active={this.props.Sidebar[0].ActiveIndex == itemIndex}
+                                            item={item}
+                                            className="row">
+                                            <div className="item">
+                                                <div className="title"><span>{item.meta.Title}</span></div>
+                                                <div className="count"><span>{count}</span></div>
+                                            </div>
+                                        </Item>
+                                    )
+                        }) }
+                      <div className="row bottom">
+                      {this.props.Sidebar[1].Items.map((item) => {
+                          return(
+                              <Item active={ item.Active } key={ item.ID } item={item}>
+                                  <img src={item.meta.src} />
+                              </Item>
+                          )
+                      })}
+
+                      </div>
                     </div>
-                    <div id="main" ref="MainView">
-                    <GameListPage layerID={this.state.UILayer.ID} activeIndex={this.state.UILayer.ActiveIndex} active={this.state.UILayer.Active} UILayer={this.state.UILayer} />
-                    </div>
-                
+                  </div>
                 </div>
-                
-                
+                <div id="main" ref="MainView">
+                  <GameListPage layerID={ this.state.UILayer.ID }
+                    activeIndex={ this.state.UILayer.ActiveIndex }
+                    active={ this.state.UILayer.Active }
+                    UILayer={ this.state.UILayer } />
+                </div>
+              </div>
             </main>
         )
     }
@@ -133,63 +159,3 @@ export default class App extends PureComponent {
 
 }
 
-
-// 
-
-/*
-
-
-                                <div className="row active">
-                                    <div className="item">
-                                        <div className="title"><span>Favorites</span></div>
-                                        <div className="count"><span>5</span></div>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="item">
-                                        <div className="title">Recent Games</div>
-                                        <div className="count">3</div>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="item">
-                                        <div className="title">All Games</div>
-                                        <div className="count">107</div>
-                                    </div>
-                                </div>
-
-                                <hr />
-
-                                <div className="row">
-                                    <div className="item">
-                                        <div className="title">Co-op</div>
-                                        <div className="count">10</div>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="item">
-                                        <div className="title">Racing</div>
-                                        <div className="count">7</div>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="item">
-                                        <div className="title">Shooter</div>
-                                        <div className="count">22</div>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="item">
-                                        <div className="title">Haven't Started</div>
-                                        <div className="count">32</div>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="item">
-                                        <div className="title">Need to finish</div>
-                                        <div className="count">64</div>
-                                    </div>
-                                </div>
-
-
-*/

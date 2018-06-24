@@ -250,7 +250,7 @@
   font-weight: 700;
   src: local("Cabin Condensed Bold"), local("CabinCondensed-Bold"), url("fonts/CabinCondensed-Bold.ttf") format("truetype");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
-clear:after, #overlay .messageBox .options:after, #sidebar .row:after, #sidebar .row .item:after, clear:before, #overlay .messageBox .options:before, #sidebar .row:before, #sidebar .row .item:before, .clear:after, .clear:before {
+clear:after, #overlay .messageBox:after, #overlay .messageBox .options:after, #sidebar .row:after, #sidebar .row .item:after, clear:before, #overlay .messageBox:before, #overlay .messageBox .options:before, #sidebar .row:before, #sidebar .row .item:before, .clear:after, .clear:before {
   content: ' ';
   display: block;
   clear: both; }
@@ -580,13 +580,16 @@ main {
     #overlay .messageBox p {
       color: #a5c1cc; }
     #overlay .messageBox .options {
-      margin-top: 0.5rem; }
+      margin-top: 0.5rem;
+      float: right; }
       #overlay .messageBox .options .item {
-        float: right;
+        float: left;
         padding: 0.75rem 1.5rem;
         background: #1c3c48;
         border-radius: 0.25rem;
         margin-left: 0.5rem; }
+        #overlay .messageBox .options .item[data-active="true"] {
+          background: black; }
 
 #sidebar {
   position: fixed;
