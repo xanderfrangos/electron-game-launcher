@@ -20,7 +20,8 @@ const addListToNav = (layerID) => {
     const newItem = new UIItem( () => {
         console.log("nav click", list)
         global.UI.NewLayer(layerID)
-        global.UI.SetCurrentListIndex(0);
+        global.UI.SetCurrentListIndex(0)
+        global.UI.MoveFocus("none")
         global.AppJS.setState({"UILayer": list})
         //global.AppJS.forceRefresh();
     } );

@@ -1,0 +1,184 @@
+
+.GameGrid {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 4px;
+    margin-top:-8px;
+
+    &[data-width="2"] .GameTile {
+        width: 50%;
+    }
+    &[data-width="3"] .GameTile {
+        width: 33.333%;
+    }
+    &[data-width="4"] .GameTile {
+        width: 25%;
+    }
+    &[data-width="5"] .GameTile {
+        width: 20%;
+    }
+    &[data-width="6"] .GameTile {
+        width: 16.666666%;
+    }
+
+    .GameGridTitle {
+        width: 100%;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+        font-size: 1.9rem;
+        font-weight: 200;
+        margin: 5rem 0 1rem;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 4px;
+        margin-top:-8px;
+        //position: relative;
+
+        
+        &:before {
+            //content:attr(data-startLetter);
+            position: absolute;
+            top:0;
+            right: 100%;
+            padding: 0 25px;
+            font-size: 65px;
+            opacity: 0.25;
+        }
+    }
+    .GameTile {
+        display: block;
+        //flex: 1 360px;
+        //flex-grow: 2;
+        padding: 0.4rem;
+        width: 100%;
+        box-sizing: border-box;
+
+        perspective: 100rem;
+        transform-style: preserve-3d;
+        position: relative;
+        //box-shadow: 0 10px 43px -13px rgba(0,0,0,0);
+        transition: box-shadow 0.2s, transform 0.2s, background 0.2s, opacity 0.2s;
+        transform: scale(1);
+        will-change: box-shadow, transform, background, opacity;
+        //border-radius: 5px;
+        //z-index: 1;
+        opacity: 0.65;
+        user-select: none;
+        cursor: pointer;
+        filter: grayscale(0.35);
+        
+
+        &[data-active="true"] {
+            z-index: 3;
+            //transform: scale(1.15);
+            //background: white;
+            //box-shadow: 0 10px 43px -13px black;
+            opacity: 1;
+            filter: grayscale(0);
+
+
+            .GameTileInner {
+                //box-shadow: 0 0 0 0.4rem rgba(white,1), 0 0 11rem -2rem rgba(white,1);
+                //box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe;
+                //animation: GameTileInnerGlowa 2s infinite;
+                @keyframes GameTileInnerGlow {
+                    0% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; }
+                    50% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #9fe4ff; }
+                    100% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; }
+                }
+                
+                //box-shadow: 0 0 0 0.2rem #63A5BE;
+                //animation: GameTileBorderGlow 2s infinite;
+                @keyframes GameTileBorderGlow {
+                    0% { box-shadow: 0 0 0 0.2rem #63A5BE; }
+                    50% { box-shadow: 0 0 0 0.2rem #96e1ff; }
+                    100% { box-shadow: 0 0 0 0.2rem #63A5BE; }
+                }
+                
+                
+                .title {
+                    opacity: 1;
+                    transform: translateY(0%);
+                    //animation: GameTileTitleGlow 2s infinite;
+                    @keyframes GameTileTitleGlow {
+                        0% { background: rgba(#63A5BE, 0.67); }
+                        50% { background: rgba(#82c9e5, 0.8); }
+                        100% { background: rgba(#63A5BE, 0.67); }
+                    }
+                }
+            }
+        }
+        
+        &:hover {
+            //z-index: 3;
+            
+            a {
+                //transform: translate3D(0,0,200px);
+            }
+        }
+        
+        .GameTileInner {
+            position: relative;
+            overflow: hidden;
+            border: 0.2rem solid transparent;
+            border-radius: 0.25rem;
+        }
+
+        .TileBase {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            padding: 0.5vw 0;
+            position: absolute;
+            bottom: 0;
+            opacity: 0;
+            background: rgba(29, 191, 254, 0.67);
+            color: white;
+            width: 100%;
+            font-weight: 900;
+            //box-shadow: 0 0 0 1px rgba(29, 191, 254, 0.67);
+            text-align: center;
+            font-family: 'Cabin Condensed';
+            //font-weight: 500;
+            text-shadow: 0 0.05rem 0.125rem rgb(42, 82, 97);
+            transform: translateY(100%);
+            transition: transform 0.3s, opacity 0.3s;
+            //backdrop-filter: blur(0.2rem);
+        }
+        
+
+        .cover {
+            width:100%;
+            height: auto;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            will-change: opacity;
+            //border-radius: 5px;
+            
+            &[src="./images/header-blank.png"] {
+                display: none;
+            }
+            
+            animation: GameTileCoverIn 0.4s !important;
+            @keyframes GameTileCoverIn {
+                0% { opacity: 0; }
+                30% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+        }
+
+    }
+}

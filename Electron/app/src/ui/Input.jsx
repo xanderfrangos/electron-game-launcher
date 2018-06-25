@@ -95,19 +95,29 @@ export default class UIInput {
             
             // Play bounce animation
             let elem = global.UI.Refs[global.UI.Active.Item.ID]
+            let cursors = elem.getElementsByTagName("cursor")
+            let cursor = false;
+            if(cursors.length > 0) {
+                cursor = cursors[0]
+            }
+
+            let animElem = (cursor === false ? elem : cursor)
             var tl = new TimelineLite();
             let dirBase = window.innerWidth / 1000;
-            let dir1 = 8 * dirBase;
-            let dir2 = -3 * dirBase;
+            let dir1 = 9 * dirBase;
+            let dir2 = -4 * dirBase;
+            let time1 = 0.04;
+            let time2 = 0.07;
+            let time3 = 0.06;
 
             if(direction == "up") {
-                tl.to(elem, 0.07, {top: dir1 * -1}).to(elem, 0.07, {top: dir2 * -1}).to(elem, 0.07, {top:0});
+                tl.to(animElem, time1, {top: dir1 * -1}).to(animElem, time2, {top: dir2 * -1}).to(animElem, time3, {top:0});
             } else if(direction == "down") {
-                tl.to(elem, 0.07, {top: dir1}).to(elem, 0.07, {top: dir2}).to(elem, 0.07, {top:0});
+                tl.to(animElem, time1, {top: dir1}).to(animElem, time2, {top: dir2}).to(animElem, time3, {top:0});
             } else if(direction == "left") {
-                tl.to(elem, 0.07, {left: dir1 * -1}).to(elem, 0.07, {left: dir2 * -1}).to(elem, 0.07, {left:0});
+                tl.to(animElem, time1, {left: dir1 * -1}).to(animElem, time2, {left: dir2 * -1}).to(animElem, time3, {left:0});
             } else if(direction == "right") {
-                tl.to(elem, 0.07, {left: dir1}).to(elem, 0.07, {left: dir2}).to(elem, 0.07, {left:0});
+                tl.to(animElem, time1, {left: dir1}).to(animElem, time2, {left: dir2}).to(animElem, time3, {left:0});
             }
             
         }
@@ -246,7 +256,8 @@ export default class UIInput {
     RunGame(game) {
         const { exec } = require('child_process');
         //let tst = exec('start steam://rungameid/' + game.meta.id);
-        console.log('start steam://rungameid/' + game.meta.id);
+        //console.log('start steam://rungameid/' + game.meta.id);
+        global.AppJS.triggerLaunchScreen(game);
         //window.open("steam://rungameid/" + game.meta.id, 'sharer', 'toolbar=0,status=0,width=548,height=325');
     }
 

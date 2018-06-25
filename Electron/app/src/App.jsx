@@ -50,8 +50,6 @@ export default class App extends PureComponent {
     }
 
     showQuit() {
-
-
         if (this.state.showQuit) {
 
             const quitBack = () => {global.UI.PreviousLayer(); this.setState({"showQuit":false})}
@@ -66,19 +64,49 @@ export default class App extends PureComponent {
             itemYes.meta.label = "Yes"
             itemNo.meta.label = "No"
 
-            
-
             itemYes.BackAction = quitBack
             itemNo.BackAction = quitBack
 
             let quitLayer = new UILayer(new UIList([itemYes, itemNo], "Quit Den", 2), "Quit Den")
             global.UI.NewLayer(quitLayer.ID)
 
-
             return (<DialogBox layer={ quitLayer }
                       title="Close Den"
                       options={ quitLayer.Lists[0].Items }>
                       <p>Would you like to close Den?</p>
+                      </DialogBox>)
+        }
+    }
+
+    triggerLaunchScreen(game) {
+        this.setState({"showLaunchGame":true, "launchGame": game})
+    }
+
+    showLaunchGame() {
+        if (this.state.showLaunchGame) {
+
+            const launchBack = () => {global.UI.PreviousLayer(); this.setState({"showLaunchGame":false})}
+
+            let itemYes = new UIItem(() => {
+                // Launch Game
+                const { exec } = require('child_process');
+                //let launch = exec(path)
+                let launch = exec('start steam://rungameid/' + this.state.launchGame.meta.id);
+
+            })
+            let itemNo = new UIItem(launchBack)
+
+            itemYes.meta.label = "Yes"
+            itemNo.meta.label = "No"
+
+            let launchLayer = new UILayer(new UIList([itemYes, itemNo], "Launch Game", 2), "Launch Game")
+            launchLayer.defaultBackAction = launchBack
+            global.UI.NewLayer(launchLayer.ID)
+
+            return (<DialogBox layer={ launchLayer }
+                      title={this.state.launchGame.meta.name}
+                      options={ launchLayer.Lists[0].Items }>
+                      <p>Would you like to start {this.state.launchGame.meta.name}?</p>
                       </DialogBox>)
         }
     }
@@ -96,6 +124,7 @@ export default class App extends PureComponent {
             <main>
               <div id="overlay">
                 { this.showQuit() }
+                { this.showLaunchGame() }
               </div>
               <div id="base">
                 <div data-active={ this.props.Sidebar[0].Active } id="sidebar">

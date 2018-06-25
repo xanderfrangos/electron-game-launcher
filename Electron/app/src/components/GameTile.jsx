@@ -30,7 +30,8 @@ export default class GameTile extends Component {
         }     
 
         return ( 
-        <div ref="Item" data-active={this.props.item.Active} className="GameTile">
+        <div ref="Item" data-active={this.props.item.Active} className="GameTile cursorable">
+        <cursor></cursor>
             <div className="GameTileInner">
                 <img className="TileBase" src="./images/header-blank.png" />
                 <img className="cover" src={this.state.coverPath || "./images/header-blank.png"} />

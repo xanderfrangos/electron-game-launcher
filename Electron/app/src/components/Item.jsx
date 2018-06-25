@@ -22,10 +22,9 @@ export default class Item extends Component {
             global.UI.Active.ItemRef = this.refs.Item;
         }
 
-        const className = "item " + (this.props.className || "");
-        console.log("Item is Active? " + this.props.active + this.props.item.ID)
+        const className = "cursorable item " + (this.props.className || "");
         return(
-            <div ref="Item" class={className} data-active={this.props.active}>{this.props.children}</div>
+            <div ref="Item" class={className} data-active={this.props.active}><cursor></cursor>{this.props.children}</div>
         )
 
     }

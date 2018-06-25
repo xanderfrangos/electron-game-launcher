@@ -33,7 +33,7 @@ export default class DialogBox extends Component {
         <div class="overlayLayer center">
             <div class="messageBox">
                 <div class="title">{this.props.title}</div>
-                {this.props.children}
+                <div class="description">{this.props.children}</div>
                 <div class="options">
                     {this.props.options.map((item, idx) => {
                         return(
@@ -48,7 +48,6 @@ export default class DialogBox extends Component {
     }
 
     componentDidMount() {
-        
         global.UI.Components[this.props.layer.ID] = this;
     }
 }

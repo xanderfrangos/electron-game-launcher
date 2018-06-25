@@ -178,69 +178,6 @@ html {
 
 
 
-#title-bar {
-    -webkit-app-region: drag;
-    //background: linear-gradient(to bottom, rgba(#151719,0.85) 0%,rgba(#151719,0) 100%);
-    //background: #111926;
-    display: none;
-    padding: none;
-    margin: 0px; 
-    position: fixed;
-    top:0;
-    left:0;
-    z-index: 1000;
-    width: 100%;
-
-}
-
-#title-bar-title {
- padding: 10px;   
-    font-size: 15px;
-    text-transform: uppercase;
-    font-weight: 700;
-    //backdrop-filter: blur(1rem);
-    //background: rgba(49, 49, 49, 0.84);
-    //background: rgb(49, 49, 49);
-    padding: 15px;
-    background: rgba(9, 14, 16, 0.8);
-}
-
-
-
-
-
-#title-bar-btns {
-    -webkit-app-region: no-drag;
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    z-index: 1000;
-    margin: 0px;
-    button {
-        -webkit-appearance: none;
-        outline:none;
-        border:none;
-        background: rgba(1,3,5,0.0);
-        border-radius: 50%;
-        width: 40px;
-        height: 28px;
-        padding: 0px;
-        line-height: 1;
-        text-align: center;
-        color:white;
-        cursor: pointer;
-        img {
-            height: 100%;
-            padding: 6px;
-            box-sizing: border-box;
-            
-        }
-        &.title-max-btn img {
-            padding: 8px;
-        }
-    }
-}
-
 main {
     display: flex;
     flex-direction: row;
@@ -249,215 +186,7 @@ main {
     margin: auto;
 }
 
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(0.5rem);
-    z-index: 10;
-    background: linear-gradient(135deg, rgba(26,42,48,0.95) 0%,rgba(2,3,3,0.95) 100%);
-    display: block;
-    &:empty {
-        display: none;
-    }
 
-    .overlayLayer {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-height: 100vh;
-        &.center {
-
-        }
-    }
-
-    .messageBox {
-        @extend clear;
-        background: #2a5261;
-    padding: 2rem;
-    width: 30rem;
-    box-shadow: 0 0.75rem 2rem -1rem black;
-
-        .title {
-            font-size: 2rem;
-            font-weight: 300;
-            padding-bottom: 1rem;
-        }
-        p {
-            color: #a5c1cc;
-        }
-        .options {
-            @extend clear;
-            margin-top: 0.5rem;
-            float: right;
-            .item {
-                float: left;
-                padding: 0.75rem 1.5rem;
-                background: #1c3c48;
-                border-radius: 0.25rem;
-                margin-left: 0.5rem;
-                &[data-active="true"] {
-                    background: black;
-                }
-            }
-        }
-    }
-
-}
-
-#sidebar {
-    position: fixed;
-    z-index: 6;
-    width: 23rem;
-    min-height: 100vh;
-    top: 0;
-    left: 0;
-    padding: 5rem 0rem 5rem 4.5rem;
-    box-sizing: border-box;
-    
-    .sidebarInner {
-
-    }
-    
-    .view {
-
-    }
-
-    
-
-    .row {
-        @extend clear;
-        width: 100%;
-        box-sizing: border-box;
-        background: rgba(white, 0.0);
-        padding: 0 1.4rem;
-        display: flex;
-        justify-content: space-between;
-        border-radius: 0.25rem;
-        
-        &.active, &[data-active="true"] {
-            background: rgba(white, 0.3);
-            background: linear-gradient(to right, rgba(61,123,146,1) 0%,rgba(54,110,130,1) 100%);
-            .item {
-                opacity: 1;
-                .count {
-                    opacity: 1;
-                    background: rgba(#fff,0.3);
-                }
-            }
-        }
-        
-        &.bottom {
-            position: absolute;
-            bottom: 4rem;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            box-sizing: border-box;
-            padding: 0 0rem 0 4.4rem;
-            
-            .item {
-                opacity: 1;
-                text-align: center;
-                position: relative;
-                &.active, &[data-active="true"] {
-                    &:before {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        width: 4rem;
-                        height: 4rem;
-                        background: linear-gradient(to right, rgba(61,123,146,1) 0%,rgba(54,110,130,1) 100%);
-                        transform: translate(-50%, -50%) scale(1);
-                        border-radius: 50%;
-                        z-index: 1;
-                        //animation: sbBottomFocus 0.2s;
-                        @keyframes sbBottomFocus {
-                            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.88); }
-                            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                        }
-                    }
-                    img {
-                        position: relative;
-                        z-index: 2;
-                    }
-                }
-
-            }
-            img {
-                padding: 0.2rem;
-                width: 1.8rem;
-            }
-        }
-        
-        .item {
-            @extend clear;
-            padding: 0.7rem 0;
-            font-size: 1.2rem;
-            opacity: 0.5;
-            font-size: 1.1rem;
-            flex: 1;
-
-            .title {
-                float:left;
-                font-weight: 400;
-            }
-            .count {
-                float:right;
-                opacity: 0.5;
-                text-align: center;
-                background: white;
-                color: black;
-                width: 2.5rem;
-                border-radius: 5rem;
-                padding: 0.25rem;
-                margin: -0.25rem 0;
-                background: rgba(#fff, 0);
-                color: white;
-            }
-        }
-        
-        .item.logo {
-            @extend condensed;
-            padding: 0rem 0 1.4rem;
-            //float: left;
-            font-size: 1.9rem;
-            font-weight: 700;
-            opacity: 1;
-        }
-
-        .item.time {
-            @extend condensed;
-            padding: 0rem 0 1.4rem;
-            //float: right;
-            font-size: 1.9rem;
-            font-weight: 400;
-            text-align: right;
-            opacity: 1;
-        }
-    }
-
-    hr {
-        &:before {
-            content: ' ';
-            display: block;
-            width: 100%;
-            height: 0.1rem;
-            background: white;
-            opacity: 0.1;
-        }
-        background: none;
-        width: 100%;
-        display: block;
-        box-sizing: border-box;
-        border:none;
-        outline:none;
-        padding: 1rem 0;
-    }
-}
 
 #main {
     box-sizing: border-box;
@@ -481,190 +210,39 @@ main {
     }
 }
 
-.GameGrid {
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 4px;
-    margin-top:-8px;
-
-    &[data-width="2"] .GameTile {
-        width: 50%;
-    }
-    &[data-width="3"] .GameTile {
-        width: 33.333%;
-    }
-    &[data-width="4"] .GameTile {
-        width: 25%;
-    }
-    &[data-width="5"] .GameTile {
-        width: 20%;
-    }
-    &[data-width="6"] .GameTile {
-        width: 16.666666%;
-    }
-
-    .GameGridTitle {
-        width: 100%;
-        padding: 0 0.5rem;
-        box-sizing: border-box;
-        font-size: 1.9rem;
-        font-weight: 200;
-        margin: 5rem 0 1rem;
-    }
-
-    .row {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: 4px;
-        margin-top:-8px;
-        //position: relative;
-
-        
-        &:before {
-            //content:attr(data-startLetter);
-            position: absolute;
-            top:0;
-            right: 100%;
-            padding: 0 25px;
-            font-size: 65px;
-            opacity: 0.25;
-        }
-    }
-    .GameTile {
-        display: block;
-        //flex: 1 360px;
-        //flex-grow: 2;
-        padding: 0.4rem;
-        width: 100%;
-        box-sizing: border-box;
-
-        perspective: 100rem;
-        transform-style: preserve-3d;
-        position: relative;
-        //box-shadow: 0 10px 43px -13px rgba(0,0,0,0);
-        transition: box-shadow 0.2s, transform 0.2s, background 0.2s, opacity 0.2s;
-        transform: scale(1);
-        will-change: box-shadow, transform, background, opacity;
-        //border-radius: 5px;
-        //z-index: 1;
-        opacity: 0.65;
-        user-select: none;
-        cursor: pointer;
-        filter: grayscale(0.35);
-        
-
-        &[data-active="true"] {
-            z-index: 3;
-            //transform: scale(1.15);
-            //background: white;
-            //box-shadow: 0 10px 43px -13px black;
+.cursorable {
+    position: relative;
+    &[data-active="true"] {
+        cursor {
             opacity: 1;
-            filter: grayscale(0);
-
-
-            .GameTileInner {
-                //box-shadow: 0 0 0 0.4rem rgba(white,1), 0 0 11rem -2rem rgba(white,1);
-                //box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe;
-                animation: GameTileInnerGlowa 2s infinite;
-                @keyframes GameTileInnerGlow {
-                    0% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; }
-                    50% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #9fe4ff; }
-                    100% { box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; }
-                }
-                
-                box-shadow: 0 0 0 0.2rem #63A5BE;
-                animation: GameTileBorderGlow 2s infinite;
-                @keyframes GameTileBorderGlow {
-                    0% { box-shadow: 0 0 0 0.2rem #63A5BE; }
-                    50% { box-shadow: 0 0 0 0.2rem #96e1ff; }
-                    100% { box-shadow: 0 0 0 0.2rem #63A5BE; }
-                }
-                
-                
-                .title {
-                    opacity: 1;
-                    transform: translateY(0%);
-                    animation: GameTileTitleGlow 2s infinite;
-                    @keyframes GameTileTitleGlow {
-                        0% { background: rgba(#63A5BE, 0.67); }
-                        50% { background: rgba(#82c9e5, 0.8); }
-                        100% { background: rgba(#63A5BE, 0.67); }
-                    }
-                }
-            }
+            transform: scale(1);
+            transition: opacity 0.23s, transform 0.23s;
         }
-        
-        &:hover {
-            //z-index: 3;
-            
-            a {
-                //transform: translate3D(0,0,200px);
-            }
-        }
-        
-        .GameTileInner {
-            position: relative;
-            overflow: hidden;
-            border: 0.2rem solid transparent;
-            border-radius: 0.25rem;
-        }
-
-        .TileBase {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .title {
-            font-size: 1.2rem;
-            padding: 0.5vw 0;
-            position: absolute;
-            bottom: 0;
-            opacity: 0;
-            background: rgba(29, 191, 254, 0.67);
-            color: white;
-            width: 100%;
-            font-weight: 900;
-            //box-shadow: 0 0 0 1px rgba(29, 191, 254, 0.67);
-            text-align: center;
-            font-family: 'Cabin Condensed';
-            //font-weight: 500;
-            text-shadow: 0 0.05rem 0.125rem rgb(42, 82, 97);
-            transform: translateY(100%);
-            transition: transform 0.3s, opacity 0.3s;
-            //backdrop-filter: blur(0.2rem);
-        }
-        
-
-        .cover {
-            width:100%;
-            height: auto;
-            display: block;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            will-change: opacity;
-            //border-radius: 5px;
-            
-            &[src="./images/header-blank.png"] {
-                display: none;
-            }
-            
-            animation: GameTileCoverIn 0.4s !important;
-            @keyframes GameTileCoverIn {
-                0% { opacity: 0; }
-                30% { opacity: 0; }
-                100% { opacity: 1; }
-            }
-        }
-
     }
 }
+cursor {
+    position: absolute;
+    pointer-events: none;
+    top:-0.2rem;
+    left:-0.2rem;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border: 0.2rem solid transparent;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 0.2rem #63A5BE, 0 0 6rem rgba(99, 165, 190, 0.46);
+    transition: opacity 0.1s, transform 0.1s;
+    transform: scale(0.95);
+    will-change: transform, opacity;
 
+    top:0;
+    left:0;
+    border:none;
+}
 
+@import "GameGrid";
+@import "Overlay";
+@import "Sidebar";
+@import "titlebar";
 
 @import "splash";
