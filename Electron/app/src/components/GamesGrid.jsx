@@ -54,7 +54,7 @@ export default class GamesGrid extends Component {
         */
         
         const gameTileRender = (game, index) => {
-            const delayPerIdx = 50
+            const delayPerIdx = 0
             const maxItems = 30
             const delay = (index < maxItems ? index * delayPerIdx : maxItems * delayPerIdx);
             return <GameTile ts={game.LastUpdate} ID={game.ID} active={game.Active} key={game.ID} game={game.meta} item={game} coverDelay={delay}></GameTile>  

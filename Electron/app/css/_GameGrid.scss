@@ -68,7 +68,7 @@
         will-change: box-shadow, transform, background, opacity;
         //border-radius: 5px;
         //z-index: 1;
-        opacity: 0.65;
+        opacity: 0.6;
         user-select: none;
         cursor: pointer;
         filter: grayscale(0.35);
@@ -81,6 +81,8 @@
             //box-shadow: 0 10px 43px -13px black;
             opacity: 1;
             filter: grayscale(0);
+
+            box-shadow: 0 7rem 11rem -3rem #040c10;
 
 
             .GameTileInner {
@@ -125,9 +127,9 @@
         
         .GameTileInner {
             position: relative;
-            overflow: hidden;
-            border: 0.2rem solid transparent;
-            border-radius: 0.25rem;
+            //overflow: hidden;
+            //border: 0.2rem solid transparent;
+            //border-radius: 0.25rem;
         }
 
         .TileBase {
@@ -137,12 +139,13 @@
         }
 
         .title {
-            font-size: 1.2rem;
-            padding: 0.5vw 0;
+            font-size: 1.35rem;
+            line-height: 1.2;
+            padding: 6rem 0 0.5rem;
             position: absolute;
             bottom: 0;
             opacity: 0;
-            background: rgba(29, 191, 254, 0.67);
+            background: linear-gradient(to bottom, rgba(23, 36, 42, 0) 0%, rgba(23, 36, 42, 0.9) 100%);
             color: white;
             width: 100%;
             font-weight: 900;
@@ -150,10 +153,21 @@
             text-align: center;
             font-family: 'Cabin Condensed';
             //font-weight: 500;
-            text-shadow: 0 0.05rem 0.125rem rgb(42, 82, 97);
-            transform: translateY(100%);
+            //text-shadow: 0 0.05rem 0.725rem #17242a;
+            transform: translateY(20%);
             transition: transform 0.3s, opacity 0.3s;
             //backdrop-filter: blur(0.2rem);
+
+            margin-top: 0.7rem;
+            border-radius: 10rem;
+            font-size: 1.8rem;
+            padding: 0.55rem;
+            box-sizing: border-box;
+            bottom: auto;
+            top: 100%;
+            background: none;
+            transform: translateY(-14%);
+
         }
         
 
@@ -167,6 +181,7 @@
             transform: translate(-50%, -50%);
             will-change: opacity;
             //border-radius: 5px;
+            border-radius: 0.25rem;
             
             &[src="./images/header-blank.png"] {
                 display: none;

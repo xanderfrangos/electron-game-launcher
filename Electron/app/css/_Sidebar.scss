@@ -32,7 +32,7 @@
         &.active, &[data-active="true"] {
             background: rgba(white, 0.3);
             background: linear-gradient(to right, rgba(61,123,146,0.18) 0%,rgba(54,110,130,0.42) 100%);
-            .item {
+            .item-content {
                 opacity: 1;
                 .count {
                     opacity: 1;
@@ -54,7 +54,7 @@
                 border-radius: 100%;
             }
             
-            .item {
+            .item-content {
                 opacity: 1;
                 text-align: center;
                 position: relative;
@@ -62,7 +62,7 @@
                 border-radius: 100%;
  
                 &.active, &[data-active="true"] {
-                    background: linear-gradient(to right, rgba(61,123,146,0.18) 0%,rgba(54,110,130,0.42) 100%);
+                    //background: linear-gradient(to right, rgba(61,123,146,0.18) 0%,rgba(54,110,130,0.42) 100%);
                     &:before {
                         position: absolute;
                         top: 50%;
@@ -91,15 +91,18 @@
                 width: 1.8rem;
             }
         }
-        
+
         .item {
+            flex: 1;
+        }
+        
+        .item-content {
             @extend clear;
             padding: 0.7rem 0;
             font-size: 1.2rem;
             opacity: 0.5;
             font-size: 1.1rem;
             flex: 1;
-            
 
             .title {
                 float:left;

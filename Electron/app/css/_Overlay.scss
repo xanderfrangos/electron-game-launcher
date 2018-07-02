@@ -11,6 +11,10 @@
     display: block;
     will-change: opacity;
 
+    line-height: 100vh;
+    text-align: center;
+    perspective: 100rem;
+
     animation: overlayIn 0.35s; 
         @keyframes overlayIn {
             0% { opacity: 0; }
@@ -25,14 +29,26 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate3d(-50%, -50%, 0);
+        //transform: translate3d(-50%, -50%, 0);
         max-height: 100vh;
-        will-change: transform, opacity;
+        //will-change: transform, opacity;
 
-        animation: overlayLayerIn 0.55s $eSmoothEnd; 
+        position: static;
+        vertical-align: middle;
+    display: inline-block;
+    text-align: left;
+    line-height: 1;
+
+
+        animation: overlayLayerIn2 0.55s $eSmoothEnd; 
         @keyframes overlayLayerIn {
             0% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(0.93); }
             100% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1); }
+        }
+
+        @keyframes overlayLayerIn2 {
+            0% { opacity: 1; transform: translate3d(0, 0, -10rem); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0rem); }
         }
 
         &.center {
@@ -44,7 +60,7 @@
         @extend clear;
         //background: #2a5261;
         padding: 2rem;
-    width: 30rem;
+    width: 45rem;
     font-size: 1.2rem;
     text-align: center;
     //box-shadow: 0 0.75rem 2rem -1rem black;

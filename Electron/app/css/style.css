@@ -250,7 +250,7 @@
   font-weight: 700;
   src: local("Cabin Condensed Bold"), local("CabinCondensed-Bold"), url("fonts/CabinCondensed-Bold.ttf") format("truetype");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215; }
-clear:after, #overlay .messageBox:after, #overlay .messageBox .options:after, #sidebar .row:after, #sidebar .row .item:after, clear:before, #overlay .messageBox:before, #overlay .messageBox .options:before, #sidebar .row:before, #sidebar .row .item:before, .clear:after, .clear:before {
+clear:after, #overlay .messageBox:after, #overlay .messageBox .options:after, #sidebar .row:after, #sidebar .row .item-content:after, clear:before, #overlay .messageBox:before, #overlay .messageBox .options:before, #sidebar .row:before, #sidebar .row .item-content:before, .clear:after, .clear:before {
   content: ' ';
   display: block;
   clear: both; }
@@ -525,8 +525,15 @@ main {
   .cursorable[data-active="true"] cursor {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 0.23s, transform 0.23s; }
-
+    transition: opacity 0.23s, transform 0.23s;
+    animation: cursorActive 1.5s 0s infinite; }
+@keyframes cursorActive {
+  0% {
+    filter: hue-rotate(0deg) brightness(0.9); }
+  50% {
+    filter: hue-rotate(-15deg) brightness(1.3); }
+  100% {
+    filter: hue-rotate(0deg) brightness(0.9); } }
 cursor {
   position: absolute;
   pointer-events: none;
@@ -541,9 +548,14 @@ cursor {
   transition: opacity 0.1s, transform 0.1s;
   transform: scale(0.95);
   will-change: transform, opacity;
+  background: linear-gradient(to right, rgba(61, 123, 146, 0.18) 0%, rgba(54, 110, 130, 0.42) 100%);
   top: 0;
   left: 0;
   border: none; }
+
+.item-content {
+  z-index: 1;
+  position: relative; }
 
 .GameGrid {
   display: flex;
@@ -592,14 +604,15 @@ cursor {
     transition: box-shadow 0.2s, transform 0.2s, background 0.2s, opacity 0.2s;
     transform: scale(1);
     will-change: box-shadow, transform, background, opacity;
-    opacity: 0.65;
+    opacity: 0.6;
     user-select: none;
     cursor: pointer;
     filter: grayscale(0.35); }
     .GameGrid .GameTile[data-active="true"] {
       z-index: 3;
       opacity: 1;
-      filter: grayscale(0); }
+      filter: grayscale(0);
+      box-shadow: 0 7rem 11rem -3rem #040c10; }
 @keyframes GameTileInnerGlow {
   0% {
     box-shadow: 0 0 0 1rem rgba(255, 255, 255, 0), 0 0 11rem -2rem #3fc9fe; }
@@ -625,29 +638,35 @@ cursor {
   100% {
     background: rgba(99, 165, 190, 0.67); } }
     .GameGrid .GameTile .GameTileInner {
-      position: relative;
-      overflow: hidden;
-      border: 0.2rem solid transparent;
-      border-radius: 0.25rem; }
+      position: relative; }
     .GameGrid .GameTile .TileBase {
       width: 100%;
       height: auto;
       display: block; }
     .GameGrid .GameTile .title {
-      font-size: 1.2rem;
-      padding: 0.5vw 0;
+      font-size: 1.35rem;
+      line-height: 1.2;
+      padding: 6rem 0 0.5rem;
       position: absolute;
       bottom: 0;
       opacity: 0;
-      background: rgba(29, 191, 254, 0.67);
+      background: linear-gradient(to bottom, rgba(23, 36, 42, 0) 0%, rgba(23, 36, 42, 0.9) 100%);
       color: white;
       width: 100%;
       font-weight: 900;
       text-align: center;
       font-family: 'Cabin Condensed';
-      text-shadow: 0 0.05rem 0.125rem #2a5261;
-      transform: translateY(100%);
-      transition: transform 0.3s, opacity 0.3s; }
+      transform: translateY(20%);
+      transition: transform 0.3s, opacity 0.3s;
+      margin-top: 0.7rem;
+      border-radius: 10rem;
+      font-size: 1.8rem;
+      padding: 0.55rem;
+      box-sizing: border-box;
+      bottom: auto;
+      top: 100%;
+      background: none;
+      transform: translateY(-14%); }
     .GameGrid .GameTile .cover {
       width: 100%;
       height: auto;
@@ -657,6 +676,7 @@ cursor {
       left: 50%;
       transform: translate(-50%, -50%);
       will-change: opacity;
+      border-radius: 0.25rem;
       animation: GameTileCoverIn 0.4s !important; }
       .GameGrid .GameTile .cover[src="./images/header-blank.png"] {
         display: none; }
@@ -677,6 +697,9 @@ cursor {
   background: linear-gradient(135deg, rgba(26, 42, 48, 0.95) 0%, rgba(2, 3, 3, 0.95) 100%);
   display: block;
   will-change: opacity;
+  line-height: 100vh;
+  text-align: center;
+  perspective: 100rem;
   animation: overlayIn 0.35s; }
 @keyframes overlayIn {
   0% {
@@ -689,10 +712,13 @@ cursor {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate3d(-50%, -50%, 0);
     max-height: 100vh;
-    will-change: transform, opacity;
-    animation: overlayLayerIn 0.55s cubic-bezier(0.305, 0.415, 0.02, 1); }
+    position: static;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: left;
+    line-height: 1;
+    animation: overlayLayerIn2 0.55s cubic-bezier(0.305, 0.415, 0.02, 1); }
 @keyframes overlayLayerIn {
   0% {
     opacity: 1;
@@ -700,9 +726,16 @@ cursor {
   100% {
     opacity: 1;
     transform: translate3d(-50%, -50%, 0) scale(1); } }
+@keyframes overlayLayerIn2 {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, -10rem); }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0rem); } }
   #overlay .messageBox {
     padding: 2rem;
-    width: 30rem;
+    width: 45rem;
     font-size: 1.2rem;
     text-align: center; }
     #overlay .messageBox .title {
@@ -744,9 +777,9 @@ cursor {
     #sidebar .row.active, #sidebar .row[data-active="true"] {
       background: rgba(255, 255, 255, 0.3);
       background: linear-gradient(to right, rgba(61, 123, 146, 0.18) 0%, rgba(54, 110, 130, 0.42) 100%); }
-      #sidebar .row.active .item, #sidebar .row[data-active="true"] .item {
+      #sidebar .row.active .item-content, #sidebar .row[data-active="true"] .item-content {
         opacity: 1; }
-        #sidebar .row.active .item .count, #sidebar .row[data-active="true"] .item .count {
+        #sidebar .row.active .item-content .count, #sidebar .row[data-active="true"] .item-content .count {
           opacity: 1; }
     #sidebar .row.bottom {
       position: absolute;
@@ -758,23 +791,21 @@ cursor {
       padding: 0 0rem 0 4.4rem; }
       #sidebar .row.bottom cursor {
         border-radius: 100%; }
-      #sidebar .row.bottom .item {
+      #sidebar .row.bottom .item-content {
         opacity: 1;
         text-align: center;
         position: relative;
         padding: 1.2rem 0;
         border-radius: 100%; }
-        #sidebar .row.bottom .item.active, #sidebar .row.bottom .item[data-active="true"] {
-          background: linear-gradient(to right, rgba(61, 123, 146, 0.18) 0%, rgba(54, 110, 130, 0.42) 100%); }
-          #sidebar .row.bottom .item.active:before, #sidebar .row.bottom .item[data-active="true"]:before {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 4rem;
-            height: 4rem;
-            transform: translate(-50%, -50%) scale(1);
-            border-radius: 50%;
-            z-index: 1; }
+        #sidebar .row.bottom .item-content.active:before, #sidebar .row.bottom .item-content[data-active="true"]:before {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 4rem;
+          height: 4rem;
+          transform: translate(-50%, -50%) scale(1);
+          border-radius: 50%;
+          z-index: 1; }
 @keyframes sbBottomFocus {
   0% {
     opacity: 1;
@@ -782,22 +813,24 @@ cursor {
   100% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1); } }
-          #sidebar .row.bottom .item.active img, #sidebar .row.bottom .item[data-active="true"] img {
-            position: relative;
-            z-index: 2; }
+        #sidebar .row.bottom .item-content.active img, #sidebar .row.bottom .item-content[data-active="true"] img {
+          position: relative;
+          z-index: 2; }
       #sidebar .row.bottom img {
         padding: 0.2rem;
         width: 1.8rem; }
     #sidebar .row .item {
+      flex: 1; }
+    #sidebar .row .item-content {
       padding: 0.7rem 0;
       font-size: 1.2rem;
       opacity: 0.5;
       font-size: 1.1rem;
       flex: 1; }
-      #sidebar .row .item .title {
+      #sidebar .row .item-content .title {
         float: left;
         font-weight: 400; }
-      #sidebar .row .item .count {
+      #sidebar .row .item-content .count {
         float: right;
         opacity: 0.5;
         text-align: center;

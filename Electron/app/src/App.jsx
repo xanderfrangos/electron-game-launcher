@@ -149,10 +149,8 @@ export default class App extends PureComponent {
                                             active={this.props.Sidebar[0].ActiveIndex == itemIndex}
                                             item={item}
                                             className="row">
-                                            <div className="item">
                                                 <div className="title"><span>{item.meta.Title}</span></div>
                                                 <div className="count"><span>{count}</span></div>
-                                            </div>
                                         </Item>
                                     )
                         }) }
