@@ -1,7 +1,7 @@
 import React, {Component}  from 'react'
 import Item from './Item.jsx'
 
-export default class DialogBox extends Component {
+export default class OptionsList extends Component {
     
     constructor(props) {
         super(props);
@@ -39,7 +39,7 @@ export default class DialogBox extends Component {
 
         return(
         <div className="overlayLayer center">
-            <div className="messageBox">
+            <div className="optionsList">
                
                 <div className="title">{this.props.title}</div>
                 {

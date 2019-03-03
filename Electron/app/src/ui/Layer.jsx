@@ -6,6 +6,12 @@ export default class UILayer {
         this.Lists = lists;
         this.LastUpdate = Date.now();
         this.defaultBackAction = () => {}
+        this.LeftAction = () => { return false; }
+        this.RightAction = () => { return false; }
+        this.UpAction = () => { return false; }
+        this.Down = () => { return false; }
+        this.ContainerElem = false;
+
         this.UpdateTS = () => {
             this.LastUpdate = Date.now();
         }

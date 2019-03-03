@@ -24,7 +24,7 @@ export default class Item extends Component {
 
         const className = "cursorable item " + (this.props.className || "");
         return(
-            <div ref="Item" class={className} data-active={this.props.active}><cursor></cursor><div class="item-content">{this.props.children}</div></div>
+            <div ref="Item" className={className} data-active={this.props.active}><cursor></cursor><div className="item-content">{this.props.children}</div></div>
         )
 
     }

@@ -579,7 +579,12 @@ cursor {
     box-sizing: border-box;
     font-size: 1.9rem;
     font-weight: 200;
-    margin: 5rem 0 1rem; }
+    margin: 5rem 0 1rem;
+    color: #80939c;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1.42rem; }
   .GameGrid .row {
     display: flex;
     flex-direction: row;
@@ -743,6 +748,12 @@ cursor {
       font-weight: 300;
       padding-bottom: 1.5rem;
       line-height: 1.1; }
+    #overlay .messageBox .cover {
+      padding: 2rem 0 3.7rem;
+      perspective: 100rem;
+      position: relative; }
+      #overlay .messageBox .cover img {
+        border-radius: 0.25rem; }
     #overlay .messageBox .description {
       line-height: 1.5; }
     #overlay .messageBox p {

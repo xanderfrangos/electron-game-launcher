@@ -377,8 +377,12 @@ export default class UINavigation {
         oldItem.dataset.active = "false"
         newItem.dataset.active = "true"
 
+        // 
         // Scroll to new item
-        this.ScrollToRefInView(document.getElementById("app"), global.UI.Refs[global.UI.Active.Item.ID], (window.innerWidth * 0.1));
+        if(global.UI.Active.Layer.ContainerElem) {
+            this.ScrollToRefInView(global.UI.Active.Layer.ContainerElem, global.UI.Refs[global.UI.Active.Item.ID], (window.innerWidth * 0.1));
+        }
+        
 
         return true;
     }

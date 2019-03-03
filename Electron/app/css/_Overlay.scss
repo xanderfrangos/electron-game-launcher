@@ -71,6 +71,15 @@
             padding-bottom: 1.5rem;
             line-height: 1.1;
         }
+        .cover {
+            padding: 2rem 0 3.7rem;
+            perspective: 100rem;
+            position: relative;
+            img {
+                border-radius: 0.25rem;
+                //animation: overlayLayerIn2 0.55s $eSmoothEnd; 
+            }
+        }
         .description {
             line-height: 1.5;
         }

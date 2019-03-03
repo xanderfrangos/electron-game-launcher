@@ -68,11 +68,13 @@ ipcRenderer.on('appStart', (event, args) => {
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
     
-
+    const launchGame = (game) => {
+        global.AppJS.triggerLaunchScreen(game)
+    }
 
     // Home
     sortedApps.forEach(function(element) {
-        let newItem = new UIItem( global.Input.RunGame );
+        let newItem = new UIItem( launchGame );
         newItem.BackAction = () => {
             global.UI.PreviousLayer()
         }
@@ -81,7 +83,7 @@ ipcRenderer.on('appStart', (event, args) => {
     }, this);
 
     sortedApps.forEach(function(element) {
-        let newItem = new UIItem(global.Input.RunGame);
+        let newItem = new UIItem(launchGame);
         newItem.BackAction = () => {
             global.UI.PreviousLayer()
         }
@@ -90,7 +92,7 @@ ipcRenderer.on('appStart', (event, args) => {
     }, this);
 
     sortedApps.forEach(function(element) {
-        let newItem = new UIItem(global.Input.RunGame);
+        let newItem = new UIItem(launchGame);
         newItem.BackAction = () => {
             global.UI.PreviousLayer()
         }
@@ -101,7 +103,7 @@ ipcRenderer.on('appStart', (event, args) => {
 
     // Test Lists
     sortedApps.forEach(function(element) {
-        let newItem = new UIItem(global.Input.RunGame);
+        let newItem = new UIItem(launchGame);
         newItem.BackAction = () => {
             global.UI.PreviousLayer()
         }
@@ -110,7 +112,7 @@ ipcRenderer.on('appStart', (event, args) => {
     }, this);
 
     sortedApps.forEach(function(element) {
-        let newItem = new UIItem(global.Input.RunGame);
+        let newItem = new UIItem(launchGame);
         newItem.BackAction = () => {
             global.UI.PreviousLayer()
         }
@@ -119,7 +121,7 @@ ipcRenderer.on('appStart', (event, args) => {
     }, this);
 
     sortedApps.forEach(function(element) {
-        let newItem = new UIItem(global.Input.RunGame);
+        let newItem = new UIItem(launchGame);
         newItem.BackAction = () => {
             global.UI.PreviousLayer()
         }
@@ -138,14 +140,17 @@ ipcRenderer.on('appStart', (event, args) => {
     let tL2 = new UIList([list2Items[23], list2Items[33], list2Items[42], list2Items[45], list2Items[7]], "Test List 2", 3);
 
     // Build Layer w/ List
-    let homeID = global.UI.NewCacheLayer([favoritesList, recentList, allList], "Home");
-    addListToNav(homeID)
+    let homeID = new UILayer([favoritesList, recentList, allList], "Home");
+    homeID.ContainerElem = document.getElementById("app")
+    addListToNav(homeID.ID)
 
-    let list1ID = global.UI.NewCacheLayer([tL1, tL1A], "Test List 1");
-    addListToNav(list1ID);
+    let list1ID = new UILayer([tL1, tL1A], "Test List 1");
+    list1ID.ContainerElem = document.getElementById("app")
+    addListToNav(list1ID.ID);
 
-    let list2ID = global.UI.NewCacheLayer(tL2, "Test List 2");
-    addListToNav(list2ID);
+    let list2ID = new UILayer(tL2, "Test List 2");
+    list2ID.ContainerElem = document.getElementById("app")
+    addListToNav(list2ID.ID);
     
 
     const { ipcRenderer } = require('electron');

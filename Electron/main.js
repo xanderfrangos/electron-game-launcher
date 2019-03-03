@@ -120,7 +120,7 @@ splashScreenReady = () => {
 
     showMainScreen()
     mainWindow.webContents.openDevTools()
-    setTimeout(() => {mainWindow.focus()}, 750);
+    setTimeout(() => {mainWindow.focus()}, 950);
 }
 
 

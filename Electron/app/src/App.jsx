@@ -103,9 +103,12 @@ export default class App extends PureComponent {
             launchLayer.defaultBackAction = launchBack
             global.UI.NewLayer(launchLayer.ID)
 
+            let coverSRC = window.appDataPath + 'cache/SteamGraphics/' + this.state.launchGame.meta.id + '/header.jpg?t=' + Date.now();
+
             return (<DialogBox layer={ launchLayer }
                       title={this.state.launchGame.meta.name}
-                      options={ launchLayer.Lists[0].Items }>
+                      options={ launchLayer.Lists[0].Items }
+                      cover={ coverSRC }>
                       <p>Would you like to start {this.state.launchGame.meta.name}?</p>
                       </DialogBox>)
         }

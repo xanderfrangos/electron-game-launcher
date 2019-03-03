@@ -20,14 +20,14 @@
         "babel-loader": "^6.3.2",
         "babel-preset-react": "^6.23.0",
         "css-loader": "^0.26.1",
-        "electron": "^2.0.1",
-        "electron-reload": "^1.1.0",
+        "electron": "^4.0.0",
+        "electron-reload": "^1.4.0",
         "extract-text-webpack-plugin": "^2.0.0-rc.3",
         "file-loader": "^0.9.0",
         "webpack": "^2.2.1"
     },
     "dependencies": {
-        "react": "^16.4.0",
-        "react-dom": "^16.4.0"
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0"
     }
 }
