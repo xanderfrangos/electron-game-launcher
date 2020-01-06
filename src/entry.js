@@ -177,6 +177,9 @@ const appStart = (event, args) => {
     let navID = nav.ID;
     global.UI.ChangeLayer(navID)
 
+    window.document.getElementById('app').onkeydown = global.Input.HandleKeyDown
+    window.document.getElementById('app').onkeyup = global.Input.HandleKeyUp
+
     render(
         <App Sidebar={global.UI.LayerCache[global.UI.Layers[0]].Lists} UILayer={global.UI.LayerCache[global.UI.Layers[0]].Lists[0].Items[0].meta}/>,
         document.getElementById('app')

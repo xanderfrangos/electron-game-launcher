@@ -794,6 +794,20 @@ class UIInput {
             Input.Gamepads.Down.DirectionDown = true;
             Input.TryMoveFocus("right");
             e.preventDefault();
+        } else if (e.key == "Enter" || e.key == " " || e.key == "a" || e.key == "z") {
+            // A - Accept
+            Input.Gamepads.Down.Buttons.push(0);
+            if (global.Input.Gamepads.Down.LastButtons.includes(0) === false) {
+                global.UI.Active.Item.PrimaryAction(global.UI.Active.Item);
+            }
+            e.preventDefault();
+        } else if (e.key == "Backspace" || e.key == "Escape" || e.key == "b" || e.key == "x") {
+            // B - Back
+            Input.Gamepads.Down.Buttons.push(1);
+            if (global.Input.Gamepads.Down.LastButtons.includes(1) === false) {
+                global.UI.Active.Item.BackAction(global.UI.Active.Item);
+            }
+            e.preventDefault();
         }
     }
 
@@ -2182,6 +2196,9 @@ const appStart = (event, args) => {
     nav.defaultBackAction = showQuit;
     let navID = nav.ID;
     global.UI.ChangeLayer(navID);
+
+    window.document.getElementById('app').onkeydown = global.Input.HandleKeyDown;
+    window.document.getElementById('app').onkeyup = global.Input.HandleKeyUp;
 
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__App_jsx__["a" /* default */], { Sidebar: global.UI.LayerCache[global.UI.Layers[0]].Lists, UILayer: global.UI.LayerCache[global.UI.Layers[0]].Lists[0].Items[0].meta }), document.getElementById('app'));
 };

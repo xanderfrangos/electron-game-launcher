@@ -234,6 +234,20 @@ export default class UIInput {
             Input.Gamepads.Down.DirectionDown = true
             Input.TryMoveFocus("right");
             e.preventDefault();
+          } else if(e.key == "Enter" || e.key == " " || e.key == "a" || e.key == "z") {
+              // A - Accept
+              Input.Gamepads.Down.Buttons.push(0) 
+              if(global.Input.Gamepads.Down.LastButtons.includes(0) === false) {
+                  global.UI.Active.Item.PrimaryAction(global.UI.Active.Item)
+              }
+            e.preventDefault();
+          } else if(e.key == "Backspace" || e.key == "Escape" || e.key == "b" || e.key == "x") {
+            // B - Back
+            Input.Gamepads.Down.Buttons.push(1) 
+            if(global.Input.Gamepads.Down.LastButtons.includes(1) === false) {
+                global.UI.Active.Item.BackAction(global.UI.Active.Item)
+            }
+            e.preventDefault();
           }
           
     }
