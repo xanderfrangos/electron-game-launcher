@@ -50,7 +50,7 @@ runSteamCrawler = (includeImages = false, callback = () => { console.log("Steam 
 
 
 app.on('ready', () => {
-    appFilesPath = "C:\\Projects\\electron-game-launcher\\Electron\\";
+    appFilesPath = "E:\\Projects\\electron-game-launcher\\Electron\\";
 
 
     splashWindow = new BrowserWindow( {width: 480, height: 300, show:false , frame: false, transparent:true, webPreferences: {blinkFeatures: 'CSSBackdropFilter'} } )
@@ -109,7 +109,11 @@ splashScreenReady = () => {
     splashWindow.webContents.send("setLoadingText", "Loading config files")
     loadConfig()
     splashWindow.webContents.send("setLoadingText", "Updating Steam games")
-    runSteamCrawler(false);
+    try {
+        runSteamCrawler(false);
+    } catch(e) {
+        
+    }
     splashWindow.webContents.send("setLoadingText", "Loading databases")
     games.steamRAW = JSON.parse(fs.readFileSync(appDataPath + 'games.steam.json', 'utf8'))
 

@@ -1,0 +1,15 @@
+
+$break-down-mobile: 960px;
+$wrapper-mobile-width: 100%;
+
+
+$eSmoothEnd: cubic-bezier(0.305, 0.415, 0.020, 1.000);
+$eOverPop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+
+@mixin mobile {
+    @media (max-width: $break-down-mobile) {
+        @content;
+    }
+}
+

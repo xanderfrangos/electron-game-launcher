@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Den Game Launcher</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+    </script>
+    <script src="src/js/howler.min.js"></script>
+</head>
+
+<body>
+
+    <div id="splash">
+        <div class="splash-inner">
+            <img src="images/logo-white.png" />
+        <div id="loadingText" class="statusText"></div>
+        </div>
+    </div>
+
+    <script>
+        var { ipcRenderer, remote, webview } = require('electron');
+
+        
+
+        let mainValue = ipcRenderer.send('SplashReady', 1);
+        ipcRenderer.send('MainThreadMessage', "WOW");
+
+        setText = (loadingText) => {
+            let text = document.getElementById("loadingText");
+            text.innerText = loadingText;
+            ipcRenderer.send('MainThreadMessage', "WOW");
+        }
+
+        setText("Loading")
+
+        ipcRenderer.on('setLoadingText', (event, arg) => {
+            setText(arg)
+        });
+
+    </script>
+
+    <script>
+        const path = 'src/sounds/'
+
+        let StartupSound = new Howl({
+            src: [path + 'Startup - Audio On.wav']
+          })
+
+          StartupSound.play()
+          Howler.volume(0.25)
+    </script>
+</body>
+
+</html>

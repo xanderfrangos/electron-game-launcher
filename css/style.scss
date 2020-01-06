@@ -1,0 +1,260 @@
+@import "vars";
+@import "fonts";
+
+clear, .clear {
+    &:after,
+    &:before {
+        content: ' ';
+        display: block;
+        clear: both;
+    }
+}
+
+@import "reset";
+
+* {
+    user-select: none;
+}
+
+.split-1-2, .split-2-4 {
+    width: 50%;
+}
+
+.split-1-3 {
+    width: 33.333%;
+}
+
+.split-2-3 {
+    width: 66.666%;
+}
+
+.split-1-4 {
+    width: 25%;
+}
+
+.split-3-4 {
+    width: 75%;
+}
+
+.split-1-5 {
+    width: 20%;
+}
+
+.split-2-5 {
+    width: 40%;
+}
+
+.split-3-5 {
+    width: 60%;
+}
+
+.split-4-5 {
+    width: 80%;
+}
+
+.split-1-2, .split-2-4, .split-1-3, .split-2-3, .split-1-4, .split-3-4, .split-1-5, .split-2-5, .split-3-5, .split-4-5 {
+    float:left;
+    box-sizing: border-box;
+    position: relative;
+
+}
+
+.split-1-3, .split-2-3, .split-1-2, .split-1-5, .split-2-5, .split-3-5, .split-4-5 {
+    @include mobile {
+        width:100%;  
+        padding:0 !important;
+    }
+}
+
+i {
+    font-style: italic;
+}
+
+b {
+    font-weight: bold;
+}
+
+condensed {
+    font-family: 'Cabin Condensed', sans-serif;
+    font-family: "Segoe UI", sans-serif;
+}
+body, html {
+    font-family: 'Cabin', sans-serif;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 500;
+    line-height: 1;
+    font-size: 17px;
+    color: white;
+    //background: #151719;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    @include mobile {
+        font-size: 15px;
+    }
+}
+
+body {
+    font-family: "Cabin";
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, rgba(#17242a,1) 0%,rgba(3,5,6,1) 100%);
+    &.noFocus {
+        .GameGrid {
+            * {
+                animation: none !important;
+            }
+        }
+    }
+}
+
+html {
+
+    font-size: 1vw; // TV Mode
+    //font-size: 12.8px; // Desktop Mode
+    //background: #151719;
+    background: rgba(3,5,6,1);
+    &.desktop {
+        font-size: 15px;
+        #title-bar {
+            display: block;
+        }
+    }
+}
+
+
+
+
+
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 0.5rem;
+    
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+    background: rgba(173, 184, 194, 0.2); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(127, 137, 146, 0); 
+}
+
+
+
+#background {
+    background: #151719 url('../images/bg2.jpg') center center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100rem;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    will-change: transform;
+
+    display: none;
+}
+
+#app {
+    //position: fixed;
+    top:0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-x:hidden;
+    overflow-y:scroll; // manage scrollbar content overflow settings
+    border: none !important;
+    outline: none !important;
+    
+}
+
+
+
+main {
+    display: flex;
+    flex-direction: row;
+    //background: #151719;
+    padding-left: 23rem; 
+    margin: auto;
+}
+
+
+
+#main {
+    box-sizing: border-box;
+    padding: 0 5rem;
+    position: relative;
+    z-index: 5;
+    max-width: 95rem;
+    
+}
+
+#base {
+    margin: auto;
+}
+
+.logo-top {
+    img {
+        width: 8rem;
+        height: auto;
+        display: block;
+        margin: 6rem auto;
+    }
+}
+
+.cursorable {
+    position: relative;
+    &[data-active="true"] {
+        cursor {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.23s, transform 0.23s;
+            animation: cursorActive 1.5s 0s infinite;
+            @keyframes cursorActive {
+                0% { filter: hue-rotate(0deg) brightness(0.9);  }
+                50% { filter: hue-rotate(-15deg) brightness(1.3); }
+                100% { filter: hue-rotate(0deg) brightness(0.9); }
+            }
+        }
+    }
+}
+cursor {
+    position: absolute;
+    pointer-events: none;
+    top:-0.2rem;
+    left:-0.2rem;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border: 0.2rem solid transparent;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 0.2rem #63A5BE, 0 0 6rem rgba(99, 165, 190, 0.46);
+    transition: opacity 0.1s, transform 0.1s;
+    transform: scale(0.95);
+    will-change: transform, opacity;
+    background: linear-gradient(to right, rgba(61,123,146,0.18) 0%,rgba(54,110,130,0.42) 100%);
+
+    top:0;
+    left:0;
+    border:none;
+}
+
+.item-content {
+    z-index: 1;
+    position: relative;;
+}
+
+@import "GameGrid";
+@import "Overlay";
+@import "Sidebar";
+@import "titlebar";
+
+@import "splash";

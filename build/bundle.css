@@ -1,0 +1,16 @@
+/*
+ * Use :local before each CSS class to be scoped
+ * Use classes instead of ids
+ */
+
+._1fIXIofCImpBNtf7ZBJ68V {
+    color: var(--primary-color);    /* Using global constants example */
+}
+
+.K0RT3v9mLWwmUbbnSXWZn {                 /* Composition example */
+    text-decoration: none;
+}
+
+._20sk-182e0A80tIjGRRBqJ {
+    height: 100px;
+}

@@ -1,0 +1,108 @@
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    //backdrop-filter: blur(0.5rem);
+    z-index: 10;
+    background: linear-gradient(135deg, rgba(26,42,48,0.95) 0%,rgba(2,3,3,0.95) 100%);
+    display: block;
+    will-change: opacity;
+
+    line-height: 100vh;
+    text-align: center;
+    perspective: 100rem;
+
+    animation: overlayIn 0.35s; 
+        @keyframes overlayIn {
+            0% { opacity: 0; }
+            100% {opacity: 1;  }
+        }
+
+    &:empty {
+        display: none;
+    }
+
+    .overlayLayer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        //transform: translate3d(-50%, -50%, 0);
+        max-height: 100vh;
+        //will-change: transform, opacity;
+
+        position: static;
+        vertical-align: middle;
+    display: inline-block;
+    text-align: left;
+    line-height: 1;
+
+
+        animation: overlayLayerIn2 0.55s $eSmoothEnd; 
+        @keyframes overlayLayerIn {
+            0% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(0.93); }
+            100% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1); }
+        }
+
+        @keyframes overlayLayerIn2 {
+            0% { opacity: 1; transform: translate3d(0, 0, -10rem); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0rem); }
+        }
+
+        &.center {
+
+        }
+    }
+
+    .messageBox {
+        @extend clear;
+        //background: #2a5261;
+        padding: 2rem;
+    width: 45rem;
+    font-size: 1.2rem;
+    text-align: center;
+    //box-shadow: 0 0.75rem 2rem -1rem black;
+
+        .title {
+            font-size: 2.7rem;
+            font-weight: 300;
+            padding-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        .cover {
+            padding: 2rem 0 3.7rem;
+            perspective: 100rem;
+            position: relative;
+            img {
+                border-radius: 0.25rem;
+                //animation: overlayLayerIn2 0.55s $eSmoothEnd; 
+            }
+        }
+        .description {
+            line-height: 1.5;
+        }
+        p {
+            color: #a5c1cc;
+        }
+        .options {
+            @extend clear;
+            margin-top: 2.5rem;
+            //float: right;
+            .item {
+                //float: left;
+                padding: 0.75rem 1.5rem;
+                //background: #1c3c48;
+                border-radius: 0.25rem;
+                margin-top: 1.1rem;
+                display: inline-block;
+                &[data-active="true"] {
+                    //background: black;
+                    background: linear-gradient(to right, rgba(61,123,146,0.18) 0%,rgba(54,110,130,0.42) 100%);
+                }
+            }
+        }
+    }
+
+}

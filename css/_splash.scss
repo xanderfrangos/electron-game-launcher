@@ -1,0 +1,32 @@
+#splash {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(21, 23, 25, 0.9);
+    @keyframes splashIn {
+        0% { transform: scale(0.95); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    animation: splashIn 0.5s;
+
+    .splash-inner {
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    img {
+        width: 100px;
+        height: auto;
+        display: block;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+    .statusText {
+        color: white;
+        text-align: center;
+    }
+}
